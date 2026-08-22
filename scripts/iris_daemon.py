@@ -204,6 +204,21 @@ def handle(token, chat_id, msg, text):
     if cmd in ("/interviewme", "interviewme"):
         typing(token, chat_id)
         return ask_iris(INTERVIEW_PROMPT)
+    # Claude Code commands sent here by muscle memory: explain, don't choke.
+    session_cmds = {
+        "/meeting": "convene the staff meeting",
+        "/brainstorm": "run a brainstorming session",
+        "/capture": "file a painpoint (though you can just dump it here — I file it automatically)",
+        "/graduate": "graduate a painpoint to a PRD",
+        "/park": "park a painpoint",
+        "/build": "approve a PRD for build and start the 48h clock",
+    }
+    if cmd in session_cmds:
+        return (f"{cmd} runs in a Claude Code session, not here — it changes pipeline state, "
+                f"which I can't do over Telegram by design.\n\n"
+                f"Open Claude Code in ~/Projects/idea-loop and run {cmd} there to {session_cmds[cmd]}.\n\n"
+                f"What I can do here: /status, /questions, /interviewme, and talking through anything "
+                f"on your mind — send it and I'll file it.")
     typing(token, chat_id)
     file_to_inbox(msg, text)
     return ask_iris(text)
