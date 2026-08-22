@@ -1,0 +1,20 @@
+name: Meeting pack summons
+
+on:
+  push:
+    paths:
+      - "meetings/**"
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram summons
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"Staff meeting pack is ready. Convene whenever you sit down: open Claude Code in ~/Projects/idea-loop and run /meeting (git pull first).\"}" > /dev/null
+          echo "Summons sent."

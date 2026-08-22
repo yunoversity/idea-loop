@@ -1,0 +1,32 @@
+name: Poll Telegram inbox
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: telegram-poll
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Poll for new messages
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/telegram_poll.py
+      - name: Commit new inbox files
+        run: |
+          git config user.name "iris-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add inbox .telegram_offset
+          git diff --cached --quiet || { git commit -m "inbox: new Telegram messages"; git push; }

@@ -55,11 +55,22 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
    reason to `taste-profile.md`. Agents use it for ORDERING AND EMPHASIS ONLY —
    it must never suppress an idea before Anthony sees it.
 
-## Cadence (America/Chicago)
+## Cadence & executors (America/Chicago)
 
-- Daily 8:00 AM — Telegram digest of top ≤3 open questions (`scripts/telegram_digest.py`)
-- Friday 8:00 AM — weekly meeting pack built + Telegram summons; Anthony convenes with `/meeting`
-- Inbound Telegram messages land in `inbox/` via `scripts/telegram_poll.py`; intake processes them
+- Daily 8:00 AM — Telegram digest of top ≤3 open questions. Runs in **GitHub Actions**
+  (`.github/workflows/telegram-digest.yml`), reading painpoints from the repo's main branch.
+- Every 30 min — inbound Telegram messages polled into `inbox/` and committed to main
+  (`.github/workflows/telegram-poll.yml`). Intake processes them next session.
+- Friday 8:00 AM — a scheduled cloud Claude agent builds the weekly meeting pack
+  (per the chief-of-staff playbook, sections 1–6 pre-filled, Decisions empty),
+  commits it to `meetings/`; a push-triggered Action sends the Telegram summons.
+  Anthony convenes with `/meeting`.
+- The bot is Iris (@Iris_CoSbot); it only talks to Anthony's chat ID.
+
+**Sync discipline (required because executors share state via GitHub):**
+- Start every session with `git pull` — inbox messages and meeting packs arrive via Actions.
+- Commit and push at the end of any session that changes pipeline state; the cloud
+  can only see what's on main.
 
 ## House rules
 
