@@ -28,6 +28,8 @@ HELP_TEXT = """Here's what I can do here (I check messages every ~30 minutes, so
 
 /status — where every idea stands in the pipeline
 /questions — the current top open questions, resent on demand
+/interviewme — I interview you: one open question at a time, from the most promising ideas
+/new — start a fresh conversation thread
 /help — this list
 
 Anything else you send me becomes pipeline input automatically: new painpoints get filed for intake, and replies to my questions get attached to their idea. For live work — brainstorming, staff meetings, graduations — open Claude Code in ~/Projects/idea-loop and use /capture, /brainstorm, /meeting, /graduate, /park."""

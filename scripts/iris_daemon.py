@@ -51,6 +51,20 @@ IRIS_SYSTEM = (
 )
 
 
+INTERVIEW_PROMPT = (
+    "Anthony just sent the InterviewMe command. Interview him to close open "
+    "questions in the pipeline: scan painpoints/*.md for unchecked '- [ ]' items "
+    "under '## Open questions', prioritize blocking questions and high-intensity "
+    "painpoints, and ask him exactly ONE question now — conversationally, naming "
+    "which painpoint it's for. His answers will arrive as normal messages in this "
+    "same thread: after each answer, briefly dig deeper if the answer is thin "
+    "(open-ended follow-ups only, never leading), then move to the next most "
+    "valuable question. One question per message, always. Keep the interview going "
+    "until he changes the subject or the questions run out. His answers are filed "
+    "to inbox/ automatically — you don't need to record them."
+)
+
+
 def log(msg):
     print(f"[{datetime.now().isoformat(timespec='seconds')}] {msg}", flush=True)
 
@@ -132,6 +146,9 @@ def handle(token, chat_id, msg, text):
     if cmd == "/new":
         SESSION_FILE.unlink(missing_ok=True)
         return "Fresh thread started — what's on your mind?"
+    if cmd in ("/interviewme", "interviewme"):
+        typing(token, chat_id)
+        return ask_iris(INTERVIEW_PROMPT)
     typing(token, chat_id)
     file_to_inbox(msg, text)
     return ask_iris(text)
