@@ -4,6 +4,7 @@ A self-improving business-idea brainstorming workflow. A Chief of Staff (CoS) ag
 owns the pipeline's momentum; Anthony owns every decision.
 
 Full requirements spec: https://claude.ai/code/artifact/fb275a50-8de2-4482-a31e-71c66eaefee6
+Anthony's working style: `working-style.md` — every agent reads it before interacting with him.
 Current goals: `goals.md` — north star: 3–5 validation-ready PRDs by 2026-09-22,
 ~5 Anthony-hours/week, sprint shortlist, escalate-and-replan on drift.
 
