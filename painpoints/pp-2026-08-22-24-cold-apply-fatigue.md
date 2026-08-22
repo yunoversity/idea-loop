@@ -1,11 +1,11 @@
 ---
 id: pp-2026-08-22-24-cold-apply-fatigue
 persona: "Mid-career tech professional, actively job hunting"
-status: captured
+status: graduated
 intensity: 5
 captured: 2026-08-22
 source: session
-prd: null
+prd: prd/pp-2026-08-22-24-cold-apply-fatigue.md
 parked_reason: null
 revival_criteria: null
 ---
@@ -79,3 +79,4 @@ plans/pp-24-jobhunt-mvp-plan.md). Anthony available for questions until the
 2026-08-22 — pre-meeting Q&A with Anthony: persona, intensity 5, second-hand-current evidence, reach=probable. Recruiting of validation testers should start in parallel with any build (Iris).
 2026-08-22 — Anthony named pilots (himself + Kevin Purdy), gave cost-in-their-words and genuine-outreach mechanics; MVP direction pointed at research-driven value-add. Anthony reclassified: partially first-hand.
 2026-08-22 — value-add defined by Anthony (delight / feel heard / workday relief); MVP-scope blocker cleared before the 6 PM meeting.
+2026-08-22 — GRADUATED by Anthony (fast-track order: PRD by Athena, review by Iris). PRD complete: validation-ready pending A3 desk test (public-signal availability).
