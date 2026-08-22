@@ -1,84 +1,68 @@
-# WARM PATH — kill the treadmill, one real step a day
+# Warm Path
 
-Idea-loop hackathon · Demo C · pp-24 (cold-apply fatigue)
-Constraint set C: **no message content at all.** Goal: make real outreach the lowest-friction next action of the day.
-
----
-
-## The pain, in the pilots' words
-
-- Cold applying "feels like progress without results" — the treadmill wins every tired evening
-- Coffee chats are rare not because outreach fails, but because it rarely happens
-- Burnout math: disengaging day job + search = no energy for the high-courage channel
+**Two names every morning. The right two. That's the whole product.**
 
 ---
 
-## The root cause this demo attacks
+## The problem
 
-**Emotional asymmetry (R4).** The false-progress channel wins because it's always the easier next step. Warm Path doesn't make outreach better — it makes it *smaller*: one warm, timely, pre-justified step per day.
-
----
-
-## What it is
-
-You import your own contacts (your export, your memory — nothing scraped). Warm Path maintains:
-
-- **Warmth ranking:** your list ordered by relationship warmth × freshness of common ground
-- **Why-now hooks:** "Maya just posted about their platform migration — this week, not next month"
-- **The Daily Two:** each morning, two names max, each with its hook and history
-- **Progress that's real:** streaks count conversations started, not applications fired into the void
-
-**It never writes, never sends, never scrapes. It decides nothing — it sequences.**
+Job hunters don't fail at writing outreach — they fail at *starting* it. After a draining workday, firing off five portal applications feels productive and costs nothing emotionally. Messaging a real human takes nerve. So the easy-but-useless option wins every night, for months.
 
 ---
 
-## Demo walkthrough (storyboard — nothing built)
+## Who has this problem
 
-1. Kevin imports 60 contacts from his own address book export + memory prompts
-2. Morning card: "Today: Priya (ex-teammate, just changed companies — congratulate) and Sam (met at PyCon, his talk got posted this week)"
-3. Kevin marks Priya "reached out" — the card logs it and schedules the follow-up nudge
-4. Friday view: 8 real outreaches this week vs. his old 0 — and 2 coffee chats booked
+Mid-career tech professionals searching while stuck in jobs they've mentally left. Our two pilot users describe the same loop: they KNOW their network is where offers come from, they have the contacts, and outreach still doesn't happen. Coffee chats are rare not because messages fail — because messages never get sent.
 
 ---
 
-## Why this preserves genuineness
+## How they cope today — and why it fails
 
-- The message is 100% the human's — the tool never sees it
-- Timeliness is itself a genuineness signal ("saw your post this week" beats "hope this finds you well")
-- Small daily asks lower the courage threshold — R4 attacked at the behavioral root
-
----
-
-## Assumptions tested (Athena) · verification (Argus)
-
-- **A2 (bottleneck):** THE decisive test — if sequencing alone lifts outreach volume, the block was activation energy, not craft
-- **A6 (workflow fit):** unprompted use ≥3 days in week 1
-- **A5 (conversion):** chats booked per 10 outreaches vs. near-zero baseline
-- Argus gate: "reached out" self-reports need spot-verification against actual sent messages
+1. **Application sprees.** Countable, comfortable, and nearly useless — "progress without results," in our pilot's words.
+2. **"I should really reach out to people" lists.** Written on Sunday, dead by Tuesday. No trigger, no order, no timing.
+3. **Spreadsheet CRMs.** Maintaining one is a second job on top of the job and the job hunt.
 
 ---
 
-## 48-hour build shape (Hephaestus — feasibility only)
+## The insight
 
-- Hour 0–4: deployed app with contact import (CSV/manual) + local storage
-- Hour 4–24: warmth ranking heuristic + Daily Two view; hook capture is MANUAL at MVP (user pastes the trigger they saw) — automated hook detection is post-validation
-- Hour 24–40: streaks, follow-up nudges; Argus tests on the ranking logic
-- Hour 40–48: pilot-ready; instrumentation = daily opens, outreaches marked, chats booked
-- Honest risk: manual hooks may be the feature users skip — watch it specifically
+The blocker isn't skill — it's activation energy. Shrink the decision ("who, today, and why today?") to zero, and the human courage required drops to something a tired person can actually spend. Timing does double duty: "saw your talk went up this week" is both the reason to send *now* and the proof you're paying attention.
 
 ---
 
-## Risks & open questions (Iris)
+## What Warm Path does
 
-- Attacks behavior, not skill: pairs naturally with A or B later — but tonight it competes alone
-- Manual hook entry at MVP undercuts the "why-now" magic; automated hooks without scraping is an unsolved design question
-- Habit products live or die in week 2 — a 1-week pilot window may flatter it
-- Contact import UX is the whole first impression; a tedious import loses both pilots by hour 1
+You import your own contacts — your address book, your memory, nothing scraped from anywhere. Every morning it deals you **two cards, maximum**:
+
+- **Who:** the warmest contact whose moment is now
+- **Why today:** "Priya just started a new job — congratulate her" · "Sam's conference talk got posted this week"
+- **Progress that's real:** streaks count conversations started, not applications launched
+
+It never writes a word and never sends anything. It just makes sure your next brave act is small, warm, and well-timed.
 
 ---
 
-## Evaluate this demo on
+## Why now
 
-1. Did the Daily Two actually happen on your hardest workday?
-2. Does progress-that's-real beat the cold-apply dopamine?
-3. Would you still want A or B once this exists — or is sequencing the whole game?
+Remote work dissolved the hallway encounters that used to keep networks warm automatically — staying in touch is now a deliberate act nobody schedules. Meanwhile application portals get more automated and less human every quarter. The gap between "what works" and "what's easy" has never been wider; Warm Path closes it from the easy side.
+
+---
+
+## Why we're uniquely positioned
+
+- **We are the user.** Both pilots have full contact lists and empty outreach logs — we're building the exact nudge we keep failing to give ourselves.
+- **We understand the courage economics.** Our research showed the false-progress trap is emotional, not informational — that's why this demo touches WHO and WHEN and refuses to touch WHAT. Competitors bolt on message generators and ruin the trust.
+- **We ship in 48 hours** and both pilots start their Daily Two the same week — behavior change data in days, not quarters.
+- **Two cards max is a hard rule.** Every networking tool dies by becoming a guilt-inducing todo list. The constraint is the product.
+
+---
+
+## What we'll prove first
+
+One week, two pilots: does the Daily Two actually happen on their worst workdays? We count real outreaches sent versus their current baseline (near zero) and coffee chats booked. If sequencing alone doesn't move behavior, we've learned the blocker is deeper than friction — worth knowing before anyone builds anything bigger.
+
+---
+
+## The ask
+
+Green-light a 48-hour build: contact import, warmth-ordered Daily Two, streaks. One week of pilot data decides if behavior actually moves.

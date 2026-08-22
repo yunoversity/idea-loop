@@ -13,11 +13,13 @@ No build starts until one wins AND the A3 desk test passes.
 | Genuineness survives contact with real recipients | ×3 | | | |
 | Distinct from what already exists | ×1 | | | |
 
-## Generated decks (Gamma, 2026-08-22)
+## Generated decks (Gamma, 2026-08-22) — v2, VC pitch style
 
-- Dossier (A): https://gamma.app/docs/jc5dg9upe3juls7
-- Red Pen (B): https://gamma.app/docs/7rn452huu43fuu7
-- Warm Path (C): https://gamma.app/docs/wk7c3k8tbts5n04
+- Dossier (A): https://gamma.app/docs/gcfkqyax3g8qiei
+- Red Pen (B): https://gamma.app/docs/fqbi244n215saa2
+- Warm Path (C): https://gamma.app/docs/n8wa2sc9e5a630y
+
+v1 (technical style, superseded): jc5dg9upe3juls7 · 7rn452huu43fuu7 · wk7c3k8tbts5n04
 
 ## Constraint sets recap
 

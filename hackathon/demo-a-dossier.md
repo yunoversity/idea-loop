@@ -1,86 +1,74 @@
-# DOSSIER — the research engine that makes them feel heard
+# Dossier
 
-Idea-loop hackathon · Demo A · pp-24 (cold-apply fatigue)
-Constraint set A: **AI never touches the message.** Goal: maximize "feel heard" value-add from ToS-clean research.
-
----
-
-## The pain, in the pilots' words
-
-- Cold applying "feels like progress without results"
-- Coffee chats are rare; asks arrive without value
-- Hand-crafted outreach works — but the research per contact doesn't scale
-- All of it stacked on a day job they're disengaged from, with burnout looming
+**Research a person in 90 seconds. Write them a message they'll actually answer — yourself.**
 
 ---
 
-## The root cause this demo attacks
+## The problem
 
-**Research friction (R2).** The legitimate cost of genuine outreach — learning enough about a person to say something that matters — has no scaffolding. Dossier pays that cost for you, so your attention goes into the message, not the digging.
-
----
-
-## What it is
-
-You name a target (and paste any links you already have — their blog, talk, GitHub, company page). Dossier returns a one-page brief:
-
-- **Their world:** recent work, public writing, talks, launches
-- **Common ground candidates:** where your paths, stacks, or interests genuinely overlap
-- **Three value-add angles**, one per mode: something delightful to share · something that shows you actually saw their work · something that makes their week easier
-- **Two conversation-starter questions** (interest, never an ask)
-
-**You write the message. Every word. The tool guarantees it has something real to say.**
+Job hunters know the best way to get hired is a warm conversation, not an application portal. But reaching out to a real person takes 30–60 minutes of homework per message — reading their work, finding real common ground, figuring out what to say. Almost nobody has that time. So they cold apply instead, and cold applying barely works.
 
 ---
 
-## Demo walkthrough (storyboard — nothing built)
+## Who has this problem
 
-1. Kevin pastes "Jane Doe, Eng Manager @ Acme" + her conference talk link
-2. 90 seconds later: the one-page brief, with her recent talk's core argument summarized and one overlap flagged ("you both migrated off k8s — she wrote about the pain")
-3. Kevin writes 4 sentences himself, referencing the talk, asking one genuine question
-4. Side panel: the three value-add angles he *didn't* use, saved for the follow-up
+Mid-career tech professionals in an active job search — often while still working a job they've checked out of. Our two pilot users are living this today:
 
----
+- They send applications into portals and hear nothing
+- Coffee chats — the thing that actually leads to offers — almost never happen
+- The search is stacked on top of a draining day job, and burnout is close
 
-## Why the output reads as genuine
-
-- The message is human because it IS human — zero generated prose
-- Common connection area comes from real overlap, surfaced not invented
-- Interest-not-ask enforced by what the brief supplies: questions, not requests
-- The costly signal survives: the sender still spends attention — just on the right part
+One of them put it perfectly: cold applying "feels like progress without results."
 
 ---
 
-## Assumptions tested (Athena) · verification (Argus)
+## How they cope today — and why it fails
 
-- **A3 (fuel exists):** ≥7 of 10 real targets yield a usable angle — *desk-testable before any build*
-- **A4 (value-add producible):** blind readers judge briefed messages "genuine + valuable"
-- **A1 (reception):** pilot messages vs. their own baseline response rate
-- Argus gate: thresholds committed before pilots send anything
-
----
-
-## 48-hour build shape (Hephaestus — feasibility only)
-
-- Hour 0–4: single-page app deployed; input form + brief template
-- Hour 4–24: research assembly from user-supplied links + permitted public sources; three-angle generator
-- Hour 24–40: brief quality pass on 10 real targets; Argus smoke tests
-- Hour 40–48: pilot-ready with instrumentation (briefs generated, messages sent, replies logged)
-- Honest risk: brief quality varies with target's public footprint — degrade gracefully, never pad
+1. **Keep cold applying.** Easy, countable, ineffective.
+2. **Hand-write outreach.** Works! But the research per message is so slow it happens twice a month.
+3. **Let AI write the outreach.** Backfires. Hiring managers can smell a template instantly, and it reads as zero effort — worse than not sending.
 
 ---
 
-## Risks & open questions (Iris)
+## The insight
 
-- **A3 is still untested** — the afternoon desk test should precede any build vote
-- Quiet targets (no public work) may return thin briefs: does the tool say "not enough signal" honestly?
-- Pilot warmth bias: Strong reception labels need an arms-length tester
-- Scope creep magnet: "just also draft the message" requests must be refused — that's Demo B's experiment, not this one
+A message works when the reader can tell you actually paid attention to them. The effort IS the proof. That's why AI-written messages fail — they remove the proof. And it's why the fix isn't writing the message for people. It's doing the homework for them.
 
 ---
 
-## Evaluate this demo on
+## What Dossier does
 
-1. Would YOU use it tomorrow for a real target?
-2. Does the brief make the recipient feel heard — or just researched?
-3. Is "human writes every word" a feature or a friction?
+Type a person's name and paste any links you have (their blog, a talk, their company page). Ninety seconds later you get one page:
+
+- What they've been working on lately, in plain terms
+- Where your background genuinely overlaps with theirs
+- Three ways to be useful to them in your first message — something they'd enjoy, something that shows you really saw their work, or something that makes their week easier
+
+**Then you write the message. Every word is yours.** The tool just guarantees you have something real to say.
+
+---
+
+## Why now
+
+AI has flooded every inbox with fake-personal messages — which makes a genuinely researched, human-written note stand out more than it ever has. The same AI that ruined outreach is finally good enough to do the *research* part well. The window is the gap between those two facts.
+
+---
+
+## Why we're uniquely positioned
+
+- **We are the user.** Both founders/pilots are mid-career tech professionals in active searches — we feel every failure the same week we fix it.
+- **We know what "genuine" looks like from both sides.** We've written outreach that works and received outreach that doesn't, and we've turned that into concrete rules the product enforces.
+- **We ship in 48 hours.** Our build system turns an approved spec into a deployed product in two days, so we can test with real hunters while others are still wireframing.
+- **We refuse to write the message.** Every competitor's temptation is to generate the email. Our discipline — human writes, always — is the moat, because it's the only version that keeps the proof of effort.
+
+---
+
+## What we'll prove first
+
+Before building anything: pick 10 real people from our own outreach lists and check there's enough public material to research them well. If 7 of 10 work, we build. Then our two pilots use it in their live searches for a week — we count replies against their own past results, and we listen for the magic phrase: "thanks for the thoughtful note."
+
+---
+
+## The ask
+
+Green-light the one-afternoon research check. If it passes, a 48-hour build and a two-pilot live trial the same week.
