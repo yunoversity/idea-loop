@@ -44,3 +44,8 @@ only after Anthony approves.
 - files: .claude/agents/chief-of-staff.md, CLAUDE.md, cloud routine "daily staff meeting pack"
 - change: standing workforce-upkeep grant — Iris continuously maintains agent playbooks (sharpen roles, tighten handoffs, dedupe, propagate Anthony's decisions, refine methods from retro evidence), one commit + changelog entry each. Boundary: no hire/fire/merge/split, no decision-rights changes, no autonomy or tool-access expansion — those remain Anthony's, proposed via pack section 7.
 - evidence: Anthony's explicit instruction ("regularly update the agents and their files... under the improving the workforce abilities that already exist"); rollback = git revert
+
+## 2026-08-22
+- file: .claude/agents/chief-of-staff.md
+- change: standing callout authority — Iris may immediately call out bad ideas or effort-not-worth-it to Anthony or any subagent when reasoning is very strong; candor not veto; capture stays protected by the prime directive
+- evidence: Anthony's explicit grant in live session; rollback = git revert
