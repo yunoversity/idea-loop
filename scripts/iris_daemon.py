@@ -159,9 +159,17 @@ def ask_iris(text):
         return "I hit an error thinking that through. It's logged — try again in a minute."
     try:
         data = json.loads(out.stdout)
+        result = data.get("result") or ""
+        if data.get("is_error") or "authentication_error" in result or "Failed to authenticate" in result:
+            log(f"claude auth/api error: {result[:300]}")
+            if "401" in result or "authenticate" in result.lower():
+                return ("I can't think right now — my Claude sign-in on your Mac is invalid. "
+                        "Fix: open the Terminal app, run `claude`, complete the browser login, then quit it. "
+                        "I'll work instantly after that. (Commands like /status and /questions still work meanwhile.)")
+            return f"My thinking engine returned an error: {result[:500]}"
         if data.get("session_id"):
             SESSION_FILE.write_text(data["session_id"])
-        return data.get("result") or "…(I came back empty — try rephrasing?)"
+        return result or "…(I came back empty — try rephrasing?)"
     except json.JSONDecodeError:
         return out.stdout[:3000] or "Empty reply — worth checking iris_daemon.log."
 
