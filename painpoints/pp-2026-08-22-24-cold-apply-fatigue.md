@@ -45,6 +45,12 @@ their networks instead — but the tooling path is blocked in both directions.
   the recipient based on proactive research about them and their professional
   work. Anthony: this value-add-research angle "is a good place to come with
   a working MVP to the table."
+- [observed] Value-add defined (Anthony, 2026-08-22): something that is (a)
+  interesting to the person via delight, (b) makes them feel heard, or (c)
+  makes their workday easier or less painful. Note the emotional register —
+  two of three modes are about feeling, not information; "feel heard" ties
+  directly to the genuine-mechanics list (referencing their actual work =
+  being seen).
 - [observed, prior] Anthony has previously articulated outreach-style rules
   from his own LinkedIn messaging practice (never open by naming the
   prospect's problems; lead with credentials/common ground; probing questions
@@ -62,7 +68,8 @@ their networks instead — but the tooling path is blocked in both directions.
 - [x] Cost in their words: disengaged-job time drain, burnout risk, rare coffee chats, cold-apply false-progress (2026-08-22)
 - [x] Genuine-message mechanics captured: human, common connection area, interest-not-ask, research-driven value-add (2026-08-22)
 - [ ] Kevin's own account in his own words (Socrates kit interview) — unblocks: completing intensity + pains from a second source
-- [ ] What does "value-add to the recipient" concretely look like per outreach target type (hiring manager vs peer vs alum)? — unblocks: MVP scope (blocking)
+- [x] Value-add defined (2026-08-22): delight/interest, making them feel heard, or making their workday easier/less painful
+- [ ] Which of the three value-add modes (delight / feel heard / workday relief) is most producible from proactive research alone? — unblocks: MVP feature choice
 
 ## Log
 2026-08-22 — captured from Anthony in session; fast-tracked by his directive:
@@ -71,3 +78,4 @@ plans/pp-24-jobhunt-mvp-plan.md). Anthony available for questions until the
 6 PM staff meeting.
 2026-08-22 — pre-meeting Q&A with Anthony: persona, intensity 5, second-hand-current evidence, reach=probable. Recruiting of validation testers should start in parallel with any build (Iris).
 2026-08-22 — Anthony named pilots (himself + Kevin Purdy), gave cost-in-their-words and genuine-outreach mechanics; MVP direction pointed at research-driven value-add. Anthony reclassified: partially first-hand.
+2026-08-22 — value-add defined by Anthony (delight / feel heard / workday relief); MVP-scope blocker cleared before the 6 PM meeting.
