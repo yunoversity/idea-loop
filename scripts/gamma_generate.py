@@ -28,7 +28,9 @@ def api(method, path, key, body=None):
     req = urllib.request.Request(
         BASE + path,
         data=json.dumps(body).encode() if body else None,
-        headers={"X-API-KEY": key, "Content-Type": "application/json"},
+        headers={"X-API-KEY": key, "Content-Type": "application/json",
+                 "Accept": "application/json",
+                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) idea-loop/1.0"},
         method=method)
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
