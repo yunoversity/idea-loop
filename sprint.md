@@ -27,7 +27,7 @@
 | Instrumentation spec | Athena | done | event schema + thresholds in README |
 | Single-file build | Hephaestus | done | build.py → dist/index.html |
 | Browser verification | Argus | done | ranking, actions, streak, cap all verified live |
-| Deploy / share | Hephaestus | done | Artifact published |
+| Deploy / share | Hephaestus | done | Artifact: https://claude.ai/code/artifact/3d138fbf-bbaa-4811-98f8-16521b1e80e2 |
 | Experiment readout (after pilot week) | Athena | pending | co-sign → Argus, then Anthony |
 
 ## Argus finding (caught in live verification, fixed before delivery)
@@ -51,3 +51,6 @@ scraping, no accounts, no spend.
 - 2026-08-22 16:55 CDT — Argus cap violation found and fixed (14 tests)
 - 2026-08-22 17:05 CDT — README/instrumentation done; Iris critique filed;
   demo published
+- 2026-08-22 17:20 CDT — export fixed to use the downloads capability (plain
+  download links are inert in the hosted viewer; would have stranded the pilot
+  event log). Fallback keeps file:// and localhost working.
