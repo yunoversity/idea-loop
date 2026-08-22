@@ -1,0 +1,195 @@
+<meta charset="utf-8">
+<title>Idea Loop Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg:#F7F9F8; --surface:#EFF3F1; --card:#FFFFFF; --ink:#1A2422; --muted:#5C6B67;
+    --line:#D5DEDA; --accent:#0E7268; --accent-ink:#0A5950; --warn:#A87B1E; --warn-bg:#F5EBD4;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#101817; --surface:#17211F; --card:#16201E; --ink:#E8EDEA; --muted:#93A29D;
+    --line:#2A3835; --accent:#3FBDAF; --accent-ink:#5ED2C5; --warn:#D3A73E; --warn-bg:#2E2712;
+  }}
+  :root[data-theme="dark"] {
+    --bg:#101817; --surface:#17211F; --card:#16201E; --ink:#E8EDEA; --muted:#93A29D;
+    --line:#2A3835; --accent:#3FBDAF; --accent-ink:#5ED2C5; --warn:#D3A73E; --warn-bg:#2E2712;
+  }
+  body { background:var(--bg); color:var(--ink); font-family:"Archivo","Helvetica Neue",sans-serif;
+         margin:0; padding:2rem 1.25rem 3rem; }
+  .wrap { max-width:1200px; margin:0 auto; }
+  header { display:flex; flex-wrap:wrap; align-items:baseline; gap:0.75rem 1.25rem; margin-bottom:1.5rem; }
+  h1 { font-size:1.5rem; font-weight:700; letter-spacing:-0.01em; margin:0; }
+  .gen { font-family:"IBM Plex Mono",monospace; font-size:0.72rem; color:var(--muted); }
+  .kpis { display:flex; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.75rem; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:6px;
+         padding:0.7rem 1.1rem; min-width:7.5rem; }
+  .kpi .n { font-size:1.55rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .kpi .l { font-family:"IBM Plex Mono",monospace; font-size:0.68rem; letter-spacing:0.08em;
+            text-transform:uppercase; color:var(--muted); margin-top:0.15rem; }
+  h2 { font-size:0.95rem; font-weight:600; margin:0 0 0.75rem; display:flex; gap:0.6rem; align-items:baseline; }
+  h2 .sub { font-family:"IBM Plex Mono",monospace; font-size:0.68rem; font-weight:400; color:var(--muted); }
+  .qgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:0.75rem; margin-bottom:2rem; }
+  .qcard { background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent);
+           border-radius:6px; padding:0.85rem 1rem; display:flex; flex-direction:column; gap:0.5rem; }
+  .qtext { font-size:0.95rem; line-height:1.45; }
+  .qmeta { font-size:0.78rem; color:var(--muted); display:flex; flex-wrap:wrap; gap:0.45rem; align-items:center; }
+  .qmeta .pp { color:var(--accent-ink); font-weight:600; }
+  .qhint { font-family:"IBM Plex Mono",monospace; font-size:0.7rem; color:var(--muted); }
+  .board { display:flex; gap:0.75rem; overflow-x:auto; padding-bottom:0.75rem; }
+  .col { background:var(--surface); border:1px solid var(--line); border-radius:8px;
+         padding:0.75rem; min-width:250px; flex:1 0 250px; }
+  .colh { font-family:"IBM Plex Mono",monospace; font-size:0.72rem; letter-spacing:0.1em;
+          text-transform:uppercase; color:var(--accent-ink); margin-bottom:0.7rem;
+          display:flex; justify-content:space-between; }
+  .colh .count { color:var(--muted); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:6px;
+          padding:0.65rem 0.8rem; margin-bottom:0.6rem; }
+  .ct { font-size:0.87rem; font-weight:600; line-height:1.35; }
+  .cm { font-size:0.75rem; color:var(--muted); margin-top:0.2rem; }
+  .cf { display:flex; align-items:center; gap:0.6rem; margin-top:0.5rem; }
+  .when { font-family:"IBM Plex Mono",monospace; font-size:0.68rem; color:var(--muted); }
+  .dots i { display:inline-block; width:7px; height:7px; border-radius:50%;
+            background:var(--line); margin-right:2px; }
+  .dots i.on { background:var(--accent); }
+  .chip { font-family:"IBM Plex Mono",monospace; font-size:0.62rem; padding:0.1rem 0.4rem;
+          border-radius:3px; letter-spacing:0.05em; }
+  .chip.stale { background:var(--warn-bg); color:var(--warn); }
+  .chip.block { background:var(--warn-bg); color:var(--warn); }
+  .revive { font-size:0.72rem; color:var(--warn); margin-top:0.4rem; }
+  .empty { color:var(--muted); font-size:0.8rem; padding:0.4rem 0.2rem; }
+</style>
+<div class="wrap">
+  <header><h1>Idea Loop Dashboard</h1><span class="gen">generated 2026-08-22 · refreshed daily</span></header>
+  <div class="kpis"><div class="kpi"><div class="n">23</div><div class="l">painpoints</div></div><div class="kpi"><div class="n">0</div><div class="l">PRDs</div></div><div class="kpi"><div class="n">46</div><div class="l">open questions</div></div><div class="kpi"><div class="n">0</div><div class="l">stale &ge;14d</div></div></div>
+  <h2>Brainstorm next <span class="sub">top open questions from the most promising painpoints</span></h2>
+  <div class="qgrid"><div class="qcard">
+  <div class="qtext">Observed from specific people, or Anthony&#x27;s read on the persona? — unblocks: evidence-depth scoring</div>
+  <div class="qmeta"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span> <span class="pp">FB/TikTok ad account is flagged as adult content and shut down</span> · LGBT Business Owner </div>
+  <div class="qhint">/brainstorm 01</div>
+</div><div class="qcard">
+  <div class="qtext">Observed from specific people, or Anthony&#x27;s read on the persona? — unblocks: evidence-depth scoring</div>
+  <div class="qmeta"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span> <span class="pp">Queerness compounds inherited genocide trauma</span> · Queer adult of Khmer descent </div>
+  <div class="qhint">/brainstorm 04</div>
+</div><div class="qcard">
+  <div class="qtext">Observed from specific people, or Anthony&#x27;s read on the persona? — unblocks: evidence-depth scoring</div>
+  <div class="qmeta"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span> <span class="pp">Coming out risks the relationship that funds their education</span> · Queer adult of Khmer descent </div>
+  <div class="qhint">/brainstorm 05</div>
+</div></div>
+  <h2>Pipeline</h2>
+  <div class="board"><div class="col"><div class="colh">captured <span class="count">23</span></div><div class="card">
+  <div class="ct">FB/TikTok ad account is flagged as adult content and shut down</div>
+  <div class="cm">LGBT Business Owner</div>
+  <div class="cf"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Queerness compounds inherited genocide trauma</div>
+  <div class="cm">Queer adult of Khmer descent</div>
+  <div class="cf"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Coming out risks the relationship that funds their education</div>
+  <div class="cm">Queer adult of Khmer descent</div>
+  <div class="cf"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Affirming healthcare can&#x27;t be verified</div>
+  <div class="cm">Queer College Sophomore</div>
+  <div class="cf"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Pink bamboo ceiling compounded by sexuality and heteronormative networking</div>
+  <div class="cm">Queer Asian Man</div>
+  <div class="cf"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Reliance on electronics</div>
+  <div class="cm">Gay Man in ATX</div>
+  <div class="cf"><span class="dots" title="intensity 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Undetectable shadowbanning</div>
+  <div class="cm">LGBT Business Owner</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">There&#x27;s no platform-safe copy guidance or policy-change early warnings</div>
+  <div class="cm">LGBT Business Owner</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Sexual racism and fetishization on dating apps with no accountability</div>
+  <div class="cm">Gay Asian Man</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">No mentor shares both the cultural and the queer half</div>
+  <div class="cm">Queer College Sophomore</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Rainbow-washing: can&#x27;t verify which employers are genuinely safe</div>
+  <div class="cm">Queer College Sophomore</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Perception of sexual spaces when kink is involved</div>
+  <div class="cm">Kink-Positive LGBTQ Community Member</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">How to explain to parents about kink identities</div>
+  <div class="cm">Kink-Positive LGBTQ Community Member</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Discomfort using the restrooms at work</div>
+  <div class="cm">Queer Finance Intern</div>
+  <div class="cf"><span class="dots" title="intensity 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Third spaces vanishing</div>
+  <div class="cm">Gay Asian Man</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Forced choice between cultural joy and queer joy</div>
+  <div class="cm">Queer adult of Khmer descent</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">No real-time backup during interrogations</div>
+  <div class="cm">Queer College Sophomore</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Diaspora recipes die with grandmothers who won&#x27;t discuss your husband</div>
+  <div class="cm">Gay Asian Man</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Closure never arrives</div>
+  <div class="cm">Gay Man in ATX</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Relationship admin tools assume two straight people</div>
+  <div class="cm">Gay Man in ATX</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Feeling unsafe in American, especially Texas</div>
+  <div class="cm">Gay Man in ATX</div>
+  <div class="cf"><span class="dots" title="intensity 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Bi-racial relationships don&#x27;t feel accepted in the gay community</div>
+  <div class="cm">Gay Man in ATX</div>
+  <div class="cf"><span class="dots" title="intensity 1/5"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div><div class="card">
+  <div class="ct">Lack of access to clean bodies of waters</div>
+  <div class="cm">Gay Man in ATX</div>
+  <div class="cf"><span class="dots" title="intensity 1/5"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="when">today</span></div>
+  
+</div></div><div class="col"><div class="colh">exploring <span class="count">0</span></div><div class="empty">—</div></div><div class="col"><div class="colh">graduated <span class="count">0</span></div><div class="empty">—</div></div><div class="col"><div class="colh">validation-ready <span class="count">0</span></div><div class="empty">—</div></div><div class="col"><div class="colh">parked <span class="count">0</span></div><div class="empty">—</div></div></div>
+</div>

@@ -57,6 +57,9 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
 
 ## Cadence & executors (America/Chicago)
 
+- Daily 7:45 AM — dashboard rebuilt (`scripts/build_dashboard.py`) and republished by a
+  cloud routine to the Idea Loop Dashboard artifact:
+  https://claude.ai/code/artifact/52faa5a2-a3cf-47c5-b5dd-963c1543149a
 - Daily 8:00 AM — Telegram digest of top ≤3 open questions. Runs in **GitHub Actions**
   (`.github/workflows/telegram-digest.yml`), reading painpoints from the repo's main branch.
 - Live conversation — the **Iris daemon** (`scripts/iris_daemon.py`, launchd service
