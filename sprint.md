@@ -1,0 +1,53 @@
+# Sprint: pp-24 → Warm Path MVP
+
+- **PRD:** prd/pp-2026-08-22-24-cold-apply-fatigue.md
+- **Approved for build:** 2026-08-22 16:20 CDT (Anthony: "build in a new repo
+  the MVP with the team"; demo choice = Warm Path per Iris's recommended path,
+  the one demo needing no weekend desk-test data)
+- **SLA deadline (hour 48):** 2026-08-24 16:20 CDT
+- **Delivered:** 2026-08-22 ~17:05 CDT — **hour ~0.75 of 48**
+- **MVP repo:** ~/Projects/mvp-warm-path (local git; no GitHub remote yet)
+- **Live demo:** published as a claude.ai Artifact (link in the session)
+- **Sprint captain:** Hephaestus
+
+## Assumptions under test (from the PRD register)
+
+- **A2 (primary):** the blocker is activation energy, not craft — outreach
+  volume vs. the pilot's own baseline
+- **A6:** workflow fit — unprompted use on ≥3 days in week 1
+- **A5:** conversion — chats booked per 10 outreaches
+
+## Task ledger
+
+| Task | Owner | Status | Handoff |
+|---|---|---|---|
+| Scaffold + logic layer | Hephaestus | done | src/logic.js, pure and testable |
+| Critical-path tests | Argus | done | 14/14 green |
+| App + design pass | Hephaestus (Apollo duty) | done | index.html, theme-aware, mobile-first |
+| Instrumentation spec | Athena | done | event schema + thresholds in README |
+| Single-file build | Hephaestus | done | build.py → dist/index.html |
+| Browser verification | Argus | done | ranking, actions, streak, cap all verified live |
+| Deploy / share | Hephaestus | done | Artifact published |
+| Experiment readout (after pilot week) | Athena | pending | co-sign → Argus, then Anthony |
+
+## Argus finding (caught in live verification, fixed before delivery)
+
+The deck **refilled** after acting on both cards — "two a day" was really "two
+at a time," and a user could grind their entire list in one evening. That is
+the exact treadmill behavior the product exists to replace, so it was a spec
+violation, not a UX nit. Fixed with `remainingToday()` (snoozes spend a card
+too; booked chats don't), covered by a new test, re-verified in browser:
+deck now goes 2 → 1 → "that's today's two."
+
+## Hour-24 checkpoint
+
+Not needed — delivered at hour ~0.75. Scope held: no message generation, no
+scraping, no accounts, no spend.
+
+## Log
+
+- 2026-08-22 16:20 CDT — sprint opened, repo scaffolded
+- 2026-08-22 16:45 CDT — logic + 13 tests green; app built; browser verified
+- 2026-08-22 16:55 CDT — Argus cap violation found and fixed (14 tests)
+- 2026-08-22 17:05 CDT — README/instrumentation done; Iris critique filed;
+  demo published
