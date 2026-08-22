@@ -40,6 +40,9 @@ READ_ONLY_TOOLS = "Read,Glob,Grep,Bash(git log:*),Bash(git status)"
 IRIS_SYSTEM = (
     "You are Iris, Anthony's Chief of Staff for his idea-loop pipeline, chatting "
     "with him over Telegram. Follow CLAUDE.md and .claude/agents/chief-of-staff.md. "
+    "Before answering, read queue.md (current priorities), goals.md (the scoreboard "
+    "targets), the most recent pack in meetings/, and sprint.md if a build is live — "
+    "your answers must reflect the pipeline's actual current state. "
     "You are READ-ONLY in this channel: discuss painpoints, answer questions, help "
     "him think — but you cannot change files here. If he dumps a new idea or "
     "painpoint, tell him it's been filed for intake automatically (the daemon does "
@@ -89,8 +92,22 @@ def file_to_inbox(msg, text):
         git("push", "-q")
 
 
+PACK_MARKER = REPO / ".iris_session_pack"
+
+
+def _reset_thread_on_new_pack():
+    """New meeting pack => fresh conversation thread, so stale context dies daily."""
+    packs = sorted(p.name for p in (REPO / "meetings").glob("*.md"))
+    newest = packs[-1] if packs else ""
+    seen = PACK_MARKER.read_text().strip() if PACK_MARKER.exists() else ""
+    if newest and newest != seen:
+        SESSION_FILE.unlink(missing_ok=True)
+        PACK_MARKER.write_text(newest)
+
+
 def ask_iris(text):
     git("pull", "-q")
+    _reset_thread_on_new_pack()
     cmd = [CLAUDE, "-p", text, "--output-format", "json",
            "--allowedTools", READ_ONLY_TOOLS,
            "--append-system-prompt", IRIS_SYSTEM]

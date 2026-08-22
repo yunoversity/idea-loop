@@ -1,6 +1,7 @@
 .env
 .telegram_offset
 .iris_session
+.iris_session_pack
 iris_daemon.log
 .DS_Store
 __pycache__/

@@ -39,17 +39,17 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
 
 ## The staff
 
-| Agent (.claude/agents/) | Job |
-|---|---|
-| chief-of-staff | Pipeline bookkeeping, meetings, nominations, judgment calls, digest content |
-| intake | Extract structure from free-form dumps (sessions + `inbox/`); never evaluates merit |
-| brainstorm-assistant | Open-ended, non-leading questions on `exploring` painpoints |
-| prd-author | Root-cause deep dive → PRD in `prd/`, runs only at graduation |
-| rapid-prototyper | Build anchor: Anthony-approved PRD → deployed MVP in 48h; never self-initiates |
-| ui-designer | Credible design pass inside the build sprint |
-| test-writer-fixer | Critical-path smoke tests during builds; never self-triggers |
-| experiment-tracker | PRD assumptions register → instrumented validation tests + honest readouts |
-| ux-researcher | Designs Anthony's user conversations; synthesizes [observed] evidence |
+| Name | Agent (.claude/agents/) | Job |
+|---|---|---|
+| **Iris** | chief-of-staff | Pipeline bookkeeping, meetings, nominations, judgment calls; emits `queue.md` (the single priority source) |
+| **Echo** | intake | Extract structure from free-form dumps (sessions + `inbox/`, processed by cloud routine every 3h); never evaluates merit |
+| **Socrates** | brainstorm-assistant | Open-ended, non-leading questions on `exploring` painpoints |
+| **Athena** | prd-author | Root-cause deep dive → PRD in `prd/`, runs only at graduation |
+| **Hephaestus** | rapid-prototyper | Sprint captain: Anthony-approved PRD → deployed MVP in 48h via `sprint.md`; never self-initiates |
+| **Apollo** | ui-designer | Credible design pass inside the build sprint |
+| **Argus** | test-writer-fixer | Critical-path smoke tests during builds; never self-triggers |
+| **Metis** | experiment-tracker | PRD assumptions register → instrumented validation tests + honest readouts |
+| **Psyche** | ux-researcher | Designs Anthony's user conversations; synthesizes [observed] evidence |
 
 Hiring history and review findings: `hiring/ONBOARDING.md`.
 
@@ -60,6 +60,14 @@ Hiring history and review findings: `hiring/ONBOARDING.md`.
 - `/meeting` — convene a staff meeting (uses the latest pack in `meetings/` if present)
 - `/graduate <painpoint-id>` — Anthony's graduation decision; triggers the PRD deep dive
 - `/park <painpoint-id>` — park with reason + revival criteria (CoS drafts, Anthony confirms)
+- `/build <prd-id>` — Anthony approves a PRD for build: starts the 48h SLA clock,
+  creates `sprint.md`, scaffolds `~/Projects/mvp-<slug>` (MVPs never live in this repo)
+
+## Coordination surfaces
+
+- `queue.md` — Iris's prioritized open questions; digest and dashboard render it verbatim
+- `sprint.md` — live build task ledger (from `templates/sprint.md`); Hephaestus captains it
+- `escalations/` — a pushed file here Telegrams Anthony immediately (sprint SLA risk)
 
 ## Self-improvement
 

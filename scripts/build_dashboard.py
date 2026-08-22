@@ -62,14 +62,23 @@ def build():
     prds = sorted((REPO / "prd").glob("*.md"))
     today = date.today().isoformat()
 
-    # top 3 questions: promising ideas first (blocking, then intensity)
+    # top 3 questions: Iris's queue.md is authoritative when present
+    by_id = {p["id"]: p for p in pps}
     cand = []
-    for p in pps:
-        if p["status"] == "parked":
-            continue
-        for q in p["questions"]:
-            cand.append((("(blocking)" in q), p["intensity"], p, q))
-    cand.sort(key=lambda t: (-t[0], -t[1], t[2]["id"]))
+    qf = REPO / "queue.md"
+    if qf.exists():
+        for line in qf.read_text().splitlines():
+            m = re.match(r"- \[ \] \((pp-[\w-]+)\)\s*(.+)", line.strip())
+            if m and m.group(1) in by_id:
+                p = by_id[m.group(1)]
+                cand.append((("(blocking)" in m.group(2)), p["intensity"], p, m.group(2)))
+    if not cand:  # fallback: raw scan when no queue exists yet
+        for p in pps:
+            if p["status"] == "parked":
+                continue
+            for q in p["questions"]:
+                cand.append((("(blocking)" in q), p["intensity"], p, q))
+        cand.sort(key=lambda t: (-t[0], -t[1], t[2]["id"]))
     top_q, seen = [], set()
     for t in cand:  # spread across distinct painpoints
         if t[2]["id"] not in seen:

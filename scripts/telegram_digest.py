@@ -25,6 +25,28 @@ def load_env():
                 os.environ.setdefault(k.strip(), v.strip())
 
 
+def _painpoint_meta():
+    meta = {}
+    for f in (REPO / "painpoints").glob("pp-*.md"):
+        text = f.read_text()
+        m = re.search(r"^# (.+)$", text, re.M)
+        meta[f.stem] = m.group(1).strip() if m else f.stem
+    return meta
+
+
+def queue_questions():
+    """Yield questions from Iris's queue.md (the single priority source), in order."""
+    qf = REPO / "queue.md"
+    if not qf.exists():
+        return
+    meta = _painpoint_meta()
+    for line in qf.read_text().splitlines():
+        m = re.match(r"- \[ \] \((pp-[\w-]+)\)\s*(.+)", line.strip())
+        if m:
+            pid, body = m.group(1), m.group(2)
+            yield ("(blocking)" in body, pid, meta.get(pid, pid), body)
+
+
 def open_questions():
     """Yield (blocking, painpoint_id, title, question) for unchecked questions."""
     for f in sorted((REPO / "painpoints").glob("pp-*.md")):
@@ -61,7 +83,9 @@ def main():
     if not token or not chat_id:
         sys.exit("TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set in .env")
 
-    qs = sorted(open_questions(), key=lambda q: (not q[0], q[1]))[:DIGEST_MAX]
+    qs = list(queue_questions())[:DIGEST_MAX]  # Iris's queue.md is authoritative
+    if not qs:  # fallback: raw scan when no queue exists yet
+        qs = sorted(open_questions(), key=lambda q: (not q[0], q[1]))[:DIGEST_MAX]
     if not qs:
         text = "Morning. No open questions today — the pipeline is either quiet or well-fed. Dump anything on your mind and I'll take it from there."
     else:
