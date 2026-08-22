@@ -32,24 +32,37 @@ their networks instead — but the tooling path is blocked in both directions.
 - AI-templated outreach blasts (backfires: reads as low-effort to recipients).
 
 ## Evidence
-- [observed, second-hand] People close to Anthony are living this right now
-  (2026-08-22, Anthony's direct answer) — current incidents, and the people are
-  reachable for interviews and validation.
-- [assumed] Intensity 5/5 "dominating" — Anthony's rating for the persona; his
-  close contacts' own words would upgrade this to observed.
-- [assumed] Hiring managers read AI-templated outreach as non-genuine —
-  Anthony's framing at capture; mechanics not yet unpacked.
-- Note: Anthony has personal experience crafting network outreach messages —
-  additional [observed] material for the "what makes it genuine" question.
+- [observed, first-hand] Anthony himself is pilot user #1 (2026-08-22): the
+  search costs time while in a job he doesn't feel engaged in, with burnout
+  risk. Kevin Purdy is pilot user #2 (close contact, actively in it).
+- [observed] The cost, in their words via Anthony: time drained inside a
+  disengaging day job; burnout risk; coffee chats are rare; cold applying
+  "feels like progress without results" — a false-progress trap that displaces
+  the outreach that would actually work.
+- [observed, both-sides] What makes outreach land as genuine (Anthony,
+  2026-08-22): feels human; references a common connection area; comes with
+  interest rather than an immediate ask; delivers an immediate value-add to
+  the recipient based on proactive research about them and their professional
+  work. Anthony: this value-add-research angle "is a good place to come with
+  a working MVP to the table."
+- [observed, prior] Anthony has previously articulated outreach-style rules
+  from his own LinkedIn messaging practice (never open by naming the
+  prospect's problems; lead with credentials/common ground; probing questions
+  over asks; admiration limited to one sentence) — consistent with and
+  reinforcing the genuine-mechanics list above.
+- [assumed → partially observed] Intensity 5/5 "dominating" — Anthony's rating,
+  now backed by first-hand experience; Kevin's own words will complete it.
 
 ## Open questions
 - [x] Persona: mid-career tech professional, actively hunting (2026-08-22)
 - [x] Proximity: people close to Anthony are in it now — reachable (2026-08-22)
 - [x] Intensity: 5 — dominating (2026-08-22, Anthony's rating)
 - [x] Reachability: probably, with effort — 1-2 weeks of recruiting (2026-08-22)
-- [ ] Which 2-3 close contacts specifically — can Socrates prep interview kits for them this week? — unblocks: observed evidence + validation roster (blocking)
-- [ ] What does the search cost them per week, in their own words (hours, morale, missed roles)? — unblocks: intensity evidence
-- [ ] What makes an outreach message land as "genuine" to a hiring manager — has Anthony seen both sides? — unblocks: root-cause driver tree (blocking)
+- [x] Pilot users: Anthony Yun + Kevin Purdy (2026-08-22) — kits from Socrates
+- [x] Cost in their words: disengaged-job time drain, burnout risk, rare coffee chats, cold-apply false-progress (2026-08-22)
+- [x] Genuine-message mechanics captured: human, common connection area, interest-not-ask, research-driven value-add (2026-08-22)
+- [ ] Kevin's own account in his own words (Socrates kit interview) — unblocks: completing intensity + pains from a second source
+- [ ] What does "value-add to the recipient" concretely look like per outreach target type (hiring manager vs peer vs alum)? — unblocks: MVP scope (blocking)
 
 ## Log
 2026-08-22 — captured from Anthony in session; fast-tracked by his directive:
@@ -57,3 +70,4 @@ Iris to coordinate a plan from painpoint → functioning MVP (see
 plans/pp-24-jobhunt-mvp-plan.md). Anthony available for questions until the
 6 PM staff meeting.
 2026-08-22 — pre-meeting Q&A with Anthony: persona, intensity 5, second-hand-current evidence, reach=probable. Recruiting of validation testers should start in parallel with any build (Iris).
+2026-08-22 — Anthony named pilots (himself + Kevin Purdy), gave cost-in-their-words and genuine-outreach mechanics; MVP direction pointed at research-driven value-add. Anthony reclassified: partially first-hand.

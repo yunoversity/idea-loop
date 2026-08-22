@@ -45,5 +45,19 @@ until today's 6 PM meeting. Pipeline stages are respected — fast, not skipped.
   deployed MVP that can't be put in front of real hunters within days tests
   nothing.
 
+## Pilots & MVP direction (Anthony, 2026-08-22 pre-meeting)
+
+- **Pilot users: Anthony Yun and Kevin Purdy** — interview kits from Socrates
+  for both (Anthony's can run as a live session; Kevin's is the first external
+  interview). Reachability upgraded: 2 named testers; recruit 1-3 more in
+  parallel with any build.
+- **Anthony's stated MVP direction:** the genuineness paradox resolves toward
+  "AI as proactive researcher": the tool's job is research-driven, immediate
+  value-add for the person being reached — human writes the message, informed.
+  Athena's PRD should treat this as Anthony's hypothesis of record, still
+  subject to the driver tree and assumptions register.
+- Iris watch-item on reach: partially resolved (2 named); keep recruiting.
+
 ## Log
 2026-08-22 — plan created; questions going to Anthony now.
+2026-08-22 — pilots named, mechanics captured, MVP direction recorded.
