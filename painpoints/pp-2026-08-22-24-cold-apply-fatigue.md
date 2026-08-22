@@ -1,8 +1,8 @@
 ---
 id: pp-2026-08-22-24-cold-apply-fatigue
-persona: "Active job hunter"
+persona: "Mid-career tech professional, actively job hunting"
 status: captured
-intensity: null
+intensity: 5
 captured: 2026-08-22
 source: session
 prd: null
@@ -32,19 +32,28 @@ their networks instead — but the tooling path is blocked in both directions.
 - AI-templated outreach blasts (backfires: reads as low-effort to recipients).
 
 ## Evidence
-- [assumed] All from Anthony's framing at capture (2026-08-22); no quotes or
-  observed incidents cited yet. Note: Anthony has personal experience crafting
-  network outreach messages — potential [observed] evidence to elicit.
+- [observed, second-hand] People close to Anthony are living this right now
+  (2026-08-22, Anthony's direct answer) — current incidents, and the people are
+  reachable for interviews and validation.
+- [assumed] Intensity 5/5 "dominating" — Anthony's rating for the persona; his
+  close contacts' own words would upgrade this to observed.
+- [assumed] Hiring managers read AI-templated outreach as non-genuine —
+  Anthony's framing at capture; mechanics not yet unpacked.
+- Note: Anthony has personal experience crafting network outreach messages —
+  additional [observed] material for the "what makes it genuine" question.
 
 ## Open questions
-- [ ] Who exactly is the persona — career stage, industry, how active a search? — unblocks: persona precision (blocking)
-- [ ] Is Anthony (or someone he knows) currently this persona? First-hand incidents? — unblocks: evidence depth (blocking)
-- [ ] Intensity 1–5, and what it costs per week (hours, morale, missed roles)? — unblocks: intensity scoring (blocking)
-- [ ] What makes an outreach message land as "genuine" to a hiring manager — has Anthony seen both sides? — unblocks: root-cause driver tree
-- [ ] Can we reach 3–5 active job hunters this week for validation? — unblocks: reachability scoring
+- [x] Persona: mid-career tech professional, actively hunting (2026-08-22)
+- [x] Proximity: people close to Anthony are in it now — reachable (2026-08-22)
+- [x] Intensity: 5 — dominating (2026-08-22, Anthony's rating)
+- [x] Reachability: probably, with effort — 1-2 weeks of recruiting (2026-08-22)
+- [ ] Which 2-3 close contacts specifically — can Socrates prep interview kits for them this week? — unblocks: observed evidence + validation roster (blocking)
+- [ ] What does the search cost them per week, in their own words (hours, morale, missed roles)? — unblocks: intensity evidence
+- [ ] What makes an outreach message land as "genuine" to a hiring manager — has Anthony seen both sides? — unblocks: root-cause driver tree (blocking)
 
 ## Log
 2026-08-22 — captured from Anthony in session; fast-tracked by his directive:
 Iris to coordinate a plan from painpoint → functioning MVP (see
 plans/pp-24-jobhunt-mvp-plan.md). Anthony available for questions until the
 6 PM staff meeting.
+2026-08-22 — pre-meeting Q&A with Anthony: persona, intensity 5, second-hand-current evidence, reach=probable. Recruiting of validation testers should start in parallel with any build (Iris).
