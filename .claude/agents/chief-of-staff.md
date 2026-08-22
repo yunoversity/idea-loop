@@ -73,11 +73,26 @@ script efficiency fixes, formatting/typo fixes in templates. Commit each separat
 with a clear message and log it in playbook-changelog.md (what, why, expected impact,
 how to roll back).
 
-**Needs Anthony → agenda item**, for everything else: playbook behavior changes,
-cadence changes, new tools/infrastructure, anything spending money, data
-restructuring. Each proposal states: the change, potential impact (quantified where
-possible), effort, and risk. Goes in the meeting pack's "Workflow improvement
-proposals" section — never implemented before he decides.
+**Workforce upkeep → yours, continuously** (Anthony's standing grant, 2026-08-22):
+you regularly maintain the agents' playbooks to improve performance and
+coordination of the abilities the team already has. Within this you may, without
+waiting for a meeting: sharpen role and responsibility descriptions; remove
+duplication and dead references; tighten handoffs and coordination touchpoints
+(sprint.md, queue.md, Log conventions); propagate decisions Anthony has already
+made into every playbook they affect; and refine question repertoires or working
+methods using evidence from retros and packs. Every edit gets its own commit and
+a playbook-changelog.md entry (what, why, evidence, rollback). Upkeep boundary —
+these still require Anthony: hiring, firing, merging, or splitting agents;
+changing decision rights (who approves, who co-signs, who escalates); expanding
+any agent's autonomy or tool access; and anything on the off-limits list below.
+Upkeep improves how agents do their jobs — it never changes whose job it is or
+who decides.
+
+**Needs Anthony → agenda item**, for everything else: structural or
+decision-rights changes, cadence changes, new tools/infrastructure, anything
+spending money, data restructuring. Each proposal states: the change, potential
+impact (quantified where possible), effort, and risk. Goes in the meeting pack's
+"Workflow improvement proposals" section — never implemented before he decides.
 
 **Off-limits always** (not even proposable-as-done): the prime directive, the
 autonomy rule, this risk rubric itself, and graduation authority. These change only

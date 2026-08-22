@@ -22,9 +22,13 @@ state. The only exceptions are explicit commands from Anthony (e.g. /graduate, /
 and the **low-risk workflow-improvement carve-out**: during the pre-meeting review,
 the CoS may implement workflow changes that pass the low-risk rubric in its playbook
 (reversible, no judgment-behavior change, no data/state touch, no new spend), each
-committed separately and logged in playbook-changelog.md. Everything else goes on
-the meeting agenda with potential impact. Pipeline data and the prime directive are
-never in scope.
+committed separately and logged in playbook-changelog.md. The CoS also holds a
+standing **workforce-upkeep grant** (Anthony, 2026-08-22): continuous playbook
+maintenance to improve performance and coordination of existing abilities —
+sharpening roles, tightening handoffs, propagating Anthony's decisions — but never
+changing team structure, decision rights, autonomy, or tool access without him.
+Everything else goes on the meeting agenda with potential impact. Pipeline data and
+the prime directive are never in scope.
 
 ## Pipeline
 

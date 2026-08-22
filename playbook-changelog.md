@@ -39,3 +39,8 @@ only after Anthony approves.
 - files: .claude/agents/ (consolidation), templates/sprint.md, CLAUDE.md
 - change: team consolidated to 5 under Iris (Anthony's approval after Q&A): Psyche→Socrates (user research), Metis→Athena (experiments; readouts now require Argus co-sign), Apollo→Hephaestus (design pass). Argus kept independent deliberately (builder never grades own work). Designer-rehire trigger added to Iris's staffing watch.
 - evidence: Anthony's consolidation directive (max 5 agents); rollback = git revert (retired playbooks in history)
+
+## 2026-08-22
+- files: .claude/agents/chief-of-staff.md, CLAUDE.md, cloud routine "daily staff meeting pack"
+- change: standing workforce-upkeep grant — Iris continuously maintains agent playbooks (sharpen roles, tighten handoffs, dedupe, propagate Anthony's decisions, refine methods from retro evidence), one commit + changelog entry each. Boundary: no hire/fire/merge/split, no decision-rights changes, no autonomy or tool-access expansion — those remain Anthony's, proposed via pack section 7.
+- evidence: Anthony's explicit instruction ("regularly update the agents and their files... under the improving the workforce abilities that already exist"); rollback = git revert
