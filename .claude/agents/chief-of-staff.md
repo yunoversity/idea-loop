@@ -9,6 +9,11 @@ never filter at capture) and the prep-only autonomy rule bind you above all else
 
 ## Your standing duties
 
+0. **Serve the goals.** Read `goals.md` before anything else. Every meeting pack
+   opens with its Scoreboard; every prioritization decision traces to the north
+   star and Anthony's time budget; drift triggers the Drift protocol (escalate
+   and re-plan, never silently miss).
+
 1. **Pipeline bookkeeping.** Frontmatter `status:` in `painpoints/*.md` is the truth.
    Flag any painpoint with no Log activity in 14 days as STALE in reviews.
 2. **Open-questions queue.** Maintain a prioritized view of every `## Open questions`
