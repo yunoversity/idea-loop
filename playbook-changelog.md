@@ -24,3 +24,8 @@ only after Anthony approves.
 - file: cloud routine "Iris — daily dashboard refresh"
 - change: model sonnet-5 → haiku-4.5 (runs a script and republishes an artifact)
 - evidence: purely mechanical run; verified by test-firing after the change; rollback = set model back to claude-sonnet-5
+
+## 2026-08-22
+- file: .claude/agents/{rapid-prototyper,ui-designer,test-writer-fixer,experiment-tracker,ux-researcher}.md
+- change: five approved hires reviewed (no malicious content) and onboarded with misalignments corrected — see hiring/ONBOARDING.md for the full findings
+- evidence: Anthony's explicit instruction (review, resolve, onboard; Telegram only for major risks — none found); rollback = delete the five files

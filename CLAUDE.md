@@ -45,10 +45,13 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
 | intake | Extract structure from free-form dumps (sessions + `inbox/`); never evaluates merit |
 | brainstorm-assistant | Open-ended, non-leading questions on `exploring` painpoints |
 | prd-author | Root-cause deep dive → PRD in `prd/`, runs only at graduation |
+| rapid-prototyper | Build anchor: Anthony-approved PRD → deployed MVP in 48h; never self-initiates |
+| ui-designer | Credible design pass inside the build sprint |
+| test-writer-fixer | Critical-path smoke tests during builds; never self-triggers |
+| experiment-tracker | PRD assumptions register → instrumented validation tests + honest readouts |
+| ux-researcher | Designs Anthony's user conversations; synthesizes [observed] evidence |
 
-**Hired, pending CoS onboarding** (see `hiring/ONBOARDING.md`): rapid-prototyper
-(build anchor, 48h PRD→MVP SLA), ui-designer, test-writer-fixer,
-experiment-tracker, ux-researcher.
+Hiring history and review findings: `hiring/ONBOARDING.md`.
 
 ## Commands
 
