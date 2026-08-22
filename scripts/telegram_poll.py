@@ -32,6 +32,8 @@ HELP_TEXT = """Here's what I can do here (I check messages every ~30 minutes, so
 /new — start a fresh conversation thread
 /help — this list
 
+Voice notes work too — I transcribe them on Anthony's Mac and treat them like text (I'll echo back what I heard so you can catch mistakes).
+
 Anything else you send me becomes pipeline input automatically: new painpoints get filed for intake, and replies to my questions get attached to their idea. For live work — brainstorming, staff meetings, graduations — open Claude Code in ~/Projects/idea-loop and use /capture, /brainstorm, /meeting, /graduate, /park."""
 
 

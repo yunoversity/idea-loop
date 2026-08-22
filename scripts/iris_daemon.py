@@ -84,6 +84,8 @@ def file_to_inbox(msg, text):
     name = ts.strftime("%Y-%m-%d-%H%M%S") + f"-{msg['message_id']}.md"
     reply = msg.get("reply_to_message", {}).get("text")
     body = f"# Telegram message · {ts.isoformat()}\n\n"
+    if msg.get("voice") or msg.get("audio"):
+        body += "*(voice note, transcribed locally)*\n\n"
     if reply:
         body += f"> In reply to:\n> {reply}\n\n"
     body += text + "\n"
@@ -95,6 +97,32 @@ def file_to_inbox(msg, text):
 
 
 PACK_MARKER = REPO / ".iris_session_pack"
+WHISPER_MODEL = os.environ.get("WHISPER_MODEL", "base")
+_whisper = None
+
+
+def transcribe(token, file_id):
+    """Download a Telegram voice note and transcribe it locally (faster-whisper).
+    First call downloads the model (~75MB for 'base') to the HF cache."""
+    global _whisper
+    import tempfile
+    with urllib.request.urlopen(
+            f"https://api.telegram.org/bot{token}/getFile?file_id={file_id}", timeout=30) as r:
+        path = json.load(r)["result"]["file_path"]
+    with urllib.request.urlopen(
+            f"https://api.telegram.org/file/bot{token}/{path}", timeout=60) as r:
+        audio = r.read()
+    if _whisper is None:
+        from faster_whisper import WhisperModel
+        _whisper = WhisperModel(WHISPER_MODEL, device="cpu", compute_type="int8")
+    with tempfile.NamedTemporaryFile(suffix=".oga", delete=False) as f:
+        f.write(audio)
+        tmp = f.name
+    try:
+        segments, _info = _whisper.transcribe(tmp, vad_filter=True)
+        return " ".join(s.text.strip() for s in segments).strip()
+    finally:
+        os.unlink(tmp)
 
 
 def _reset_thread_on_new_pack():
@@ -197,10 +225,22 @@ def main():
             if str(msg.get("chat", {}).get("id")) != str(chat_id):
                 continue
             text = msg.get("text")
-            if not text:
+            voice = msg.get("voice") or msg.get("audio")
+            if not text and not voice:
                 continue
-            log(f"msg: {text[:80]!r}")
             try:
+                if voice:
+                    typing(token, chat_id)
+                    text = transcribe(token, voice["file_id"])
+                    if not text:
+                        send(token, chat_id, "I got the voice note but couldn't make out any words — mind trying again?")
+                        continue
+                    log(f"voice ({voice.get('duration', '?')}s): {text[:80]!r}")
+                    send(token, chat_id, f"🎙️ Heard: “{text[:400]}”")
+                    msg = dict(msg)
+                    msg["text"] = text
+                else:
+                    log(f"msg: {text[:80]!r}")
                 reply = handle(token, chat_id, msg, text)
                 send_chunked(token, chat_id, reply)
             except Exception as e:  # keep the daemon alive no matter what
