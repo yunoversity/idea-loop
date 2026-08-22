@@ -1,8 +1,8 @@
 name: Poll Telegram inbox
 
+# Manual fallback only: the Iris daemon (scripts/iris_daemon.py) owns inbound
+# Telegram now. Run this by hand if the daemon is down for an extended period.
 on:
-  schedule:
-    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 concurrency:

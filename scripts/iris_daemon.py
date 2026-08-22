@@ -1,0 +1,175 @@
+#!/usr/bin/env python3
+"""Iris live: long-polls Telegram and answers Anthony conversationally via
+headless Claude Code reading (read-only) from this repo.
+
+Safety split:
+- Claude ("Iris") is READ-ONLY — she can read painpoints, playbooks, and the
+  taste profile to converse, but cannot write files or push.
+- All writes are done deterministically by this script: every non-command
+  message is also filed to inbox/ for the intake agent (same as the async
+  loop always did), and inbox files are committed+pushed by the script.
+
+Commands: /help /status /questions answered by script; /new resets the thread.
+Only TELEGRAM_CHAT_ID is accepted. Shares .telegram_offset with the manual
+Actions poll fallback.
+
+Run under launchd (see scripts/com.iris.daemon.plist) or by hand:
+  python3 scripts/iris_daemon.py
+"""
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+OFFSET_FILE = REPO / ".telegram_offset"
+SESSION_FILE = REPO / ".iris_session"
+CLAUDE = os.path.expanduser("~/.local/bin/claude")
+CLAUDE_TIMEOUT = 240
+
+sys.path.insert(0, str(REPO / "scripts"))
+from telegram_digest import load_env, send  # noqa: E402
+from telegram_poll import HELP_TEXT, status_text, questions_text  # noqa: E402
+
+READ_ONLY_TOOLS = "Read,Glob,Grep,Bash(git log:*),Bash(git status)"
+
+IRIS_SYSTEM = (
+    "You are Iris, Anthony's Chief of Staff for his idea-loop pipeline, chatting "
+    "with him over Telegram. Follow CLAUDE.md and .claude/agents/chief-of-staff.md. "
+    "You are READ-ONLY in this channel: discuss painpoints, answer questions, help "
+    "him think — but you cannot change files here. If he dumps a new idea or "
+    "painpoint, tell him it's been filed for intake automatically (the daemon does "
+    "that) and engage with the substance. If he asks for state changes (graduate, "
+    "park, playbook edits), explain those happen in a Claude Code session or at the "
+    "staff meeting (/meeting). Telegram formatting: plain text only, no markdown "
+    "headers or tables, keep replies under 3000 characters, be conversational and "
+    "concise — this is a chat, not a report."
+)
+
+
+def log(msg):
+    print(f"[{datetime.now().isoformat(timespec='seconds')}] {msg}", flush=True)
+
+
+def git(*args, timeout=60):
+    return subprocess.run(["git", "-C", str(REPO), *args],
+                          capture_output=True, text=True, timeout=timeout)
+
+
+def file_to_inbox(msg, text):
+    ts = datetime.fromtimestamp(msg["date"], tz=timezone.utc)
+    name = ts.strftime("%Y-%m-%d-%H%M%S") + f"-{msg['message_id']}.md"
+    reply = msg.get("reply_to_message", {}).get("text")
+    body = f"# Telegram message · {ts.isoformat()}\n\n"
+    if reply:
+        body += f"> In reply to:\n> {reply}\n\n"
+    body += text + "\n"
+    (REPO / "inbox" / name).write_text(body)
+    git("add", "inbox")
+    if git("diff", "--cached", "--quiet").returncode != 0:
+        git("commit", "-q", "-m", "inbox: telegram message via iris daemon")
+        git("push", "-q")
+
+
+def ask_iris(text):
+    git("pull", "-q")
+    cmd = [CLAUDE, "-p", text, "--output-format", "json",
+           "--allowedTools", READ_ONLY_TOOLS,
+           "--append-system-prompt", IRIS_SYSTEM]
+    resumed = SESSION_FILE.exists()
+    if resumed:
+        cmd += ["--resume", SESSION_FILE.read_text().strip()]
+    env = dict(os.environ)
+    env["PATH"] = os.path.expanduser("~/.local/bin") + ":/usr/local/bin:/usr/bin:/bin"
+    try:
+        out = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True,
+                             timeout=CLAUDE_TIMEOUT, env=env)
+    except subprocess.TimeoutExpired:
+        return "That one took me too long to think about — try asking a smaller piece of it."
+    if out.returncode != 0:
+        if resumed:  # stale session id is the usual culprit; retry fresh once
+            SESSION_FILE.unlink(missing_ok=True)
+            return ask_iris(text)
+        log(f"claude error: {out.stderr[:500]}")
+        return "I hit an error thinking that through. It's logged — try again in a minute."
+    try:
+        data = json.loads(out.stdout)
+        if data.get("session_id"):
+            SESSION_FILE.write_text(data["session_id"])
+        return data.get("result") or "…(I came back empty — try rephrasing?)"
+    except json.JSONDecodeError:
+        return out.stdout[:3000] or "Empty reply — worth checking iris_daemon.log."
+
+
+def send_chunked(token, chat_id, text):
+    for i in range(0, len(text), 4000):
+        send(token, chat_id, text[i:i + 4000])
+
+
+def typing(token, chat_id):
+    try:
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{token}/sendChatAction",
+            data=json.dumps({"chat_id": chat_id, "action": "typing"}).encode(),
+            headers={"Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=10)
+    except OSError:
+        pass
+
+
+def handle(token, chat_id, msg, text):
+    cmd = text.strip().split()[0].lower() if text.strip() else ""
+    if cmd in ("/help", "/start"):
+        return HELP_TEXT + "\n\nI'm live right now, so you can also just talk to me — ask about any painpoint, think out loud, or dump a new idea."
+    if cmd == "/status":
+        return status_text()
+    if cmd == "/questions":
+        return questions_text()
+    if cmd == "/new":
+        SESSION_FILE.unlink(missing_ok=True)
+        return "Fresh thread started — what's on your mind?"
+    typing(token, chat_id)
+    file_to_inbox(msg, text)
+    return ask_iris(text)
+
+
+def main():
+    load_env()
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    if not token or not chat_id:
+        sys.exit("TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set in .env")
+    log("Iris daemon up; long-polling Telegram.")
+    offset = int(OFFSET_FILE.read_text()) if OFFSET_FILE.exists() else 0
+    while True:
+        try:
+            url = f"https://api.telegram.org/bot{token}/getUpdates?timeout=50&offset={offset}"
+            with urllib.request.urlopen(url, timeout=70) as resp:
+                updates = json.load(resp).get("result", [])
+        except OSError as e:
+            log(f"poll error, backing off: {e}")
+            time.sleep(15)
+            continue
+        for u in updates:
+            offset = max(offset, u["update_id"] + 1)
+            OFFSET_FILE.write_text(str(offset))
+            msg = u.get("message") or {}
+            if str(msg.get("chat", {}).get("id")) != str(chat_id):
+                continue
+            text = msg.get("text")
+            if not text:
+                continue
+            log(f"msg: {text[:80]!r}")
+            try:
+                reply = handle(token, chat_id, msg, text)
+                send_chunked(token, chat_id, reply)
+            except Exception as e:  # keep the daemon alive no matter what
+                log(f"handler error: {e}")
+
+
+if __name__ == "__main__":
+    main()

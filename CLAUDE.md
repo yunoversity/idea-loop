@@ -59,8 +59,13 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
 
 - Daily 8:00 AM — Telegram digest of top ≤3 open questions. Runs in **GitHub Actions**
   (`.github/workflows/telegram-digest.yml`), reading painpoints from the repo's main branch.
-- Every 30 min — inbound Telegram messages polled into `inbox/` and committed to main
-  (`.github/workflows/telegram-poll.yml`). Intake processes them next session.
+- Live conversation — the **Iris daemon** (`scripts/iris_daemon.py`, launchd service
+  `com.iris.daemon` on Anthony's Mac) long-polls Telegram: /help /status /questions
+  answered by script; other messages are filed to `inbox/` (committed+pushed) AND
+  answered conversationally by read-only headless Claude. Iris cannot write via
+  Telegram — state changes happen only in Claude Code sessions or meetings.
+  When the Mac sleeps, Telegram queues messages (~24h) and the daemon catches up on
+  wake; `.github/workflows/telegram-poll.yml` remains as a manual-dispatch fallback.
 - Friday 8:00 AM — a scheduled cloud Claude agent builds the weekly meeting pack
   (per the chief-of-staff playbook, sections 1–6 pre-filled, Decisions empty),
   commits it to `meetings/`; a push-triggered Action sends the Telegram summons.
