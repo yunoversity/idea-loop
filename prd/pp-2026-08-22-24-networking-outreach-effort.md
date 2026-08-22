@@ -1,6 +1,6 @@
-# PRD: Cold-apply fatigue — genuine network outreach for job hunters
+# PRD: Keeping up with networking outreach takes more effort than people can sustain
 
-- **Painpoint:** painpoints/pp-2026-08-22-24-cold-apply-fatigue.md
+- **Painpoint:** painpoints/pp-2026-08-22-24-networking-outreach-effort.md
 - **Persona:** Mid-career tech professional, actively job hunting (often while
   in a disengaging current role)
 - **Graduated:** 2026-08-22 (Anthony's stated reason: evidence-ready with
