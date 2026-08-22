@@ -13,11 +13,11 @@
 | Task | Owner | Status | Handoff |
 |---|---|---|---|
 | Scaffold + hello-world deploy | Hephaestus | todo | |
-| Core feature(s) | Hephaestus | todo | |
-| Instrumentation spec | Metis | todo | events list → Hephaestus |
-| Design pass | Apollo | todo | tokens/components → Hephaestus |
+| Core feature(s) + design pass | Hephaestus | todo | |
+| Instrumentation spec | Athena | todo | events list → Hephaestus |
 | Critical-path smoke tests | Argus | todo | bugs → Hephaestus via ledger |
 | Production deploy + live URL | Hephaestus | todo | URL → painpoint Log |
+| Experiment readout (post-launch) | Athena | todo | co-sign → Argus, then Anthony |
 
 ## Hour-24 checkpoint (mandatory, captain runs it)
 <!-- on track? scope cuts proposed? escalation needed? record the call here -->

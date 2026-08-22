@@ -39,3 +39,11 @@ flag major risks immediately; this review cleared).
 **Standing staffing risk:** no dedicated frontend/backend/devops hire;
 rapid-prototyper carries the stack and deployment alone. Flag with a re-hire
 proposal if an MVP build strains the 48h SLA.
+
+## 2026-08-22 — consolidation to 5 agents under Iris
+
+Anthony approved: Apollo absorbed into Hephaestus (design pass), Metis into
+Athena (experiments; Argus co-signs readouts as the independence check),
+Psyche into Socrates (user research; Anthony still conducts all human contact).
+Argus kept separate so verification never reports to the builder. Rehire
+triggers live in Iris's playbook (staffing watch).

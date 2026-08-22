@@ -43,13 +43,15 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
 |---|---|---|
 | **Iris** | chief-of-staff | Pipeline bookkeeping, meetings, nominations, judgment calls; emits `queue.md` (the single priority source) |
 | **Echo** | intake | Extract structure from free-form dumps (sessions + `inbox/`, processed by cloud routine every 3h); never evaluates merit |
-| **Socrates** | brainstorm-assistant | Open-ended, non-leading questions on `exploring` painpoints |
-| **Athena** | prd-author | Root-cause deep dive → PRD in `prd/`, runs only at graduation |
-| **Hephaestus** | rapid-prototyper | Sprint captain: Anthony-approved PRD → deployed MVP in 48h via `sprint.md`; never self-initiates |
-| **Apollo** | ui-designer | Credible design pass inside the build sprint |
-| **Argus** | test-writer-fixer | Critical-path smoke tests during builds; never self-triggers |
-| **Metis** | experiment-tracker | PRD assumptions register → instrumented validation tests + honest readouts |
-| **Psyche** | ux-researcher | Designs Anthony's user conversations; synthesizes [observed] evidence |
+| **Socrates** | brainstorm-assistant | The questioner, both directions: non-leading brainstorms with Anthony + interview kits and synthesis for his real-user conversations |
+| **Athena** | prd-author | Problem science: root-cause PRD at graduation, then experiment design and readouts against its assumptions register (readouts need Argus co-sign) |
+| **Hephaestus** | rapid-prototyper | Sprint captain: Anthony-approved PRD → deployed, credibly-designed MVP in 48h via `sprint.md`; never self-initiates |
+| **Argus** | test-writer-fixer | Independent verification: critical-path tests during builds + co-signs every experiment readout; never self-triggers |
+
+Consolidated 2026-08-22 (Anthony's approval): Apollo→Hephaestus, Metis→Athena,
+Psyche→Socrates. Rehire trigger: if validation feedback is about polish/jank
+rather than the idea, Iris proposes a dedicated designer rehire at the next
+meeting. Retired playbooks recoverable from git history.
 
 Hiring history and review findings: `hiring/ONBOARDING.md`.
 

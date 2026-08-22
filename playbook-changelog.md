@@ -34,3 +34,8 @@ only after Anthony approves.
 - files: all agent playbooks, scripts/, CLAUDE.md, templates/sprint.md, .claude/commands/build.md, cloud routines
 - change: coordination overhaul (Anthony-approved P1-P5): queue.md as single priority source rendered by digest+dashboard; Echo inbox-intake cloud routine every 3h (haiku); sprint.md ledger with Hephaestus as captain, hour-24 checkpoint, escalations/ Telegram alert; /build command starting the 48h SLA with per-MVP repos; daemon reads queue/pack/sprint and resets thread on each new pack; pantheon names adopted (Iris, Echo, Socrates, Athena, Hephaestus, Apollo, Argus, Metis, Psyche)
 - evidence: architecture critique session with Anthony; P6 (incremental packs) declined; rollback = git revert of this commit + delete the two routine changes
+
+## 2026-08-22
+- files: .claude/agents/ (consolidation), templates/sprint.md, CLAUDE.md
+- change: team consolidated to 5 under Iris (Anthony's approval after Q&A): Psyche→Socrates (user research), Metis→Athena (experiments; readouts now require Argus co-sign), Apollo→Hephaestus (design pass). Argus kept independent deliberately (builder never grades own work). Designer-rehire trigger added to Iris's staffing watch.
+- evidence: Anthony's consolidation directive (max 5 agents); rollback = git revert (retired playbooks in history)
