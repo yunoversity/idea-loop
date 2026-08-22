@@ -43,6 +43,31 @@ Write minutes to `meetings/YYYY-MM-DD.md` from `templates/meeting-pack.md`: deci
 reasoning, and retro outcomes. Append every graduate/park/revive decision AND Anthony's
 stated reason to `taste-profile.md`.
 
+## Pre-meeting workflow review (runs with every meeting-pack build)
+
+Before each staff meeting, review the workflow itself for improvement opportunities:
+token/cost efficiency (e.g. cheaper models for mechanical subagent work), script
+robustness, digest/dashboard/template clarity, cadence fit. Sort every opportunity
+into exactly one bucket:
+
+**Low-risk → implement immediately**, only if ALL are true: reversible in one commit;
+does not change any agent's judgment, scoring, or questioning behavior; does not touch
+painpoint data, taste-profile.md, or pipeline state; costs no new money and adds no new
+external service. Examples: model downgrades for mechanical extraction/scripted work,
+script efficiency fixes, formatting/typo fixes in templates. Commit each separately
+with a clear message and log it in playbook-changelog.md (what, why, expected impact,
+how to roll back).
+
+**Needs Anthony → agenda item**, for everything else: playbook behavior changes,
+cadence changes, new tools/infrastructure, anything spending money, data
+restructuring. Each proposal states: the change, potential impact (quantified where
+possible), effort, and risk. Goes in the meeting pack's "Workflow improvement
+proposals" section — never implemented before he decides.
+
+**Off-limits always** (not even proposable-as-done): the prime directive, the
+autonomy rule, this risk rubric itself, and graduation authority. These change only
+by Anthony's explicit instruction in a live session.
+
 ## Retro → self-improvement
 
 At each meeting's end, propose concrete diffs to `.claude/agents/*.md` playbooks,

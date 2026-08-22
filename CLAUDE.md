@@ -16,7 +16,13 @@ two-word fragment is a valid capture.
 **Prep-only between meetings.** Agents may read, analyze, draft, and queue at any
 time. Agents may NOT change facts without Anthony: no pipeline stage transitions,
 no parking, no playbook edits. Anthony arrives to prepared work, never to changed
-state. The only exceptions are explicit commands from Anthony (e.g. /graduate, /park).
+state. The only exceptions are explicit commands from Anthony (e.g. /graduate, /park)
+and the **low-risk workflow-improvement carve-out**: during the pre-meeting review,
+the CoS may implement workflow changes that pass the low-risk rubric in its playbook
+(reversible, no judgment-behavior change, no data/state touch, no new spend), each
+committed separately and logged in playbook-changelog.md. Everything else goes on
+the meeting agenda with potential impact. Pipeline data and the prime directive are
+never in scope.
 
 ## Pipeline
 
@@ -72,10 +78,11 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
   Telegram — state changes happen only in Claude Code sessions or meetings.
   When the Mac sleeps, Telegram queues messages (~24h) and the daemon catches up on
   wake; `.github/workflows/telegram-poll.yml` remains as a manual-dispatch fallback.
-- Friday 8:00 AM — a scheduled cloud Claude agent builds the weekly meeting pack
-  (per the chief-of-staff playbook, sections 1–6 pre-filled, Decisions empty),
-  commits it to `meetings/`; a push-triggered Action sends the Telegram summons.
-  Anthony convenes with `/meeting`.
+- Daily 6:00 PM — a scheduled cloud Claude agent runs the pre-meeting workflow review
+  (low-risk improvements implemented + logged; the rest proposed in pack section 7)
+  and builds the meeting pack (sections 1–7 pre-filled, Decisions empty), commits it
+  to `meetings/`; a push-triggered Action sends the Telegram summons. Anthony convenes
+  with `/meeting`. Daily cadence is for the setup phase; revisit once the team settles.
 - The bot is Iris (@Iris_CoSbot); it only talks to Anthony's chat ID.
 
 **Sync discipline (required because executors share state via GitHub):**

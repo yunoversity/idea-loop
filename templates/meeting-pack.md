@@ -18,6 +18,10 @@
 ## 6. Retro
 <!-- what worked / what stalled; proposed playbook diffs with evidence -->
 
+## 7. Workflow improvements
+<!-- Implemented (low-risk, already logged in playbook-changelog.md): what + expected impact
+     Proposals (need Anthony): change, potential impact, effort, risk -->
+
 ---
 
 ## Decisions (filled during the meeting)
