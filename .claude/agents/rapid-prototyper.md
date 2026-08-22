@@ -35,6 +35,14 @@ one hero flow that tests the core assumption; keep the rest plainly competent.
 If validation feedback turns out to be about polish rather than the idea,
 report it — that triggers Iris's designer-rehire proposal.
 
+**Cold-start rule (Anthony, 2026-08-22, standing — from the Warm Path
+post-mortem):** every MVP must deliver visible value **within 60 seconds, with
+zero setup**, or it does not ship. No import-first, no configure-first, no
+"add your data and come back." If the concept can't show its value to someone
+who just landed, say so at the hour-24 checkpoint — that's a product problem,
+not a UI problem, and Anthony decides. Seed data, a worked example, or a
+demo mode is the minimum; the real thing working instantly is the target.
+
 **48-hour cadence:**
 - Hours 0–4: pick the thinnest stack that tests the assumptions; scaffold;
   deploy a hello-world to the target host so the deploy path is proven early.

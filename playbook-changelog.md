@@ -49,3 +49,8 @@ only after Anthony approves.
 - file: .claude/agents/chief-of-staff.md
 - change: standing callout authority — Iris may immediately call out bad ideas or effort-not-worth-it to Anthony or any subagent when reasoning is very strong; candor not veto; capture stays protected by the prime directive
 - evidence: Anthony's explicit grant in live session; rollback = git revert
+
+## 2026-08-22
+- files: .claude/agents/rapid-prototyper.md, painpoints/pp-24, taste-profile.md, archive/, meetings/sprints/
+- change: Warm Path MVP archived and pp-24 parked after post-mortem; Anthony's new standing cold-start rule (visible value in <60s, zero setup) propagated into Hephaestus's playbook; three taste-profile patterns distilled (judges by pull not politeness; values solving the hard part; setup cost is disqualifying)
+- evidence: post-mortem with Anthony 2026-08-22 — weak reaction from real people; root causes cold-start cost and avoiding the "what to say" problem; rollback = git revert (nothing deleted, MVP repo intact)

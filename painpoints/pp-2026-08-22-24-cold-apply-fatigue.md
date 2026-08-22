@@ -1,13 +1,13 @@
 ---
 id: pp-2026-08-22-24-cold-apply-fatigue
 persona: "Mid-career tech professional, actively job hunting"
-status: graduated
+status: parked
 intensity: 5
 captured: 2026-08-22
 source: session
 prd: prd/pp-2026-08-22-24-cold-apply-fatigue.md
-parked_reason: null
-revival_criteria: null
+parked_reason: "Warm Path MVP drew a weak reaction from real people (2026-08-22). Cold-start cost too high, and it deliberately avoided the hard part — what to say. Problem stays credible; solution shape was wrong. Needs evidence, not another build."
+revival_criteria: "Any one of: (1) a hunter unprompted asks for help with WHAT TO SAY; (2) A3 desk test passes (>=7/10 targets yield real research material) AND a hunter says they would use a brief on their hardest day; (3) someone shows a self-built outreach-research workaround; (4) Anthony wants it for his own search this week."
 ---
 
 # Cold-apply fatigue: job hunters need genuine direct outreach in their networks
@@ -90,3 +90,4 @@ plans/pp-24-jobhunt-mvp-plan.md). Anthony available for questions until the
 2026-08-22 — Anthony named pilots (himself + Kevin Purdy), gave cost-in-their-words and genuine-outreach mechanics; MVP direction pointed at research-driven value-add. Anthony reclassified: partially first-hand.
 2026-08-22 — value-add defined by Anthony (delight / feel heard / workday relief); MVP-scope blocker cleared before the 6 PM meeting.
 2026-08-22 — GRADUATED by Anthony (fast-track order: PRD by Athena, review by Iris). PRD complete: validation-ready pending A3 desk test (public-signal availability).
+2026-08-22 — PARKED after Warm Path post-mortem (archive/2026-08-22-warm-path-postmortem.md). Not killed: PRD, MVP, and tests all preserved.
