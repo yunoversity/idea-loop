@@ -46,6 +46,10 @@ painpoint in `painpoints/`, named `pp-YYYY-MM-DD-<slug>.md`, from
 | brainstorm-assistant | Open-ended, non-leading questions on `exploring` painpoints |
 | prd-author | Root-cause deep dive → PRD in `prd/`, runs only at graduation |
 
+**Hired, pending CoS onboarding** (see `hiring/ONBOARDING.md`): rapid-prototyper
+(build anchor, 48h PRD→MVP SLA), ui-designer, test-writer-fixer,
+experiment-tracker, ux-researcher.
+
 ## Commands
 
 - `/capture <dump>` — ingest a free-form painpoint dump (also processes `inbox/`)

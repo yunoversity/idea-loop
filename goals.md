@@ -13,6 +13,14 @@ ranked by blast radius, and a designed cheap test for each top assumption.
 Real-people evidence is NOT required inside the month — it happens when the tests
 run. A PRD missing an assumptions register or designed tests does not count.
 
+## MVP SLA
+
+**A working, deployed MVP within 48 hours of Anthony approving a PRD for build.**
+The build squad (rapid-prototyper as anchor, with ui-designer and
+test-writer-fixer) owns the clock; experiment-tracker instruments the MVP against
+the PRD's assumptions register before hour 48. PRD approval for build is a
+separate, explicit Anthony decision — graduation alone does not start the clock.
+
 ## Operating constraints
 
 - **Anthony's time budget: ~5 hours/week.** Iris paces all asks — digests,
