@@ -59,6 +59,16 @@ their networks instead — but the tooling path is blocked in both directions.
 - [assumed → partially observed] Intensity 5/5 "dominating" — Anthony's rating,
   now backed by first-hand experience; Kevin's own words will complete it.
 
+## Pilot feedback (MVP v1, 2026-08-22)
+- [observed] "People don't want to upload names manually" — first friction
+  finding from the Warm Path MVP. Manual contact entry is a cold-start tax that
+  can kill adoption before the Daily Two ever gets a chance. Resolved same day
+  with drag-and-drop import of LinkedIn's own Connections.csv export.
+- [request] Anthony: paste a LinkedIn profile URL to trigger the 90-second
+  research. Reading that URL programmatically is scraping (out of bounds); the
+  legitimate versions need either user-pasted material or public-source research
+  with an LLM — i.e. Dossier with a backend. Decision pending (see plans/).
+
 ## Open questions
 - [x] Persona: mid-career tech professional, actively hunting (2026-08-22)
 - [x] Proximity: people close to Anthony are in it now — reachable (2026-08-22)

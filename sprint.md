@@ -54,3 +54,9 @@ scraping, no accounts, no spend.
 - 2026-08-22 17:20 CDT — export fixed to use the downloads capability (plain
   download links are inert in the hosted viewer; would have stranded the pilot
   event log). Fallback keeps file:// and localhost working.
+- 2026-08-22 17:55 CDT — pilot feedback: manual entry rejected. Shipped
+  LinkedIn/Google export import (drag-drop CSV, preamble + quoted-comma safe,
+  profile links captured) + per-contact research notes. 18/18 tests. Redeployed.
+- OPEN DECISION for Anthony: automated "paste a LinkedIn URL -> 90-second
+  research" needs a backend + Anthropic API key (new spend) and is really
+  Dossier. Iris will not authorize spend; Anthony decides.
