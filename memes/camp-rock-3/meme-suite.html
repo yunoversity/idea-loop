@@ -1,0 +1,574 @@
+<title>Final Jam for Everyone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Permanent+Marker&family=Nunito+Sans:ital,wght@0,400;0,700;0,800;1,400&display=swap">
+<style>
+  :root {
+    --board: #E4D5B7;
+    --board-edge: #C9B48D;
+    --paper: #FBF7EC;
+    --paper-2: #F3ECDB;
+    --ink: #2B2419;
+    --ink-soft: #6B5F4C;
+    --pine: #2F5D3A;
+    --lake: #33658A;
+    --ember: #D95D28;
+    --ember-soft: rgba(217, 93, 40, 0.14);
+    --tape: rgba(240, 220, 140, 0.55);
+    --card-shadow: 0 2px 6px rgba(43, 36, 25, 0.18), 0 10px 24px rgba(43, 36, 25, 0.08);
+    --rule: rgba(43, 36, 25, 0.16);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --board: #1A231B;
+      --board-edge: #10160F;
+      --paper: #262B20;
+      --paper-2: #1F241A;
+      --ink: #EDE5D0;
+      --ink-soft: #A79B80;
+      --pine: #8FBF9A;
+      --lake: #86AECD;
+      --ember: #F0824A;
+      --ember-soft: rgba(240, 130, 74, 0.16);
+      --tape: rgba(214, 190, 108, 0.28);
+      --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 0, 0, 0.35);
+      --rule: rgba(237, 229, 208, 0.18);
+    }
+  }
+  :root[data-theme="dark"] {
+    --board: #1A231B;
+    --board-edge: #10160F;
+    --paper: #262B20;
+    --paper-2: #1F241A;
+    --ink: #EDE5D0;
+    --ink-soft: #A79B80;
+    --pine: #8FBF9A;
+    --lake: #86AECD;
+    --ember: #F0824A;
+    --ember-soft: rgba(240, 130, 74, 0.16);
+    --tape: rgba(214, 190, 108, 0.28);
+    --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 0, 0, 0.35);
+    --rule: rgba(237, 229, 208, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--board);
+    background-image: radial-gradient(rgba(43, 36, 25, 0.06) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  /* ---- Poster hero ---- */
+  .poster {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: var(--card-shadow);
+    max-width: 780px;
+    margin: 0 auto 56px;
+    padding: 40px 32px 34px;
+    text-align: center;
+    position: relative;
+    transform: rotate(-0.4deg);
+  }
+  .poster::before, .poster::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    width: 92px; height: 30px;
+    background: var(--tape);
+    transform: rotate(-4deg);
+  }
+  .poster::before { left: 8%; }
+  .poster::after { right: 8%; transform: rotate(5deg); }
+  .eyebrow {
+    font-family: "Permanent Marker", cursive;
+    color: var(--pine);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: "Alfa Slab One", "Georgia", serif;
+    font-weight: 400;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  h1 .pop { color: var(--ember); }
+  .deck {
+    max-width: 56ch;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+  }
+  .byline {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 2px dashed var(--rule);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lake);
+  }
+
+  /* ---- Board of cards ---- */
+  .board { columns: 3 320px; column-gap: 22px; }
+  .card {
+    break-inside: avoid;
+    background: var(--paper);
+    box-shadow: var(--card-shadow);
+    margin: 0 0 22px;
+    padding: 26px 20px 18px;
+    position: relative;
+  }
+  .card:nth-child(3n)   { transform: rotate(0.5deg); }
+  .card:nth-child(3n+1) { transform: rotate(-0.45deg); }
+  .card:nth-child(4n+2) { transform: rotate(0.3deg); }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -10px; left: 50%;
+    width: 84px; height: 24px;
+    background: var(--tape);
+    transform: translateX(-50%) rotate(-2.5deg);
+  }
+  .tmpl {
+    font-family: "Permanent Marker", cursive;
+    font-size: 0.82rem;
+    color: var(--ember);
+    margin: 0 0 2px;
+  }
+  .card h2 {
+    font-family: "Alfa Slab One", "Georgia", serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .why {
+    margin: 14px 0 0;
+    padding-top: 10px;
+    border-top: 2px dashed var(--rule);
+    font-family: "Permanent Marker", cursive;
+    font-size: 0.83rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .why b { color: var(--pine); font-weight: 400; }
+
+  /* panel primitives */
+  .panels { display: flex; flex-direction: column; gap: 8px; }
+  .panel {
+    background: var(--paper-2);
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 0.93rem;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .panel .n {
+    font-family: "Alfa Slab One", serif;
+    font-size: 0.8rem;
+    color: var(--lake);
+    flex: none;
+  }
+  .panel.repeat { border-style: dashed; border-color: var(--ember); background: var(--ember-soft); }
+  .stage { font-style: italic; color: var(--ink-soft); }
+
+  /* dialogue (anakin/padme) */
+  .dlg .panel { border-left-width: 5px; }
+  .dlg .a { border-left-color: var(--lake); }
+  .dlg .p { border-left-color: var(--ember); }
+  .dlg .who {
+    flex: none;
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 2px;
+  }
+
+  /* expanding brain */
+  .brain .panel { position: relative; overflow: hidden; }
+  .brain .b1 { opacity: 0.75; }
+  .brain .b2 { background: linear-gradient(90deg, var(--paper-2), var(--ember-soft)); }
+  .brain .b3 { background: linear-gradient(90deg, var(--ember-soft), rgba(51, 101, 138, 0.16)); }
+  .brain .b4 {
+    background: linear-gradient(90deg, var(--ember-soft), rgba(51, 101, 138, 0.22), var(--ember-soft));
+    border-color: var(--ember);
+    font-weight: 700;
+  }
+  .brain .lvl {
+    flex: none;
+    font-size: 1.05rem;
+    filter: saturate(0.9);
+  }
+
+  /* drake */
+  .drake .no { opacity: 0.62; }
+  .drake .no .mark { color: var(--ink-soft); }
+  .drake .yes { border-color: var(--pine); background: rgba(47, 93, 58, 0.1); }
+  .drake .mark { flex: none; font-family: "Alfa Slab One", serif; font-size: 0.9rem; color: var(--pine); }
+
+  /* corporate find-the-differences */
+  .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .pic {
+    background: var(--paper-2);
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.88rem;
+  }
+  .pic .frame { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+  .punch {
+    text-align: center;
+    font-family: "Permanent Marker", cursive;
+    font-size: 1.02rem;
+    color: var(--ember);
+    padding: 6px 0 2px;
+  }
+
+  /* chats: slack + group chat + tweet */
+  .chat { display: flex; flex-direction: column; gap: 7px; }
+  .chat-head {
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--lake);
+    border-bottom: 1.5px solid var(--rule);
+    padding-bottom: 6px;
+    margin-bottom: 3px;
+  }
+  .msg { max-width: 92%; }
+  .msg .from {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 2px 4px;
+  }
+  .msg .bubble {
+    background: var(--paper-2);
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    border-top-left-radius: 3px;
+    padding: 8px 12px;
+    font-size: 0.92rem;
+  }
+  .msg.right { align-self: flex-end; }
+  .msg.right .from { text-align: right; margin: 0 4px 2px 0; }
+  .msg.right .bubble {
+    border-radius: 12px;
+    border-top-right-radius: 3px;
+    border-color: var(--lake);
+    background: rgba(51, 101, 138, 0.1);
+  }
+  .tweet { border: 1.5px solid var(--rule); border-radius: 10px; padding: 12px 14px; background: var(--paper-2); }
+  .tweet + .tweet { margin-top: 8px; margin-left: 18px; }
+  .tweet .handle { font-weight: 800; font-size: 0.85rem; color: var(--lake); }
+  .tweet .body { font-size: 0.93rem; margin-top: 4px; }
+  .tweet .meta { font-size: 0.72rem; color: var(--ink-soft); margin-top: 6px; }
+
+  /* party scene */
+  .scene {
+    background: var(--paper-2);
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 14px 12px;
+    font-size: 0.92rem;
+  }
+  .scene + .scene { margin-top: 8px; }
+  .scene .cap {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .scene.corner { border-left: 5px solid var(--ember); font-style: italic; }
+
+  /* ---- Receipts ---- */
+  .receipts {
+    margin-top: 64px;
+    background: var(--paper);
+    box-shadow: var(--card-shadow);
+    padding: 34px 30px 30px;
+    border-top: 6px solid var(--pine);
+  }
+  .receipts h2 {
+    font-family: "Alfa Slab One", serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+    margin: 0 0 6px;
+  }
+  .receipts > p { color: var(--ink-soft); max-width: 68ch; margin: 0 0 22px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+  .stat {
+    background: var(--paper-2);
+    border: 1.5px solid var(--rule);
+    border-radius: 4px;
+    padding: 14px 12px 12px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: "Alfa Slab One", serif;
+    font-size: 1.9rem;
+    line-height: 1;
+    color: var(--ember);
+    font-variant-numeric: tabular-nums;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat .lbl { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); }
+  .facts { columns: 2 300px; column-gap: 32px; margin: 0; padding: 0 0 0 1.2em; font-size: 0.93rem; }
+  .facts li { break-inside: avoid; margin-bottom: 9px; }
+  .facts b { color: var(--pine); }
+  .sources { margin-top: 22px; padding-top: 14px; border-top: 2px dashed var(--rule); font-size: 0.83rem; color: var(--ink-soft); }
+  .sources a { color: var(--lake); font-weight: 700; text-decoration-color: var(--rule); }
+  .credits {
+    text-align: center;
+    margin-top: 40px;
+    font-family: "Permanent Marker", cursive;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .credits .who { color: var(--ember); }
+
+  a:focus-visible { outline: 3px solid var(--ember); outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .wrap { padding-top: 26px; }
+    .poster { padding: 30px 18px 26px; }
+    .facts { columns: 1; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="poster">
+    <p class="eyebrow">Camp Rock presents · one night only · 16 years in the making</p>
+    <h1>FINAL JAM<br><span class="pop">FOR EVERYONE</span></h1>
+    <p class="deck">A thirteen-meme suite on the beautiful absurdity of <em>Camp Rock 3</em> — every joke load-bearing on a verified behind-the-scenes fact. Receipts pinned at the bottom of the board.</p>
+    <p class="byline">Written by the Idea Loop staff · Socrates × Athena × Hephaestus</p>
+  </header>
+
+  <main class="board">
+
+    <article class="card">
+      <p class="tmpl">Gru's Plan</p>
+      <h2>The A&amp;R Emergency</h2>
+      <div class="panels">
+        <div class="panel"><span class="n">1</span><span>Lose your reunion tour's opening act at the last minute</span></div>
+        <div class="panel"><span class="n">2</span><span>Skip agents, labels, and every touring professional in the industry</span></div>
+        <div class="panel"><span class="n">3</span><span>Drive to your childhood summer camp and make teenagers compete for the slot</span></div>
+        <div class="panel repeat"><span class="n">4</span><span><span class="stage">(stares at board)</span> Drive to your childhood summer camp and make teenagers compete for the slot</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> Connect 3's solution to an urgent tour-logistics crisis is, canonically, a kids' camp talent show.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Anakin / Padmé</p>
+      <h2>The Singular Winner</h2>
+      <div class="panels dlg">
+        <div class="panel a"><span class="who">Anakin</span><span>We're holding a Final Jam to crown the ONE act that opens our tour.</span></div>
+        <div class="panel p"><span class="who">Padmé</span><span>And the winner gets the slot, right?</span></div>
+        <div class="panel a"><span class="who">Anakin</span><span class="stage">(stares)</span></div>
+        <div class="panel p"><span class="who">Padmé</span><span>The singular competition has a singular winner... right?</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> All five finalists — Sage, Fletch, Rosie, Desi AND Cliff — win and jointly become the opening act.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Fake tweet</p>
+      <h2>Normal Tour-Break Activities</h2>
+      <div class="tweet">
+        <span class="handle">@MitchieTorres</span>
+        <p class="body">took a quick break from my own national tour to fly back to camp, watch a children's talent competition, and hang out backstage with my mom talking about how much camp means to kids. normal tour-break activities</p>
+        <p class="meta">8:04 PM · from the Camp Rock mess hall</p>
+      </div>
+      <div class="tweet">
+        <span class="handle">@Connect3Official</span>
+        <p class="body">while you're here can you make our one business decision for us</p>
+      </div>
+      <p class="why"><b>Why it lands:</b> Mitchie pauses a tour to attend a camp talent show, then resolves the plot by telling the actual band how to pick their opener.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Clown Makeup</p>
+      <h2>Villain v2.0</h2>
+      <div class="panels">
+        <div class="panel"><span class="n">1</span><span>Writing a new villain for Camp Rock 3</span></div>
+        <div class="panel"><span class="n">2</span><span>Making her an "intimidating influencer" so it feels modern</span></div>
+        <div class="panel"><span class="n">3</span><span>Giving her two cronies named Daniel and Danielle</span></div>
+        <div class="panel repeat"><span class="n">4</span><span>Making them carbon copies of Tess's backup singers from 2008</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> The villain's job title got patched from "mean rich girl" to "influencer"; everything else was photocopied, down to the matched-set henchmen.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Expanding Brain</p>
+      <h2>Dig Deep</h2>
+      <div class="panels brain">
+        <div class="panel b1"><span class="lvl">🧠</span><span>Open Camp Rock 3 with a new song</span></div>
+        <div class="panel b2"><span class="lvl">✨</span><span>Open with a cover of "Brand New Day" while campers do flips off the bus, exactly like 2008</span></div>
+        <div class="panel b3"><span class="lvl">🌌</span><span>Have famous alum Calvin Rhodes run a workshop telling kids to "dig deep" for original material</span></div>
+        <div class="panel b4"><span class="lvl">🌞</span><span>End the movie on "We Rock"</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> The film assigns the campers homework it refused to do itself.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Corporate needs you to find the differences</p>
+      <h2>Same Picture</h2>
+      <div class="pics">
+        <div class="pic"><span class="frame">☀️🏕️</span>An American summer camp in July</div>
+        <div class="pic"><span class="frame">🌧️🍁</span>A soundstage lake in Vancouver in October</div>
+      </div>
+      <p class="punch">Production crew: "They're the same picture."</p>
+      <p class="why"><b>Why it lands:</b> Principal photography ran Sept 15 – Nov 1, 2025, in Vancouver — every sun-drenched "summer" frame is Canadian mid-autumn.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Gru's Plan</p>
+      <h2>EP Math</h2>
+      <div class="panels">
+        <div class="panel"><span class="n">1</span><span>Make the long-awaited Camp Rock 3 after 16 years</span></div>
+        <div class="panel"><span class="n">2</span><span>Assemble everyone who ever touched the franchise as executive producers</span></div>
+        <div class="panel"><span class="n">3</span><span>The credits now have 8 EPs and Final Jam only ever had 5 winners</span></div>
+        <div class="panel repeat"><span class="n">4</span><span><span class="stage">(stares at board)</span> The credits now have 8 EPs and Final Jam only ever had 5 winners</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> Eight executive producers — Joe, Nick, Kevin, Demi, Federle, Sullenger, Berman, Marsh — versus five Final Jam champions.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Drake</p>
+      <h2>The Counteroffer</h2>
+      <div class="panels drake">
+        <div class="panel no"><span class="mark">✗</span><span>Demi's pitch: an R-rated Camp Rock 3</span></div>
+        <div class="panel yes"><span class="mark">✓</span><span>Demi as EP #4 of 8 on a Disney+ movie so G-rated the edgiest thing in it is a secret cameo</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> She publicly joked about an R-rated Camp Rock 3; the machine's counteroffer was an EP credit and a Mitchie cameo kept classified until the world premiere.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Leaked production Slack</p>
+      <h2>#camprock3-prod</h2>
+      <div class="chat">
+        <p class="chat-head"># camprock3-prod</p>
+        <div class="msg"><p class="from">line-producer</p><div class="bubble">Schedule locked: camp scenes wrap Nov 1 in Vancouver. Wardrobe, please confirm tank tops and swimwear.</div></div>
+        <div class="msg right"><p class="from">wardrobe-dept</p><div class="bubble">It is 8°C and raining.</div></div>
+        <div class="msg"><p class="from">line-producer</p><div class="bubble">Great, so confirmed. Also all 8 EPs have notes on the lake scene.</div></div>
+        <div class="msg right"><p class="from">wardrobe-dept</p><div class="bubble">There are more EPs on this thread than weeks left in the shoot.</div></div>
+        <div class="msg"><p class="from">line-producer</p><div class="bubble">Joe says it's a "pretty wild full circle moment." Please dress the campers for July.</div></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> A Nov 1 Vancouver wrap, eight executive producers, and a seven-week shoot — plus Joe Jonas's actual quote — in one plausible production-channel nightmare.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Anakin / Padmé</p>
+      <h2>Know Your Audience</h2>
+      <div class="panels dlg">
+        <div class="panel a"><span class="who">Anakin</span><span>Camp Rock 3 is out! The Jonas Brothers are back at camp!</span></div>
+        <div class="panel p"><span class="who">Padmé</span><span>To play new teenage campers, right?</span></div>
+        <div class="panel a"><span class="who">Anakin</span><span><span class="stage">(stares)</span> They're pushing 40 with wives and kids. They're there to find a teen opening act.</span></div>
+        <div class="panel p"><span class="who">Padmé</span><span>...so it's a movie for actual children, right?</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> The marketing targeted the fans who were 12 in 2008 — the "kids' movie" is aimed squarely at people with mortgages.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">"They don't know"</p>
+      <h2>We Rock (Sobbing)</h2>
+      <div class="scene"><span class="cap">The party</span>A room full of Gen Z kids vibing to the Final Jam finale.</div>
+      <div class="scene corner"><span class="cap">Lone 30-year-old in the corner</span>"They don't know I sobbed when 'We Rock' started playing. They weren't even BORN for the first Final Jam."</div>
+      <p class="why"><b>Why it lands:</b> The movie closes on the 2008 anthem as a passing-of-the-torch — a targeted emotional strike on anyone who owned the original soundtrack CD.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Expanding Brain</p>
+      <h2>Most Successful Music Institution on Earth</h2>
+      <div class="panels brain">
+        <div class="panel b1"><span class="lvl">🧠</span><span>Camp Rock produced one famous act: Connect 3</span></div>
+        <div class="panel b2"><span class="lvl">✨</span><span>Also Mitchie, now a global touring superstar</span></div>
+        <div class="panel b3"><span class="lvl">🌌</span><span>Also Calvin Rhodes, ANOTHER famous alum, per Milo Manheim's cameo</span></div>
+        <div class="panel b4"><span class="lvl">🌞</span><span>One tiny lakeside summer camp has a superstar hit rate that makes Juilliard, Motown, and the entire nation of South Korea look like amateurs</span></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> The Calvin Rhodes retcon makes Camp Rock statistically the most successful music institution on Earth, and the movie treats this as completely normal.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Group chat</p>
+      <h2>final jam survivors 🎸</h2>
+      <div class="chat">
+        <p class="chat-head">final jam survivors 🎸</p>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">NO SPOILERS but the secret cameo at the premiere... I screamed</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">if you tell me Demi is in this I'm leaving work right now</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">Mitchie "takes a break from tour" to attend a CHILDREN'S CAMP TALENT SHOW</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">girl what does she say</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">"She's really good."</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">I'M IN MY CAR. THE 2008 LINE. THEY KEPT THE LINE.</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">also all FIVE finalists win and become the opening act. everyone gets the torch</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">participation-trophy Final Jam... they really know their audience is us</div></div>
+      </div>
+      <p class="why"><b>Why it lands:</b> The hidden-until-premiere cameo, the "She's really good" callback, and the everyone-wins ending — processed in the medium where 30-year-olds actually processed this movie.</p>
+    </article>
+
+  </main>
+
+  <section class="receipts">
+    <h2>The Receipts</h2>
+    <p>Every meme above is load-bearing on one of these verified behind-the-scenes facts. Nothing was invented; only exaggerated with love.</p>
+    <div class="stats">
+      <div class="stat"><span class="num">16 yrs</span><span class="lbl">Wait since Camp Rock 2</span></div>
+      <div class="stat"><span class="num">7 wks</span><span class="lbl">Actual shoot length</span></div>
+      <div class="stat"><span class="num">~119:1</span><span class="lbl">Wait-to-shoot ratio</span></div>
+      <div class="stat"><span class="num">8</span><span class="lbl">Executive producers</span></div>
+      <div class="stat"><span class="num">5</span><span class="lbl">Final Jam "winners"</span></div>
+    </div>
+    <ul class="facts">
+      <li><b>Filming:</b> Sept 15 – Nov 1, 2025, Vancouver, Canada — a seven-week autumn shoot for a summer-camp movie. Released August 2026 on Disney Channel and Disney+.</li>
+      <li><b>Crew:</b> directed by Veronica Rodriguez (<em>The Slumber Party</em>), written by Eydie Faye (<em>Fuller House</em>); EPs include all three Jonas Brothers, Demi Lovato, and Tim Federle.</li>
+      <li><b>Premise:</b> Connect 3 lose their reunion-tour opening act at the last minute and recruit a replacement via a summer-camp talent competition.</li>
+      <li><b>Ending:</b> Mitchie convinces Connect 3 they "don't have to pick just one" — all five finalists win Final Jam and share the opening slot.</li>
+      <li><b>Demi's cameo</b> was kept secret until the world premiere; in it Mitchie takes a tour break to watch the camp show and repeats her most-quoted 2008 line, "She's really good." She once joked publicly about wanting an R-rated Camp Rock 3.</li>
+      <li><b>Villain:</b> influencer Madison, flanked by cronies Daniel and Danielle — carbon copies of Tess Tyler's 2008 backup singers.</li>
+      <li><b>Cameo #2:</b> Milo Manheim as Calvin Rhodes, yet another world-famous Camp Rock alum, hosting a songwriting workshop ("dig deep").</li>
+      <li><b>Callbacks:</b> the film opens on a "Brand New Day" cover with campers flipping off the bus (shot-for-shot 2008 homage) and closes on "We Rock."</li>
+      <li><b>Director's forecast:</b> new lead Malachi Barton learned guitar for the role; Rodriguez predicts he'll be "the next Zac Efron."</li>
+      <li><b>Full circle:</b> Joe Jonas, watching the new campers with Demi: "pinching ourselves like wow, this is a pretty wild full circle moment."</li>
+    </ul>
+    <p class="sources">Sources:
+      <a href="https://www.hollywoodreporter.com/tv/tv-features/camp-rock-3-jonas-brothers-demi-lovato-milo-manheim-1236670313/">Hollywood Reporter (director interview)</a> ·
+      <a href="https://www.hollywoodreporter.com/movies/movie-news/jonas-brothers-new-generation-disney-stars-camp-rock-3-1236671030/">Hollywood Reporter (Jonas/Lovato)</a> ·
+      <a href="https://www.today.com/popculture/tv/camp-rock-3-ending-demi-lovato-surprise-cameo-rcna591418">Today.com (ending)</a> ·
+      <a href="https://www.backstage.com/magazine/article/camp-rock-3-news-79370/">Backstage (cast &amp; crew)</a> ·
+      <a href="https://hollywoodnorthbuzz.com/2025/12/camp-rock-3-trailer-with-jonas-brothers-filmed-in-vancouver.html">Hollywood North Buzz (Vancouver shoot)</a> ·
+      <a href="https://www.yahoo.com/entertainment/movies/articles/every-camp-rock-3-easter-020000125.html">Yahoo (easter eggs)</a> ·
+      <a href="https://www.primetimer.com/features/camp-rock-3-cast-guide-meet-the-full-cast-and-characters-of-the-musical-drama">Primetimer (character guide)</a> ·
+      <a href="https://www.foxnews.com/entertainment/demi-lovato-talks-plans-for-r-rated-camp-rock-3.amp">Fox News (R-rated joke)</a>
+    </p>
+  </section>
+
+  <p class="credits">Concepts by <span class="who">Socrates</span> (premise), <span class="who">Athena</span> (production), &amp; <span class="who">Hephaestus</span> (nostalgia) · curated for Anthony · Idea Loop, off the clock 🏕️</p>
+
+</div>
