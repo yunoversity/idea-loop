@@ -92,6 +92,8 @@ def next_pickup(place_id, service):
             continue
         by_day.setdefault(day, set()).update(flag_names(ev))
     for day in sorted(by_day):
+        print(f"  {day}: {sorted(by_day[day])}")
+    for day in sorted(by_day):
         d = date.fromisoformat(day)
         names = by_day[day]
         if d >= today and any("garbage" in n or "trash" in n for n in names):
