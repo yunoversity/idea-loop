@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Iris live: long-polls Telegram and answers Anthony conversationally via
-headless Claude Code reading (read-only) from this repo.
+headless Claude Code running against this repo.
 
-Safety split:
-- Claude ("Iris") is READ-ONLY — she can read painpoints, playbooks, and the
-  taste profile to converse, but cannot write files or push.
-- All writes are done deterministically by this script: every non-command
-  message is also filed to inbox/ for the intake agent (same as the async
-  loop always did), and inbox files are committed+pushed by the script.
+Two modes:
+- NORMAL — Claude is read-only. She discusses the pipeline; the script does the
+  writing (every non-command message is filed to inbox/ and pushed).
+- MEETING — opened by /meeting, closed by /endmeeting. The staff meeting is the
+  sanctioned venue for state changes with Anthony present, so Claude may write
+  the files a meeting produces: minutes, queue.md, taste-profile.md, and
+  painpoint frontmatter for decisions he makes explicitly in the conversation.
+  She still cannot decide anything, change decision rights, or start a build.
 
-Commands: /help /status /questions answered by script; /new resets the thread.
+Commands: /help /status /questions answered by script; /new resets the thread;
+/meeting and /endmeeting bracket a live meeting; /interviewme runs the interview.
 Only TELEGRAM_CHAT_ID is accepted. Shares .telegram_offset with the manual
 Actions poll fallback.
 
@@ -36,6 +39,42 @@ from telegram_digest import load_env, send  # noqa: E402
 from telegram_poll import HELP_TEXT, status_text, questions_text  # noqa: E402
 
 READ_ONLY_TOOLS = "Read,Glob,Grep,Bash(git log:*),Bash(git status)"
+
+# Meeting mode: the staff meeting is the sanctioned venue for state changes with
+# Anthony present and deciding in real time, so Iris may write here — but only
+# the files a meeting legitimately produces, and only while a meeting is open.
+MEETING_TOOLS = ",".join([
+    "Read", "Glob", "Grep", "Write", "Edit",
+    "Bash(git pull)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push)",
+    "Bash(git status)", "Bash(git log:*)", "Bash(git diff:*)",
+    "Bash(python3 scripts/build_dashboard.py)",
+])
+MEETING_FLAG = REPO / ".iris_meeting"
+
+MEETING_SYSTEM = (
+    "You are Iris, running Anthony's staff meeting live over Telegram. He is "
+    "present and deciding in real time — this is the sanctioned venue for state "
+    "changes, so you MAY write files here. Follow .claude/agents/chief-of-staff.md "
+    "and working-style.md exactly.\n\n"
+    "MEETING CONDUCT: work the agenda ONE item at a time and wait for his answer "
+    "before moving on — never dump the whole pack in one message. Headline first, "
+    "detail only if he asks. Keep each message under ~1200 characters. When you "
+    "need a decision, ask for it plainly and state your recommendation with the "
+    "reason. Track where you are in the agenda across messages.\n\n"
+    "AGENDA: (1) scoreboard vs goals.md, (2) pipeline review + stale flags, "
+    "(3) graduation nominations — scored, he decides, (4) parking proposals, "
+    "(5) open-question triage + refresh queue.md, (6) retro, (7) workflow items.\n\n"
+    "WHAT YOU MAY WRITE during the meeting: meetings/<today>.md (minutes, including "
+    "his decisions and stated reasons), queue.md, taste-profile.md (his own words "
+    "only), and painpoint frontmatter ONLY for decisions he explicitly makes in "
+    "this conversation (status, parked_reason, revival_criteria). Commit and push "
+    "after each decision so nothing is lost if the chat drops.\n\n"
+    "WHAT YOU MAY NOT DO: decide anything yourself, change CLAUDE.md's prime "
+    "directive or autonomy rule, alter decision rights, hire/fire/merge agents, "
+    "approve spend, or start a build. Graduation and /build remain his explicit "
+    "calls, and a /build must still be run from a Claude Code session.\n\n"
+    "Telegram formatting: plain text, no markdown headers or tables."
+)
 
 IRIS_SYSTEM = (
     "You are Iris, Anthony's Chief of Staff for his idea-loop pipeline, chatting "
@@ -135,12 +174,13 @@ def _reset_thread_on_new_pack():
         PACK_MARKER.write_text(newest)
 
 
-def ask_iris(text):
+def ask_iris(text, meeting=False):
     git("pull", "-q")
-    _reset_thread_on_new_pack()
+    if not meeting:
+        _reset_thread_on_new_pack()
     cmd = [CLAUDE, "-p", text, "--output-format", "json",
-           "--allowedTools", READ_ONLY_TOOLS,
-           "--append-system-prompt", IRIS_SYSTEM]
+           "--allowedTools", MEETING_TOOLS if meeting else READ_ONLY_TOOLS,
+           "--append-system-prompt", MEETING_SYSTEM if meeting else IRIS_SYSTEM]
     resumed = SESSION_FILE.exists()
     if resumed:
         cmd += ["--resume", SESSION_FILE.read_text().strip()]
@@ -154,7 +194,7 @@ def ask_iris(text):
     if out.returncode != 0:
         if resumed:  # stale session id is the usual culprit; retry fresh once
             SESSION_FILE.unlink(missing_ok=True)
-            return ask_iris(text)
+            return ask_iris(text, meeting)
         log(f"claude error: {out.stderr[:500]}")
         return "I hit an error thinking that through. It's logged — try again in a minute."
     try:
@@ -205,8 +245,31 @@ def handle(token, chat_id, msg, text):
         typing(token, chat_id)
         return ask_iris(INTERVIEW_PROMPT)
     # Claude Code commands sent here by muscle memory: explain, don't choke.
+    if cmd in ("/meeting", "meeting"):
+        MEETING_FLAG.write_text(datetime.now().isoformat())
+        SESSION_FILE.unlink(missing_ok=True)  # fresh thread for the meeting
+        typing(token, chat_id)
+        return ask_iris(
+            "Anthony has convened the staff meeting over Telegram. Open it: read "
+            "goals.md, working-style.md, your playbook, every painpoint, queue.md, "
+            "the newest pack in meetings/ if one exists, and taste-profile.md. "
+            "Then start the meeting — propose a length, give the scoreboard, and "
+            "begin agenda item 1. ONE item, then wait for him.", meeting=True)
+    if cmd in ("/endmeeting", "endmeeting"):
+        was_open = MEETING_FLAG.exists()
+        MEETING_FLAG.unlink(missing_ok=True)
+        if not was_open:
+            return "No meeting was open."
+        reply = ask_iris(
+            "Anthony has ended the staff meeting. Finalize: write the minutes to "
+            "meetings/<today>.md with every decision and his stated reason, append "
+            "decisions to taste-profile.md, refresh queue.md, commit and push. Then "
+            "reply with a short summary of what was decided and what happens next.",
+            meeting=True)
+        SESSION_FILE.unlink(missing_ok=True)
+        return reply
+
     session_cmds = {
-        "/meeting": "convene the staff meeting",
         "/brainstorm": "run a brainstorming session",
         "/capture": "file a painpoint (though you can just dump it here — I file it automatically)",
         "/graduate": "graduate a painpoint to a PRD",
@@ -220,6 +283,8 @@ def handle(token, chat_id, msg, text):
                 f"What I can do here: /status, /questions, /interviewme, and talking through anything "
                 f"on your mind — send it and I'll file it.")
     typing(token, chat_id)
+    if MEETING_FLAG.exists():
+        return ask_iris(text, meeting=True)  # meeting turns are minutes, not inbox
     file_to_inbox(msg, text)
     return ask_iris(text)
 

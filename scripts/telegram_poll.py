@@ -29,6 +29,7 @@ HELP_TEXT = """Here's what I can do here (I check messages every ~30 minutes, so
 /status — where every idea stands in the pipeline
 /questions — the current top open questions, resent on demand
 /interviewme — I interview you: one open question at a time, from the most promising ideas
+/meeting — run the staff meeting right here, one agenda item at a time (/endmeeting to close and file the minutes)
 /new — start a fresh conversation thread
 /help — this list
 
