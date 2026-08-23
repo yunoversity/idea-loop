@@ -12,6 +12,10 @@ on:
         description: "Print the message without sending"
         type: boolean
         default: false
+      test_phone:
+        description: "Send a one-off test SMS to this E.164 number (uses Textbelt free tier if no key secret is set)"
+        type: string
+        default: ""
 
 jobs:
   remind:
@@ -33,4 +37,13 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           TRASH_SMS_EMAIL: ${{ secrets.TRASH_SMS_EMAIL }}
-        run: python scripts/trash_reminder.py ${{ inputs.dry_run && '--dry-run' || '' }}
+        # test_phone is read from the event payload (not yaml env interpolation) so the
+        # number never appears in public run logs.
+        run: |
+          TEST_PHONE=$(jq -r '.inputs.test_phone // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || true)
+          if [ -n "$TEST_PHONE" ]; then
+            export TRASH_SMS_TO="$TEST_PHONE"
+            export TEXTBELT_KEY="${TEXTBELT_KEY:-textbelt}"
+            echo "Test mode: sending to number from dispatch input (not logged)."
+          fi
+          python scripts/trash_reminder.py ${{ inputs.dry_run && '--dry-run' || '' }}
