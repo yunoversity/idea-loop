@@ -23,6 +23,11 @@ Two hard constraints drive every phase:
    against the beatmap *before* any generation, and the final edit is assembled
    *from* it. Nothing is generated that isn't in the script; nothing lands on
    the timeline off-beat.
+3. **Sync is layered, not literal.** Cuts live on the phrase/bar grid; beats
+   between cuts are hit by squish *inside* the running shot; texture rides the
+   hats. Read `references/edit-craft.md` (AMV + visualizer craft) before
+   writing the script — it governs cut rate, anticipation, continuity, and
+   the effects budget.
 
 Tool/model recommendations and API setup: `references/tools.md`.
 Script format and worked example: `references/script-format.md`.
@@ -63,14 +68,22 @@ the **frozen style block** (copy the template from the style bible, fill in
 palette and materials, then never edit it again), and a character sheet (2–4
 recurring shapes, each with a one-line description reused verbatim in prompts).
 
-Then write the shot script per `references/script-format.md`:
-- One shot per section slice; shots are 2–8s and **start and end on downbeats**.
-- Each shot gets: timecodes, a still prompt (style block + character + framing),
-  a motion prompt (what squishes, when, how hard — mapped to that section's
-  energy), and a squish cue (`full-squash` on downbeats for high energy,
-  `jiggle` for low).
-- Escalate playfulness with energy: low energy = idle wobble and slow morphs;
-  peak energy = shapes trampolining, merging, splattering and reforming.
+Then write the shot script per `references/script-format.md`, applying
+edit-craft.md:
+- **Cut grid**: cuts land on `phrases`/`downbeats` from the beatmap — every
+  2+ bars in low sections, 1–2 bars mid, beat-rate only in the final build.
+  Shots always **start and end on the grid**. Beats between cuts are expressed
+  by squish inside the shot, never by more cuts.
+- Each shot gets: timecodes, a still prompt (style block + character +
+  framing), a motion prompt (what squishes, when, how hard — with the wind-up
+  *before* each impact spelled out, mapped to the section's `bands`:
+  low→squash amplitude, mid→color/morph pace, high→jiggle frequency), a
+  squish cue, and a `motion_dir` for screen-direction continuity with its
+  neighbors.
+- **Arc**: accelerate cut rate into the drop, place the one `splat-reform`
+  hero at `peak_downbeat`, then a 2-bar+ breather shot. Escalate playfulness
+  with energy: low = idle wobble and slow morphs; peak = shapes trampolining,
+  merging, splattering and reforming.
 
 Show Anthony the script before spending generation credits if he's present;
 if running autonomously, proceed but keep the script as the reviewable record.
@@ -87,8 +100,12 @@ here than after animation.
 ## Phase 4 — Animate
 
 For each still, run image-to-video with the shot's motion prompt. Request
-~1s more than the shot's script duration (trim margin). Kling and Veo handle
-squash-and-stretch physics best; see tools.md. Save as `clips/shot-NN.mp4`.
+~1s more than the shot's script duration (trim margin — you will need it to
+place the impact, see Phase 5). Motion prompts describe the anticipation
+explicitly ("stretches tall, then slams into a full squash") and loop in
+bar-length cycles so uncut stretches stay locked to the grid. Kling and Veo
+handle squash-and-stretch physics best; see tools.md. Save as
+`clips/shot-NN.mp4`.
 
 **Zero-key fallback:** if no `FAL_KEY`/`REPLICATE_API_TOKEN` is in `.env`, stop
 here and deliver the *prompt pack*: brief.md + script.md with every still and
@@ -99,7 +116,16 @@ spend is Anthony's call.
 
 Build `edl.json` (schema in `scripts/claymation/assemble.py` docstring): each
 shot's file, its trim-in point, and its script timecodes — snapped to actual
-beatmap downbeats, not to rounded numbers. Then:
+beatmap downbeats, not to rounded numbers. Two craft steps here:
+
+- **Trim for impact**: for impact shots, scrub the clip, find the frame where
+  the squash lands, and set `in` so that frame falls on the shot's first
+  internal downbeat. This trim IS the sync; `in: 0` is only for jiggle shots.
+- **Effects budget**: `punch` (3–6% push-in) on high-energy shots only, never
+  two adjacent; `flashes` on at most 3–4 of the biggest low-band hits,
+  always including `peak_downbeat`.
+
+Then:
 
 ```
 python3 scripts/claymation/assemble.py ~/Projects/viz-<slug>/edl.json
@@ -115,8 +141,10 @@ within one frame (~83ms at 12fps) of a downbeat.
 Extract a frame per shot into a contact sheet (`ffmpeg` thumbnail per clip,
 tile with the montage step in assemble.py `--contact-sheet`). Check against the
 style bible: palette drift, material drift (clay → rubber/CGI is the common
-failure), character drift, dead shots with no squish. Regenerate only the
-failing shots (Phase 3→4 for just those), rebuild, and deliver
-`out/visualizer.mp4`. For a human polish pass (titles, grade, captions), hand
+failure), character drift, dead shots with no squish. Then run both edit-craft
+screenings: the **mute test** (does the cut flow carry without audio?) and the
+**sync test** (every impact within one frame of its beat — almost-synced is
+worse than unsynced; fix the `in` trim). Regenerate only the failing shots
+(Phase 3→4 for just those), rebuild, and deliver `out/visualizer.mp4`. For a human polish pass (titles, grade, captions), hand
 the clips + script.md to an AI editor per tools.md — the script maps 1:1 onto
 a Descript/Runway timeline.

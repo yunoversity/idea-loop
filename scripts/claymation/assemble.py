@@ -11,10 +11,19 @@ edl.json schema (paths relative to the edl file's directory):
   "output": "out/visualizer.mp4",
   "width": 1920, "height": 1080,      // optional, default 1920x1080
   "fps": 12,                          // clay cadence; 12 is the look
+  "flashes": [14.03],                 // optional: 1-frame white impact
+                                      // flashes at these timeline times.
+                                      // Budget: 3-4 max, biggest low-band
+                                      // hits only (edit-craft.md §6)
   "shots": [
     {"file": "clips/shot-01.mp4",
      "start": 0.0,  "end": 4.31,      // timeline placement (from script.json)
-     "in": 0.5}                       // trim-in inside the source clip (opt.)
+     "in": 0.5,                       // trim-in inside the source clip: set
+                                      // so the impact frame lands on the
+                                      // shot's first downbeat (§3), not 0
+     "punch": 0.05}                   // optional slow push-in (3-6%);
+                                      // high-energy shots only, never two
+                                      // adjacent shots (§6)
   ]
 }
 
@@ -83,8 +92,15 @@ def main() -> int:
             if dur <= 0:
                 sys.exit(f"Non-positive duration for {s['file']}")
             part = td / f"part-{i:02d}.mp4"
+            vf = conform
+            punch = float(s.get("punch", 0.0))
+            if punch > 0:
+                nframes = max(int(dur * fps), 1)
+                vf += (f",zoompan=z='min(1+{punch}*on/{nframes},{1 + punch})'"
+                       f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+                       f":d=1:s={w}x{h}:fps={fps}")
             run(["ffmpeg", "-y", "-ss", str(s.get("in", 0.0)), "-i", str(src),
-                 "-t", f"{dur:.3f}", "-an", "-vf", conform,
+                 "-t", f"{dur:.3f}", "-an", "-vf", vf,
                  "-c:v", "libx264", "-preset", "medium", "-crf", "18",
                  str(part)])
             parts.append(part)
@@ -95,6 +111,19 @@ def main() -> int:
         silent = td / "silent.mp4"
         run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i",
              str(concat_list), "-c", "copy", str(silent)])
+
+        flashes = [t - shots[0]["start"] for t in edl.get("flashes", [])]
+        if flashes:
+            flash_dur = 1.0 / fps + 0.005  # one frame
+            chain = ",".join(
+                "drawbox=x=0:y=0:w=iw:h=ih:color=white@0.85:thickness=fill"
+                f":enable='between(t,{t:.3f},{t + flash_dur:.3f})'"
+                for t in flashes)
+            flashed = td / "flashed.mp4"
+            run(["ffmpeg", "-y", "-i", str(silent), "-vf", chain,
+                 "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+                 str(flashed)])
+            silent = flashed
 
         run(["ffmpeg", "-y", "-i", str(silent), "-i", str(audio),
              "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy",

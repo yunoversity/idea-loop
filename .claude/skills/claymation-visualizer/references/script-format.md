@@ -24,18 +24,29 @@ never rounded by hand.
       "still_prompt": "<style block> + <cast lines> + framing: BLOB centered on the paper sweep, tabletop level, lots of negative space.",
       "motion_prompt": "<style block> + BLOB idle-jiggles like gelatin, breathing slowly, one lazy blink. Subtle, low energy, no displacement.",
       "squish_cue": "jiggle",
-      "energy": "low"
+      "energy": "low",
+      "motion_dir": "static",
+      "punch": 0.0
     }
   ]
 }
 ```
 
+`motion_dir` is the subject's dominant screen direction (`enter-left`,
+`exit-right`, `static`, ...) — used to check continuity across cuts
+(edit-craft.md §4). `punch` (0 or 0.03–0.06) is carried into the EDL.
+
 ## Rules
 
-- `start`/`end` are exact downbeat times from the beatmap. A shot spans a whole
-  number of bars (typically 1–2 bars; 2–8 seconds at most tempos).
-- Every shot's `motion_prompt` names a squish cue from the style bible grammar
-  and ties it to the beat ("squashes hard on each downbeat, four times").
+- `start`/`end` are exact downbeat times from the beatmap, on the cut grid
+  from edit-craft.md §2: 2+ bars in low sections, 1–2 bars mid, beat-rate
+  only in the final build. A shot spans a whole number of bars.
+- Every shot's `motion_prompt` names a squish cue from the style bible grammar,
+  ties it to the beat, and spells out the wind-up before each impact
+  ("stretches tall on the and, slams into a full squash on each downbeat,
+  four times").
+- Adjacent shots must be continuity-checked: `motion_dir` chains (exit-right →
+  enter-left), or the cut is a match cut / `morph` on shape.
 - `energy` copies the section's intensity from beatmap.json and must match the
   cue: low→jiggle/morph, mid→bounce, high→full-squash, the drop→splat-reform.
 - The biggest downbeat of the track (highest onset strength) gets the
