@@ -45,6 +45,20 @@ Compiled 2026-08-23 to ground the meme suite in real, verifiable specifics.
   cello prodigy Rosie, rebellious guitarist Fletch, Cliff, choreography
   queen Callie.
 
+## v2 addendum (2026-08-23) — soundtrack & premiere-week specifics
+
+- Premiere: **Aug 13, 2026 on Disney Channel** (linear first!), Disney+ the
+  next day. 17-track soundtrack released Aug 14 via Walt Disney Records.
+- New cast songs include **"Work In Progress"** (yes, really, on the movie
+  that took 16 years), "Echo," "Rhythm's Only Right," "One Beat Away"
+  (single, July 1), "Play My Music" remake (Aug 7). Five legacy songs were
+  re-recorded by the new generation.
+- The Jonas Brothers contributed **exactly one new song, "Come On Over,"**
+  plus a "We Rock" remake — TikTok discourse called the finale vocals
+  "insane."
+- Cast TikTok: Segura, Pollack, Stone, and Barton performed "She's really
+  good" in four registers — supportive, angry, disappointed, sarcastic.
+
 ## Sources
 
 - Hollywood Reporter — Jonas Brothers/Lovato on Camp Rock 3; director

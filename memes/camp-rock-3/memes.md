@@ -1,163 +1,146 @@
-# The Camp Rock 3 Meme Bundle
+# The Camp Rock 3 Meme Bundle — Unhinged Edition (v2)
 
-Off-pipeline fun project, 2026-08-23. Three staff agents each took a lens on
-the researched facts in `research.md`; Iris-style curation cut 15 drafts to 13
-(dropped one duplicate villain joke and a third Anakin/Padmé on the same beat).
-
-Lenses: **Socrates** — premise/plot logic. **Athena** — production/industry
-machine. **Hephaestus** — nostalgia-bait/fandom.
+Rewritten 2026-08-23 on Anthony's note: unhinged, deeply current (premiere was
+Aug 13–14), and every meme welded to ONE hyper-specific verified detail.
+v1 preserved in git history. Facts in `research.md`.
 
 ---
 
-## 1. The A&R Emergency (Socrates — Gru's Plan)
+## 1. The Lake Solution (Gru's Plan)
+*Welded to: the entire premise.*
 
-1. Lose your reunion tour's opening act at the last minute
-2. Skip agents, labels, and every touring professional in the industry
-3. Drive to your childhood summer camp and make teenagers compete for the slot
-4. *(stares at board)* Drive to your childhood summer camp and make teenagers
-   compete for the slot
+1. Your opening act quits days before a reunion tour
+2. Your label has a roster. Your agency has a building full of agents. Your
+   phone has numbers in it
+3. Drive to a lake you last attended as a teenager and announce that
+   whichever child sings best gets the tour
+4. *(stares at board)* Drive to a lake you last attended as a teenager and
+   announce that whichever child sings best gets the tour
 
-> Connect 3's solution to an urgent tour-logistics crisis is a kids' camp
-> talent show.
+## 2. The Concept of Winning (Anakin/Padmé)
+*Welded to: Mitchie's "you don't have to pick just one" → all five finalists win.*
 
-## 2. The Singular Winner (Socrates — Anakin/Padmé)
+1. Anakin: Final Jam will decide THE opening act.
+2. Padmé: And you'll honor the result, right?
+3. Anakin: Mitchie showed up unannounced, on a break from her own tour, and
+   told us numbers aren't real.
+4. Padmé: ...you gave the slot to five children because a woman backstage
+   said "you don't have to pick just one"... right?
 
-1. Anakin: We're holding a Final Jam to crown the ONE act that opens our tour
-2. Padmé: And the winner gets the slot, right?
-3. Anakin: *(stares)*
-4. Padmé: The singular competition has a singular winner... right?
+## 3. Three Words, Four Registers (Expanding Brain)
+*Welded to: the real cast TikTok performing "She's really good" supportive,
+angry, disappointed, and sarcastic.*
 
-> All five finalists — Sage, Fletch, Rosie, Desi, and Cliff — win.
+1. 2008: Mitchie says "She's really good" once, about Mitchie things
+2. 2026: Mitchie returns from tour and says it again — about Sage — as scripture
+3. The cast records a TikTok performing the line in four emotional registers:
+   supportive, angry, disappointed, sarcastic
+4. Eighteen years of franchise lore compressed into three words with the
+   interpretive range of Hamlet. The Royal Shakespeare Company could never
 
-## 3. Normal Tour-Break Activities (Socrates — fake tweet)
+## 4. IT WAS IN THE TRACKLIST THE WHOLE TIME (conspiracy corkboard)
+*Welded to: the soundtrack contains an actual song titled "Work In Progress."*
 
-- **@MitchieTorres:** took a quick break from my own national tour to fly back
-  to camp, watch a children's talent competition, and hang out backstage with
-  my mom talking about how much camp means to kids. normal tour-break
-  activities
-- **@Connect3Official:** while you're here can you make our one business
-  decision for us
+- EVIDENCE A: Camp Rock 2 — 2010. Camp Rock 3 — 2026. Development: 16 years.
+- EVIDENCE B: The shoot itself: 7 weeks.
+- EVIDENCE C: Track on the official 17-song soundtrack, written, recorded,
+  mixed, mastered, and shipped by Walt Disney Records: **"WORK IN PROGRESS."**
+- CONCLUSION: THEY TOLD US. THEY CONFESSED IN THE TRACKLIST. WAKE UP.
 
-> Mitchie pauses a tour to attend a camp talent show, then resolves the plot
-> by telling the actual band how to pick their opener.
+## 5. The Counteroffer (Drake)
+*Welded to: Demi's public R-rated Camp Rock 3 pitch + the classified cameo.*
 
-## 4. Villain v2.0 (Socrates — Clown Makeup)
+- ✗ Demi's publicly stated artistic vision: an R-rated Camp Rock 3
+- ✓ Disney's counteroffer: EP credit #4 of 8, a cameo classified until the
+  world premiere, and dialogue about how much camp means to kids
 
-1. Writing a new villain for Camp Rock 3
-2. Making her an "intimidating influencer" so it feels modern
-3. Giving her two cronies named Daniel and Danielle
-4. Making them carbon copies of Tess's backup singers from 2008
+## 6. Same Picture (Corporate)
+*Welded to: Sept 15 – Nov 1 Vancouver shoot.*
 
-> The villain's job title got updated to "influencer"; everything else was
-> photocopied, down to the matched-set henchmen.
+- Picture 1: ☀️ July at an American summer camp
+- Picture 2: 🌧️ 8°C and raining, November 1st, British Columbia
+- Production crew: "They're the same picture. Wardrobe, please confirm
+  swimwear."
 
-## 5. Dig Deep (Socrates — Expanding Brain)
+## 7. #camprock3-prod (leaked Slack)
+*Welded to: 7-week autumn Vancouver shoot + 8 EPs (more EPs than weeks).*
 
-1. Small brain: Open Camp Rock 3 with a new song
-2. Glowing brain: Open with a cover of "Brand New Day" while campers do flips
-   off the bus, exactly like 2008
-3. Galaxy brain: Have famous alum Calvin Rhodes run a workshop telling kids to
-   "dig deep" for original material
-4. Ascended brain: End the movie on "We Rock"
+- **line-producer:** Reminder: we are a SUMMER camp until Nov 1. I do not
+  want to see a single visible breath in dailies.
+- **wardrobe-dept:** It is 8°C. The campers are hypothermic in tank tops.
+- **line-producer:** CGI the breath out. Also all 8 EPs have notes on the
+  lake scene. Yes, more EPs than weeks of shooting. No, I don't want to talk
+  about it.
+- **vfx-dept:** we are now billing "breath removal" as a line item
+- **line-producer:** Joe says it's a "pretty wild full circle moment." The
+  circle is the lake. Get back in it.
 
-> The film assigns the campers homework it refused to do itself.
+## 8. Is This a Pigeon? (director's prophecy)
+*Welded to: director Veronica Rodriguez's verbatim call that Malachi Barton —
+who learned guitar for the movie — will be "the next Zac Efron."*
 
-## 6. Same Picture (Athena — Corporate Find-the-Differences)
+- Figure: Director Rodriguez
+- Butterfly: a teenager who learned guitar for this specific movie
+- Caption: "Is this the next Zac Efron?"
 
-1. Corporate: "An American summer camp in July" / "A soundstage lake in
-   Vancouver in October"
-2. Camp Rock 3 production crew: "They're the same picture."
+## 9. Acceptance Rate: Unknown (Expanding Brain)
+*Welded to: the Calvin Rhodes retcon (Milo Manheim) — yet another world-famous alum.*
 
-> Principal photography: Sept 15 – Nov 1, 2025, Vancouver.
+1. Camp Rock produced one famous act: Connect 3
+2. Also Mitchie Torres, now a global touring superstar
+3. Also Calvin Rhodes, ANOTHER famous alum, who drops by to tell children to
+   "dig deep"
+4. One lakeside summer camp outperforms Juilliard, Motown, and the entire
+   K-pop trainee system. Tuition unknown. Acceptance rate unknown. Congress
+   should investigate
 
-## 7. EP Math (Athena — Gru's Plan)
+## 10. Casting Notice (fake breakdown sheet)
+*Welded to: Madison's cronies being literally named Daniel and Danielle,
+carbon copies of Tess's 2008 backup singers.*
 
-1. Make the long-awaited Camp Rock 3 after 16 years
-2. Assemble everyone who ever touched the franchise as executive producers
-3. The credits now have 8 EPs and Final Jam only ever had 5 winners
-4. *(stares at board)* The credits now have 8 EPs and Final Jam only ever had
-   5 winners
+> SEEKING: two performers, any vocal range, who legally function as a single
+> rhyming unit. Duties: standing slightly behind an influencer; replicating
+> blocking last used in 2008. Names are non-negotiable: you WILL be DANIEL
+> and DANIELLE. The franchise has spoken.
 
-> Eight executive producers: Joe, Nick, Kevin, Demi, Federle, Sullenger,
-> Berman, Marsh.
+## 11. Come On Over Where (fake tweet)
+*Welded to: the Jonas Brothers contributing exactly one new song, "Come On
+Over," to the 17-track soundtrack.*
 
-## 8. The Counteroffer (Athena — Drake)
+- **@finaljamtruther:** 16 years. 5,840 days. The Jonas Brothers return to
+  Camp Rock and contribute one (1) new song. It is called "Come On Over."
+  Come on over WHERE, gentlemen. We have been HERE. Since 2010. You are the
+  ones who left the lake.
 
-1. ✗ Demi's pitch: an R-rated Camp Rock 3
-2. ✓ Demi as EP #4 of 8 on a Disney+ movie so G-rated the edgiest thing in it
-   is a secret cameo
+## 12. They Don't Know (party guy)
+*Welded to: the "We Rock" finale remake + TikTok calling the vocals "insane."*
 
-> She joked publicly about an R-rated Camp Rock 3; the machine's counteroffer
-> was an EP credit and a classified Mitchie cameo.
+1. A party full of Gen Z kids who found the soundtrack on release day, Aug 14.
+2. Lone 30-year-old in the corner: "They don't know I've watched the new
+   'We Rock' eleven times because TikTok said the vocals were insane, and
+   TikTok was RIGHT, and the torch was PASSED, and I was 12 once—"
 
-## 9. #camprock3-prod (Athena — fake Slack exchange)
+## 13. final jam survivors 🎸 (group chat, premiere night)
+*Welded to: the Aug 13 Disney CHANNEL premiere (Disney+ the next day) + the
+cameo + the five-winner ending.*
 
-1. **line-producer:** Schedule locked: camp scenes wrap Nov 1 in Vancouver.
-   Wardrobe, please confirm tank tops and swimwear.
-2. **wardrobe-dept:** It is 8°C and raining.
-3. **line-producer:** Great, so confirmed. Also all 8 EPs have notes on the
-   lake scene.
-4. **wardrobe-dept:** There are more EPs on this thread than weeks left in
-   the shoot.
-5. **line-producer:** Joe says it's a "pretty wild full circle moment."
-   Please dress the campers for July.
-
-> Nov 1 Vancouver wrap + eight EPs + a seven-week shoot, garnished with Joe
-> Jonas's actual quote.
-
-## 10. Know Your Audience (Hephaestus — Anakin/Padmé)
-
-1. Anakin: Camp Rock 3 is out! The Jonas Brothers are back at camp!
-2. Padmé: To play new teenage campers, right?
-3. Anakin: *(stares)* They're pushing 40 with wives and kids. They're there to
-   find a teen opening act.
-4. Padmé: ...so it's a movie for actual children, right?
-
-> The marketing targeted the fans who were 12 in 2008 — the "kids' movie" is
-> aimed at people with mortgages.
-
-## 11. They Don't Know (Hephaestus — party guy)
-
-1. Party full of Gen Z kids vibing to the Final Jam finale.
-2. Lone 30-year-old in the corner: "They don't know I sobbed when 'We Rock'
-   started playing. They weren't even BORN for the first Final Jam."
-
-> The movie closes on the 2008 anthem as a passing-of-the-torch — a targeted
-> emotional strike on anyone who owned the soundtrack CD.
-
-## 12. Most Successful Music Institution on Earth (Hephaestus — Expanding Brain)
-
-1. Small brain: Camp Rock produced one famous act: Connect 3.
-2. Glowing brain: Also Mitchie, now a global touring superstar.
-3. Galaxy brain: Also Calvin Rhodes, ANOTHER famous alum, per Milo Manheim's
-   cameo.
-4. Transcendent brain: One tiny lakeside summer camp has a superstar hit rate
-   that makes Juilliard, Motown, and the entire nation of South Korea look
-   like amateurs.
-
-> The Calvin Rhodes retcon makes Camp Rock statistically the most successful
-> music institution on Earth, and the movie treats this as completely normal.
-
-## 13. final jam survivors 🎸 (Hephaestus — group chat)
-
-- **Jess:** NO SPOILERS but the secret cameo at the premiere... I screamed
-- **Sam:** if you tell me Demi is in this I'm leaving work right now
-- **Jess:** Mitchie "takes a break from tour" to attend a CHILDREN'S CAMP
+- **Jess:** it's happening. disney CHANNEL first, like it's 2008. they made
+  us find the channel number again
+- **Sam:** my tv doesn't HAVE channels. I'm at my mom's house for this
+- **Jess:** MITCHIE'S HERE. SHE "TOOK A BREAK FROM TOUR." FOR A CHILDREN'S
   TALENT SHOW
-- **Sam:** girl what does she say
-- **Jess:** "She's really good."
-- **Sam:** I'M IN MY CAR. THE 2008 LINE. THEY KEPT THE LINE.
-- **Jess:** also all FIVE finalists win and become the opening act. everyone
-  gets the torch
-- **Sam:** participation-trophy Final Jam... they really know their audience
-  is us
-
-> The hidden-until-premiere cameo, the "She's really good" callback, and the
-> everyone-wins ending, processed in the medium where 30-year-olds actually
-> processed this movie.
+- **Sam:** what does she say. WHAT DOES SHE SAY
+- **Jess:** "she's really good."
+- **Sam:** I need to lie down on my mom's kitchen floor
+- **Jess:** update: all five finalists just won. all of them. winning is
+  fake now
+- **Sam:** mitchie walked into a business decision she wasn't invited to and
+  abolished scarcity
 
 ---
 
-**Cut in curation:** a Woman-Yelling-at-Cat on the Madison/Tess clone fact
-(duplicate of #4) and a third Anakin/Padmé on the 16-year-wait vs 7-week-shoot
-ratio (~119:1 — the stat survives in the artifact's receipts section).
+**v2 curation notes:** v1's EP-math Gru folded into the Slack thread; v1's
+Mitchie tweet folded into #2 and #13; three new memes built on newly
+researched specifics ("Work In Progress" track, "Come On Over," the
+four-ways TikTok, Disney Channel premiere night). The soundtrack also
+contains a song called "Echo" — our intake agent has been notified.

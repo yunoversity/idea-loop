@@ -13,6 +13,7 @@
     --lake: #33658A;
     --ember: #D95D28;
     --ember-soft: rgba(217, 93, 40, 0.14);
+    --string: #C0392B;
     --tape: rgba(240, 220, 140, 0.55);
     --card-shadow: 0 2px 6px rgba(43, 36, 25, 0.18), 0 10px 24px rgba(43, 36, 25, 0.08);
     --rule: rgba(43, 36, 25, 0.16);
@@ -29,6 +30,7 @@
       --lake: #86AECD;
       --ember: #F0824A;
       --ember-soft: rgba(240, 130, 74, 0.16);
+      --string: #E45C4B;
       --tape: rgba(214, 190, 108, 0.28);
       --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 0, 0, 0.35);
       --rule: rgba(237, 229, 208, 0.18);
@@ -45,6 +47,7 @@
     --lake: #86AECD;
     --ember: #F0824A;
     --ember-soft: rgba(240, 130, 74, 0.16);
+    --string: #E45C4B;
     --tape: rgba(214, 190, 108, 0.28);
     --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 10px 24px rgba(0, 0, 0, 0.35);
     --rule: rgba(237, 229, 208, 0.18);
@@ -106,6 +109,19 @@
     margin: 0 auto;
     color: var(--ink-soft);
     font-size: 1.02rem;
+  }
+  .stamp {
+    position: absolute;
+    right: 14px; bottom: 12px;
+    font-family: "Permanent Marker", cursive;
+    color: var(--string);
+    border: 3px solid var(--string);
+    border-radius: 4px;
+    padding: 2px 10px;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    transform: rotate(-8deg);
+    opacity: 0.85;
   }
   .byline {
     margin-top: 18px;
@@ -200,7 +216,6 @@
   }
 
   /* expanding brain */
-  .brain .panel { position: relative; overflow: hidden; }
   .brain .b1 { opacity: 0.75; }
   .brain .b2 { background: linear-gradient(90deg, var(--paper-2), var(--ember-soft)); }
   .brain .b3 { background: linear-gradient(90deg, var(--ember-soft), rgba(51, 101, 138, 0.16)); }
@@ -209,11 +224,7 @@
     border-color: var(--ember);
     font-weight: 700;
   }
-  .brain .lvl {
-    flex: none;
-    font-size: 1.05rem;
-    filter: saturate(0.9);
-  }
+  .brain .lvl { flex: none; font-size: 1.05rem; filter: saturate(0.9); }
 
   /* drake */
   .drake .no { opacity: 0.62; }
@@ -240,6 +251,73 @@
     color: var(--ember);
     padding: 6px 0 2px;
   }
+
+  /* conspiracy corkboard */
+  .conspiracy { border-top: 6px solid var(--string); }
+  .conspiracy .panel {
+    border-left: 4px solid var(--string);
+    position: relative;
+  }
+  .conspiracy .tag {
+    flex: none;
+    font-weight: 800;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--string);
+    padding-top: 3px;
+  }
+  .conspiracy .conclusion {
+    background: var(--ember-soft);
+    border: 2px dashed var(--string);
+    font-family: "Permanent Marker", cursive;
+    font-size: 0.98rem;
+    color: var(--string);
+  }
+
+  /* pigeon */
+  .pigeon {
+    background: var(--paper-2);
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .pigeon .figure { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .pigeon .butterfly {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 10px auto;
+    max-width: 30ch;
+  }
+  .pigeon .butterfly .wing { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+  .pigeon .ask {
+    font-family: "Permanent Marker", cursive;
+    font-size: 1.1rem;
+    color: var(--ember);
+    border-top: 2px dashed var(--rule);
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+  /* casting notice */
+  .notice {
+    background: var(--paper-2);
+    border: 2px solid var(--ink);
+    padding: 16px 14px;
+    font-size: 0.92rem;
+  }
+  .notice .head {
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .notice em { color: var(--ember); font-style: normal; font-weight: 800; }
 
   /* chats: slack + group chat + tweet */
   .chat { display: flex; flex-direction: column; gap: 7px; }
@@ -278,9 +356,8 @@
     background: rgba(51, 101, 138, 0.1);
   }
   .tweet { border: 1.5px solid var(--rule); border-radius: 10px; padding: 12px 14px; background: var(--paper-2); }
-  .tweet + .tweet { margin-top: 8px; margin-left: 18px; }
   .tweet .handle { font-weight: 800; font-size: 0.85rem; color: var(--lake); }
-  .tweet .body { font-size: 0.93rem; margin-top: 4px; }
+  .tweet .body { font-size: 0.95rem; margin-top: 4px; }
   .tweet .meta { font-size: 0.72rem; color: var(--ink-soft); margin-top: 6px; }
 
   /* party scene */
@@ -352,6 +429,7 @@
     font-family: "Permanent Marker", cursive;
     color: var(--ink-soft);
     font-size: 0.95rem;
+    line-height: 1.8;
   }
   .credits .who { color: var(--ember); }
 
@@ -359,6 +437,7 @@
   @media (max-width: 640px) {
     .wrap { padding-top: 26px; }
     .poster { padding: 30px 18px 26px; }
+    .stamp { position: static; display: inline-block; margin-top: 14px; }
     .facts { columns: 1; }
   }
 </style>
@@ -366,9 +445,10 @@
 <div class="wrap">
 
   <header class="poster">
-    <p class="eyebrow">Camp Rock presents · one night only · 16 years in the making</p>
+    <p class="eyebrow">Camp Rock presents · one night only · 16 years in the making · 7 weeks in the shooting</p>
     <h1>FINAL JAM<br><span class="pop">FOR EVERYONE</span></h1>
-    <p class="deck">A thirteen-meme suite on the beautiful absurdity of <em>Camp Rock 3</em> — every joke load-bearing on a verified behind-the-scenes fact. Receipts pinned at the bottom of the board.</p>
+    <p class="deck">Thirteen memes on the beautiful absurdity of <em>Camp Rock 3</em>, ten days after it premiered on — and this is real — the Disney <em>Channel</em>. Every meme is welded to one hyper-specific, verified behind-the-scenes detail. Receipts pinned at the bottom of the board.</p>
+    <span class="stamp">UNHINGED EDITION</span>
     <p class="byline">Written by the Idea Loop staff · Socrates × Athena × Hephaestus</p>
   </header>
 
@@ -376,98 +456,71 @@
 
     <article class="card">
       <p class="tmpl">Gru's Plan</p>
-      <h2>The A&amp;R Emergency</h2>
+      <h2>The Lake Solution</h2>
       <div class="panels">
-        <div class="panel"><span class="n">1</span><span>Lose your reunion tour's opening act at the last minute</span></div>
-        <div class="panel"><span class="n">2</span><span>Skip agents, labels, and every touring professional in the industry</span></div>
-        <div class="panel"><span class="n">3</span><span>Drive to your childhood summer camp and make teenagers compete for the slot</span></div>
-        <div class="panel repeat"><span class="n">4</span><span><span class="stage">(stares at board)</span> Drive to your childhood summer camp and make teenagers compete for the slot</span></div>
+        <div class="panel"><span class="n">1</span><span>Your opening act quits days before a reunion tour</span></div>
+        <div class="panel"><span class="n">2</span><span>Your label has a roster. Your agency has a building full of agents. Your phone has numbers in it</span></div>
+        <div class="panel"><span class="n">3</span><span>Drive to a lake you last attended as a teenager and announce that whichever child sings best gets the tour</span></div>
+        <div class="panel repeat"><span class="n">4</span><span><span class="stage">(stares at board)</span> Drive to a lake you last attended as a teenager and announce that whichever child sings best gets the tour</span></div>
       </div>
-      <p class="why"><b>Why it lands:</b> Connect 3's solution to an urgent tour-logistics crisis is, canonically, a kids' camp talent show.</p>
+      <p class="why"><b>Welded to:</b> the actual premise — Connect 3's canonical response to a tour-logistics emergency is child talent-show A&amp;R.</p>
     </article>
 
     <article class="card">
       <p class="tmpl">Anakin / Padmé</p>
-      <h2>The Singular Winner</h2>
+      <h2>The Concept of Winning</h2>
       <div class="panels dlg">
-        <div class="panel a"><span class="who">Anakin</span><span>We're holding a Final Jam to crown the ONE act that opens our tour.</span></div>
-        <div class="panel p"><span class="who">Padmé</span><span>And the winner gets the slot, right?</span></div>
-        <div class="panel a"><span class="who">Anakin</span><span class="stage">(stares)</span></div>
-        <div class="panel p"><span class="who">Padmé</span><span>The singular competition has a singular winner... right?</span></div>
+        <div class="panel a"><span class="who">Anakin</span><span>Final Jam will decide THE opening act.</span></div>
+        <div class="panel p"><span class="who">Padmé</span><span>And you'll honor the result, right?</span></div>
+        <div class="panel a"><span class="who">Anakin</span><span>Mitchie showed up unannounced, on a break from her own tour, and told us numbers aren't real.</span></div>
+        <div class="panel p"><span class="who">Padmé</span><span>...you gave the slot to five children because a woman backstage said "you don't have to pick just one"... right?</span></div>
       </div>
-      <p class="why"><b>Why it lands:</b> All five finalists — Sage, Fletch, Rosie, Desi AND Cliff — win and jointly become the opening act.</p>
-    </article>
-
-    <article class="card">
-      <p class="tmpl">Fake tweet</p>
-      <h2>Normal Tour-Break Activities</h2>
-      <div class="tweet">
-        <span class="handle">@MitchieTorres</span>
-        <p class="body">took a quick break from my own national tour to fly back to camp, watch a children's talent competition, and hang out backstage with my mom talking about how much camp means to kids. normal tour-break activities</p>
-        <p class="meta">8:04 PM · from the Camp Rock mess hall</p>
-      </div>
-      <div class="tweet">
-        <span class="handle">@Connect3Official</span>
-        <p class="body">while you're here can you make our one business decision for us</p>
-      </div>
-      <p class="why"><b>Why it lands:</b> Mitchie pauses a tour to attend a camp talent show, then resolves the plot by telling the actual band how to pick their opener.</p>
-    </article>
-
-    <article class="card">
-      <p class="tmpl">Clown Makeup</p>
-      <h2>Villain v2.0</h2>
-      <div class="panels">
-        <div class="panel"><span class="n">1</span><span>Writing a new villain for Camp Rock 3</span></div>
-        <div class="panel"><span class="n">2</span><span>Making her an "intimidating influencer" so it feels modern</span></div>
-        <div class="panel"><span class="n">3</span><span>Giving her two cronies named Daniel and Danielle</span></div>
-        <div class="panel repeat"><span class="n">4</span><span>Making them carbon copies of Tess's backup singers from 2008</span></div>
-      </div>
-      <p class="why"><b>Why it lands:</b> The villain's job title got patched from "mean rich girl" to "influencer"; everything else was photocopied, down to the matched-set henchmen.</p>
+      <p class="why"><b>Welded to:</b> Mitchie's actual line — and Sage, Fletch, Rosie, Desi AND Cliff all "winning" the singular Final Jam.</p>
     </article>
 
     <article class="card">
       <p class="tmpl">Expanding Brain</p>
-      <h2>Dig Deep</h2>
+      <h2>Three Words, Four Registers</h2>
       <div class="panels brain">
-        <div class="panel b1"><span class="lvl">🧠</span><span>Open Camp Rock 3 with a new song</span></div>
-        <div class="panel b2"><span class="lvl">✨</span><span>Open with a cover of "Brand New Day" while campers do flips off the bus, exactly like 2008</span></div>
-        <div class="panel b3"><span class="lvl">🌌</span><span>Have famous alum Calvin Rhodes run a workshop telling kids to "dig deep" for original material</span></div>
-        <div class="panel b4"><span class="lvl">🌞</span><span>End the movie on "We Rock"</span></div>
+        <div class="panel b1"><span class="lvl">🧠</span><span>2008: Mitchie says "She's really good" once</span></div>
+        <div class="panel b2"><span class="lvl">✨</span><span>2026: Mitchie returns from tour and says it again — about Sage — as scripture</span></div>
+        <div class="panel b3"><span class="lvl">🌌</span><span>The cast records a TikTok performing the line in four emotional registers: supportive, angry, disappointed, sarcastic</span></div>
+        <div class="panel b4"><span class="lvl">🌞</span><span>Eighteen years of franchise lore compressed into three words with the interpretive range of Hamlet. The Royal Shakespeare Company could never</span></div>
       </div>
-      <p class="why"><b>Why it lands:</b> The film assigns the campers homework it refused to do itself.</p>
+      <p class="why"><b>Welded to:</b> the real cast TikTok — Segura, Pollack, Stone, and Barton each delivered "She's really good" in one of those four exact tones.</p>
     </article>
 
-    <article class="card">
-      <p class="tmpl">Corporate needs you to find the differences</p>
-      <h2>Same Picture</h2>
-      <div class="pics">
-        <div class="pic"><span class="frame">☀️🏕️</span>An American summer camp in July</div>
-        <div class="pic"><span class="frame">🌧️🍁</span>A soundstage lake in Vancouver in October</div>
-      </div>
-      <p class="punch">Production crew: "They're the same picture."</p>
-      <p class="why"><b>Why it lands:</b> Principal photography ran Sept 15 – Nov 1, 2025, in Vancouver — every sun-drenched "summer" frame is Canadian mid-autumn.</p>
-    </article>
-
-    <article class="card">
-      <p class="tmpl">Gru's Plan</p>
-      <h2>EP Math</h2>
+    <article class="card conspiracy">
+      <p class="tmpl">Conspiracy corkboard</p>
+      <h2>IT WAS IN THE TRACKLIST THE WHOLE TIME</h2>
       <div class="panels">
-        <div class="panel"><span class="n">1</span><span>Make the long-awaited Camp Rock 3 after 16 years</span></div>
-        <div class="panel"><span class="n">2</span><span>Assemble everyone who ever touched the franchise as executive producers</span></div>
-        <div class="panel"><span class="n">3</span><span>The credits now have 8 EPs and Final Jam only ever had 5 winners</span></div>
-        <div class="panel repeat"><span class="n">4</span><span><span class="stage">(stares at board)</span> The credits now have 8 EPs and Final Jam only ever had 5 winners</span></div>
+        <div class="panel"><span class="tag">Evid. A</span><span>Camp Rock 2: 2010. Camp Rock 3: 2026. Development: sixteen years.</span></div>
+        <div class="panel"><span class="tag">Evid. B</span><span>The shoot itself: seven weeks.</span></div>
+        <div class="panel"><span class="tag">Evid. C</span><span>A track on the official 17-song soundtrack — written, recorded, mixed, mastered, and shipped by Walt Disney Records — is titled <strong>"WORK IN PROGRESS."</strong></span></div>
+        <div class="panel conclusion"><span>THEY TOLD US. THEY CONFESSED IN THE TRACKLIST. WAKE UP.</span></div>
       </div>
-      <p class="why"><b>Why it lands:</b> Eight executive producers — Joe, Nick, Kevin, Demi, Federle, Sullenger, Berman, Marsh — versus five Final Jam champions.</p>
+      <p class="why"><b>Welded to:</b> "Work In Progress" is a real cast song on the real soundtrack of the movie that took 16 years to exist.</p>
     </article>
 
     <article class="card">
       <p class="tmpl">Drake</p>
       <h2>The Counteroffer</h2>
       <div class="panels drake">
-        <div class="panel no"><span class="mark">✗</span><span>Demi's pitch: an R-rated Camp Rock 3</span></div>
-        <div class="panel yes"><span class="mark">✓</span><span>Demi as EP #4 of 8 on a Disney+ movie so G-rated the edgiest thing in it is a secret cameo</span></div>
+        <div class="panel no"><span class="mark">✗</span><span>Demi's publicly stated artistic vision: an R-rated Camp Rock 3</span></div>
+        <div class="panel yes"><span class="mark">✓</span><span>Disney's counteroffer: EP credit #4 of 8, a cameo classified until the world premiere, and dialogue about how much camp means to kids</span></div>
       </div>
-      <p class="why"><b>Why it lands:</b> She publicly joked about an R-rated Camp Rock 3; the machine's counteroffer was an EP credit and a Mitchie cameo kept classified until the world premiere.</p>
+      <p class="why"><b>Welded to:</b> Demi Lovato's actual R-rated pitch, versus the secrecy protocol around her Mitchie cameo.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Corporate needs you to find the differences</p>
+      <h2>Same Picture</h2>
+      <div class="pics">
+        <div class="pic"><span class="frame">☀️🏕️</span>July at an American summer camp</div>
+        <div class="pic"><span class="frame">🌧️🍁</span>8°C and raining, November 1st, British Columbia</div>
+      </div>
+      <p class="punch">"They're the same picture. Wardrobe, please confirm swimwear."</p>
+      <p class="why"><b>Welded to:</b> the Sept 15 – Nov 1, 2025 Vancouver shoot — every golden "summer" frame is Canadian late autumn.</p>
     </article>
 
     <article class="card">
@@ -475,86 +528,106 @@
       <h2>#camprock3-prod</h2>
       <div class="chat">
         <p class="chat-head"># camprock3-prod</p>
-        <div class="msg"><p class="from">line-producer</p><div class="bubble">Schedule locked: camp scenes wrap Nov 1 in Vancouver. Wardrobe, please confirm tank tops and swimwear.</div></div>
-        <div class="msg right"><p class="from">wardrobe-dept</p><div class="bubble">It is 8°C and raining.</div></div>
-        <div class="msg"><p class="from">line-producer</p><div class="bubble">Great, so confirmed. Also all 8 EPs have notes on the lake scene.</div></div>
-        <div class="msg right"><p class="from">wardrobe-dept</p><div class="bubble">There are more EPs on this thread than weeks left in the shoot.</div></div>
-        <div class="msg"><p class="from">line-producer</p><div class="bubble">Joe says it's a "pretty wild full circle moment." Please dress the campers for July.</div></div>
+        <div class="msg"><p class="from">line-producer</p><div class="bubble">Reminder: we are a SUMMER camp until Nov 1. I do not want to see a single visible breath in dailies.</div></div>
+        <div class="msg right"><p class="from">wardrobe-dept</p><div class="bubble">It is 8°C. The campers are hypothermic in tank tops.</div></div>
+        <div class="msg"><p class="from">line-producer</p><div class="bubble">CGI the breath out. Also all 8 EPs have notes on the lake scene. Yes, more EPs than weeks of shooting. No, I don't want to talk about it.</div></div>
+        <div class="msg right"><p class="from">vfx-dept</p><div class="bubble">we are now billing "breath removal" as a line item</div></div>
+        <div class="msg"><p class="from">line-producer</p><div class="bubble">Joe says it's a "pretty wild full circle moment." The circle is the lake. Get back in it.</div></div>
       </div>
-      <p class="why"><b>Why it lands:</b> A Nov 1 Vancouver wrap, eight executive producers, and a seven-week shoot — plus Joe Jonas's actual quote — in one plausible production-channel nightmare.</p>
+      <p class="why"><b>Welded to:</b> a seven-week shoot supervised by eight executive producers — there were literally more EPs than weeks — plus Joe Jonas's verbatim quote.</p>
     </article>
 
     <article class="card">
-      <p class="tmpl">Anakin / Padmé</p>
-      <h2>Know Your Audience</h2>
-      <div class="panels dlg">
-        <div class="panel a"><span class="who">Anakin</span><span>Camp Rock 3 is out! The Jonas Brothers are back at camp!</span></div>
-        <div class="panel p"><span class="who">Padmé</span><span>To play new teenage campers, right?</span></div>
-        <div class="panel a"><span class="who">Anakin</span><span><span class="stage">(stares)</span> They're pushing 40 with wives and kids. They're there to find a teen opening act.</span></div>
-        <div class="panel p"><span class="who">Padmé</span><span>...so it's a movie for actual children, right?</span></div>
+      <p class="tmpl">Is this a pigeon?</p>
+      <h2>The Prophecy</h2>
+      <div class="pigeon">
+        <p class="figure">Director Veronica Rodriguez, gesturing:</p>
+        <p class="butterfly"><span class="wing">🦋</span>a teenager who learned guitar for this specific movie</p>
+        <p class="ask">"Is this the next Zac Efron?"</p>
       </div>
-      <p class="why"><b>Why it lands:</b> The marketing targeted the fans who were 12 in 2008 — the "kids' movie" is aimed squarely at people with mortgages.</p>
-    </article>
-
-    <article class="card">
-      <p class="tmpl">"They don't know"</p>
-      <h2>We Rock (Sobbing)</h2>
-      <div class="scene"><span class="cap">The party</span>A room full of Gen Z kids vibing to the Final Jam finale.</div>
-      <div class="scene corner"><span class="cap">Lone 30-year-old in the corner</span>"They don't know I sobbed when 'We Rock' started playing. They weren't even BORN for the first Final Jam."</div>
-      <p class="why"><b>Why it lands:</b> The movie closes on the 2008 anthem as a passing-of-the-torch — a targeted emotional strike on anyone who owned the original soundtrack CD.</p>
+      <p class="why"><b>Welded to:</b> Rodriguez's verbatim press-tour prophecy about Malachi Barton, whose guitar skills are 100% Camp-Rock-3-vintage.</p>
     </article>
 
     <article class="card">
       <p class="tmpl">Expanding Brain</p>
-      <h2>Most Successful Music Institution on Earth</h2>
+      <h2>Acceptance Rate: Unknown</h2>
       <div class="panels brain">
         <div class="panel b1"><span class="lvl">🧠</span><span>Camp Rock produced one famous act: Connect 3</span></div>
-        <div class="panel b2"><span class="lvl">✨</span><span>Also Mitchie, now a global touring superstar</span></div>
-        <div class="panel b3"><span class="lvl">🌌</span><span>Also Calvin Rhodes, ANOTHER famous alum, per Milo Manheim's cameo</span></div>
-        <div class="panel b4"><span class="lvl">🌞</span><span>One tiny lakeside summer camp has a superstar hit rate that makes Juilliard, Motown, and the entire nation of South Korea look like amateurs</span></div>
+        <div class="panel b2"><span class="lvl">✨</span><span>Also Mitchie Torres, now a global touring superstar</span></div>
+        <div class="panel b3"><span class="lvl">🌌</span><span>Also Calvin Rhodes, ANOTHER world-famous alum, who drops by to tell children to "dig deep"</span></div>
+        <div class="panel b4"><span class="lvl">🌞</span><span>One lakeside summer camp outperforms Juilliard, Motown, and the entire K-pop trainee system. Tuition unknown. Acceptance rate unknown. Congress should investigate</span></div>
       </div>
-      <p class="why"><b>Why it lands:</b> The Calvin Rhodes retcon makes Camp Rock statistically the most successful music institution on Earth, and the movie treats this as completely normal.</p>
+      <p class="why"><b>Welded to:</b> Milo Manheim's Calvin Rhodes cameo, which canonically adds a THIRD global superstar act to one tiny camp's alumni list.</p>
     </article>
 
     <article class="card">
-      <p class="tmpl">Group chat</p>
+      <p class="tmpl">Casting breakdown sheet</p>
+      <h2>Now Casting</h2>
+      <div class="notice">
+        <p class="head">Breakdown · Camp Rock 3 · Roles 7 &amp; 8</p>
+        <p>SEEKING: two performers, any vocal range, who legally function as a single rhyming unit. Duties: standing slightly behind an influencer; replicating blocking last used in 2008. Names are non-negotiable: you WILL be <em>DANIEL</em> and <em>DANIELLE</em>. The franchise has spoken.</p>
+      </div>
+      <p class="why"><b>Welded to:</b> Madison's cronies' actual names — Daniel and Danielle — described in press as carbon copies of Tess Tyler's 2008 backup singers.</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Fake tweet</p>
+      <h2>Come On Over WHERE</h2>
+      <div class="tweet">
+        <span class="handle">@finaljamtruther</span>
+        <p class="body">16 years. 5,840 days. The Jonas Brothers return to Camp Rock and contribute one (1) new song. It is called "Come On Over." Come on over WHERE, gentlemen. We have been HERE. Since 2010. You are the ones who left the lake.</p>
+        <p class="meta">11:52 PM · Aug 14, 2026 · soundtrack release night</p>
+      </div>
+      <p class="why"><b>Welded to:</b> the 17-track soundtrack credits the Jonas Brothers with exactly one new song, "Come On Over" (plus a "We Rock" remake).</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">"They don't know"</p>
+      <h2>We Rock (Eleven Viewings)</h2>
+      <div class="scene"><span class="cap">The party</span>A room full of Gen Z kids who found the soundtrack on release day, August 14.</div>
+      <div class="scene corner"><span class="cap">Lone 30-year-old in the corner</span>"They don't know I've watched the new 'We Rock' eleven times because TikTok said the vocals were insane, and TikTok was RIGHT, and the torch was PASSED, and I was 12 once—"</div>
+      <p class="why"><b>Welded to:</b> the finale "We Rock" remake and the actual TikTok discourse calling its vocals "insane."</p>
+    </article>
+
+    <article class="card">
+      <p class="tmpl">Group chat · premiere night, Aug 13</p>
       <h2>final jam survivors 🎸</h2>
       <div class="chat">
         <p class="chat-head">final jam survivors 🎸</p>
-        <div class="msg"><p class="from">Jess</p><div class="bubble">NO SPOILERS but the secret cameo at the premiere... I screamed</div></div>
-        <div class="msg right"><p class="from">Sam</p><div class="bubble">if you tell me Demi is in this I'm leaving work right now</div></div>
-        <div class="msg"><p class="from">Jess</p><div class="bubble">Mitchie "takes a break from tour" to attend a CHILDREN'S CAMP TALENT SHOW</div></div>
-        <div class="msg right"><p class="from">Sam</p><div class="bubble">girl what does she say</div></div>
-        <div class="msg"><p class="from">Jess</p><div class="bubble">"She's really good."</div></div>
-        <div class="msg right"><p class="from">Sam</p><div class="bubble">I'M IN MY CAR. THE 2008 LINE. THEY KEPT THE LINE.</div></div>
-        <div class="msg"><p class="from">Jess</p><div class="bubble">also all FIVE finalists win and become the opening act. everyone gets the torch</div></div>
-        <div class="msg right"><p class="from">Sam</p><div class="bubble">participation-trophy Final Jam... they really know their audience is us</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">it's happening. disney CHANNEL first, like it's 2008. they made us find the channel number again</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">my tv doesn't HAVE channels. I'm at my mom's house for this</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">MITCHIE'S HERE. SHE "TOOK A BREAK FROM TOUR." FOR A CHILDREN'S TALENT SHOW</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">what does she say. WHAT DOES SHE SAY</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">"she's really good."</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">I need to lie down on my mom's kitchen floor</div></div>
+        <div class="msg"><p class="from">Jess</p><div class="bubble">update: all five finalists just won. all of them. winning is fake now</div></div>
+        <div class="msg right"><p class="from">Sam</p><div class="bubble">mitchie walked into a business decision she wasn't invited to and abolished scarcity</div></div>
       </div>
-      <p class="why"><b>Why it lands:</b> The hidden-until-premiere cameo, the "She's really good" callback, and the everyone-wins ending — processed in the medium where 30-year-olds actually processed this movie.</p>
+      <p class="why"><b>Welded to:</b> the Aug 13 Disney Channel premiere (Disney+ the next day), the classified cameo, the 2008 line, and the five-winner ending — in the medium where 30-year-olds actually processed it.</p>
     </article>
 
   </main>
 
   <section class="receipts">
     <h2>The Receipts</h2>
-    <p>Every meme above is load-bearing on one of these verified behind-the-scenes facts. Nothing was invented; only exaggerated with love.</p>
+    <p>Every meme above is load-bearing on one of these verified details. Nothing was invented; only exaggerated with love (and one corkboard of red string).</p>
     <div class="stats">
       <div class="stat"><span class="num">16 yrs</span><span class="lbl">Wait since Camp Rock 2</span></div>
       <div class="stat"><span class="num">7 wks</span><span class="lbl">Actual shoot length</span></div>
-      <div class="stat"><span class="num">~119:1</span><span class="lbl">Wait-to-shoot ratio</span></div>
-      <div class="stat"><span class="num">8</span><span class="lbl">Executive producers</span></div>
-      <div class="stat"><span class="num">5</span><span class="lbl">Final Jam "winners"</span></div>
+      <div class="stat"><span class="num">8 &gt; 7</span><span class="lbl">EPs vs weeks of shooting</span></div>
+      <div class="stat"><span class="num">5</span><span class="lbl">Winners of one Final Jam</span></div>
+      <div class="stat"><span class="num">1</span><span class="lbl">New Jonas Brothers song</span></div>
     </div>
     <ul class="facts">
-      <li><b>Filming:</b> Sept 15 – Nov 1, 2025, Vancouver, Canada — a seven-week autumn shoot for a summer-camp movie. Released August 2026 on Disney Channel and Disney+.</li>
-      <li><b>Crew:</b> directed by Veronica Rodriguez (<em>The Slumber Party</em>), written by Eydie Faye (<em>Fuller House</em>); EPs include all three Jonas Brothers, Demi Lovato, and Tim Federle.</li>
-      <li><b>Premise:</b> Connect 3 lose their reunion-tour opening act at the last minute and recruit a replacement via a summer-camp talent competition.</li>
-      <li><b>Ending:</b> Mitchie convinces Connect 3 they "don't have to pick just one" — all five finalists win Final Jam and share the opening slot.</li>
-      <li><b>Demi's cameo</b> was kept secret until the world premiere; in it Mitchie takes a tour break to watch the camp show and repeats her most-quoted 2008 line, "She's really good." She once joked publicly about wanting an R-rated Camp Rock 3.</li>
-      <li><b>Villain:</b> influencer Madison, flanked by cronies Daniel and Danielle — carbon copies of Tess Tyler's 2008 backup singers.</li>
-      <li><b>Cameo #2:</b> Milo Manheim as Calvin Rhodes, yet another world-famous Camp Rock alum, hosting a songwriting workshop ("dig deep").</li>
-      <li><b>Callbacks:</b> the film opens on a "Brand New Day" cover with campers flipping off the bus (shot-for-shot 2008 homage) and closes on "We Rock."</li>
-      <li><b>Director's forecast:</b> new lead Malachi Barton learned guitar for the role; Rodriguez predicts he'll be "the next Zac Efron."</li>
+      <li><b>Premiere:</b> August 13, 2026 on Disney Channel — the cable channel, in 2026 — with Disney+ the next day; the 17-track soundtrack dropped Aug 14 via Walt Disney Records.</li>
+      <li><b>The tracklist confession:</b> new cast songs include "Work In Progress," "Echo," "Rhythm's Only Right," and "One Beat Away"; the Jonas Brothers' single new contribution is "Come On Over," plus a "We Rock" remake whose vocals TikTok pronounced "insane."</li>
+      <li><b>Filming:</b> Sept 15 – Nov 1, 2025, Vancouver — a seven-week late-autumn shoot for a summer-camp movie, supervised by eight executive producers (Joe, Nick, Kevin, Demi, Tim Federle, Betsy Sullenger, Spencer Berman, Gary Marsh). More EPs than weeks.</li>
+      <li><b>Premise:</b> Connect 3 lose their reunion-tour opening act at the last minute and source a replacement from a children's talent competition at their childhood camp.</li>
+      <li><b>Ending:</b> Mitchie tells Connect 3 they "don't have to pick just one" — all five finalists (Sage, Fletch, Rosie, Desi, Cliff) win Final Jam and share the tour slot.</li>
+      <li><b>The cameo:</b> Demi Lovato's Mitchie return was kept secret until the world premiere; on screen she takes a tour break to watch the camp show and repeats her most-quoted 2008 line, "She's really good." The cast later performed that line four ways (supportive, angry, disappointed, sarcastic) on TikTok. Demi had once publicly floated an R-rated Camp Rock 3.</li>
+      <li><b>Villain:</b> influencer Madison, flanked by cronies named Daniel and Danielle — carbon copies of Tess Tyler's 2008 backup singers.</li>
+      <li><b>Cameo #2:</b> Milo Manheim as Calvin Rhodes, yet another world-famous Camp Rock alum, hosting a songwriting workshop ("dig deep") at a camp that now out-produces every conservatory on Earth.</li>
+      <li><b>The prophecy:</b> director Veronica Rodriguez says new lead Malachi Barton — who learned guitar for the movie — will be "the next Zac Efron."</li>
       <li><b>Full circle:</b> Joe Jonas, watching the new campers with Demi: "pinching ourselves like wow, this is a pretty wild full circle moment."</li>
     </ul>
     <p class="sources">Sources:
@@ -563,12 +636,14 @@
       <a href="https://www.today.com/popculture/tv/camp-rock-3-ending-demi-lovato-surprise-cameo-rcna591418">Today.com (ending)</a> ·
       <a href="https://www.backstage.com/magazine/article/camp-rock-3-news-79370/">Backstage (cast &amp; crew)</a> ·
       <a href="https://hollywoodnorthbuzz.com/2025/12/camp-rock-3-trailer-with-jonas-brothers-filmed-in-vancouver.html">Hollywood North Buzz (Vancouver shoot)</a> ·
-      <a href="https://www.yahoo.com/entertainment/movies/articles/every-camp-rock-3-easter-020000125.html">Yahoo (easter eggs)</a> ·
+      <a href="https://www.justjaredjr.com/2026/07/13/track-list-for-camp-rock-3-soundtrack-revealed-6-past-songs-revisited/">Just Jared Jr. (tracklist)</a> ·
+      <a href="https://www.thewrap.com/creative-content/movies/camp-rock-3-songs-list-soundtrack/">TheWrap (all the songs)</a> ·
+      <a href="https://www.tiktok.com/discover/camp-rock-3?lang=en">TikTok (premiere discourse)</a> ·
       <a href="https://www.primetimer.com/features/camp-rock-3-cast-guide-meet-the-full-cast-and-characters-of-the-musical-drama">Primetimer (character guide)</a> ·
       <a href="https://www.foxnews.com/entertainment/demi-lovato-talks-plans-for-r-rated-camp-rock-3.amp">Fox News (R-rated joke)</a>
     </p>
   </section>
 
-  <p class="credits">Concepts by <span class="who">Socrates</span> (premise), <span class="who">Athena</span> (production), &amp; <span class="who">Hephaestus</span> (nostalgia) · curated for Anthony · Idea Loop, off the clock 🏕️</p>
+  <p class="credits">Concepts by <span class="who">Socrates</span> (premise), <span class="who">Athena</span> (production), &amp; <span class="who">Hephaestus</span> (nostalgia) · unhinged punch-up curated for Anthony · Idea Loop, off the clock 🏕️<br>P.S. the soundtrack contains a song called "Echo." Our intake agent has been notified.</p>
 
 </div>
