@@ -1,8 +1,6 @@
 name: Trash pickup SMS reminder
 
 on:
-  push: # TEMP: dry-run verification on the feature branch; removed before merge
-    branches: [claude/google-voice-trash-reminders-2k70uh]
   schedule:
     # Thursday 6:00 PM America/Chicago. Two UTC crons cover DST; the script
     # itself checks Chicago local time and no-ops on the wrong one.
@@ -35,4 +33,4 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           TRASH_SMS_EMAIL: ${{ secrets.TRASH_SMS_EMAIL }}
-        run: python scripts/trash_reminder.py ${{ (inputs.dry_run || github.event_name == 'push') && '--dry-run' || '' }}
+        run: python scripts/trash_reminder.py ${{ inputs.dry_run && '--dry-run' || '' }}
