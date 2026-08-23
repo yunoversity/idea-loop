@@ -111,17 +111,27 @@ def compose(pickup_day, has_recycling):
 
 
 def send_twilio(msg):
-    sid = os.environ["TWILIO_ACCOUNT_SID"]
+    sid = os.environ["TWILIO_ACCOUNT_SID"].strip()
+    token = os.environ["TWILIO_AUTH_TOKEN"].strip()
     body = urllib.parse.urlencode({
-        "To": os.environ["TRASH_SMS_TO"], "From": os.environ["TWILIO_FROM"], "Body": msg,
+        "To": os.environ["TRASH_SMS_TO"].strip(), "From": os.environ["TWILIO_FROM"].strip(),
+        "Body": msg,
     }).encode()
     req = urllib.request.Request(
         f"https://api.twilio.com/2010-04-01/Accounts/{sid}/Messages.json", data=body)
     import base64
-    creds = base64.b64encode(f"{sid}:{os.environ['TWILIO_AUTH_TOKEN']}".encode()).decode()
+    creds = base64.b64encode(f"{sid}:{token}".encode()).decode()
     req.add_header("Authorization", f"Basic {creds}")
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        print(f"Twilio: sent ({resp.status})")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            print(f"Twilio: sent ({resp.status})")
+    except urllib.error.HTTPError as e:
+        import re as _re
+        # Redact phone digits: these logs are public on this repo.
+        detail = _re.sub(r"\+?\d{7,}", "[number]", e.read().decode(errors="replace")[:600])
+        hint = (" — check TWILIO_ACCOUNT_SID (starts with AC) and TWILIO_AUTH_TOKEN "
+                "(the Auth Token on the Console home, not an API key)") if e.code == 401 else ""
+        raise SystemExit(f"Twilio send failed (HTTP {e.code}){hint}: {detail}")
 
 
 def send_textbelt(msg):
