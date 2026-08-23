@@ -10,6 +10,8 @@ Transports, tried in order — the first one with its env vars set wins:
   2. Textbelt      TEXTBELT_KEY
   3. Email-to-SMS  SMTP_HOST, SMTP_USER, SMTP_PASS, TRASH_SMS_EMAIL
                    (SMTP_PORT optional, default 587; e.g. Gmail + number@vtext.com)
+  4. Telegram      TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID — fallback to Anthony's
+                   Telegram until a real SMS transport is configured
 Recipient number: TRASH_SMS_TO (E.164, e.g. +15125551234) — used by Twilio/Textbelt.
 
 Google Voice is NOT supported: it has no public API for sending SMS.
@@ -147,10 +149,21 @@ def send_email_sms(msg):
     print(f"Email-to-SMS: sent to {os.environ['TRASH_SMS_EMAIL']}")
 
 
+def send_telegram(msg):
+    """Fallback until an SMS transport is configured: message Anthony's Telegram."""
+    body = urllib.parse.urlencode({
+        "chat_id": os.environ["TELEGRAM_CHAT_ID"], "text": msg,
+    }).encode()
+    url = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}/sendMessage"
+    with urllib.request.urlopen(urllib.request.Request(url, data=body), timeout=30) as resp:
+        print(f"Telegram fallback: sent ({resp.status}). Configure an SMS transport to text Kevin directly.")
+
+
 TRANSPORTS = [
     ("Twilio", ("TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN", "TWILIO_FROM", "TRASH_SMS_TO"), send_twilio),
     ("Textbelt", ("TEXTBELT_KEY", "TRASH_SMS_TO"), send_textbelt),
     ("Email-to-SMS", ("SMTP_HOST", "SMTP_USER", "SMTP_PASS", "TRASH_SMS_EMAIL"), send_email_sms),
+    ("Telegram (fallback)", ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"), send_telegram),
 ]
 
 

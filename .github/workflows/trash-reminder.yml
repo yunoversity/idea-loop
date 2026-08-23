@@ -37,6 +37,9 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           TRASH_SMS_EMAIL: ${{ secrets.TRASH_SMS_EMAIL }}
+          # Fallback until an SMS transport is configured: deliver to Anthony's Telegram
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         # test_phone is read from the event payload (not yaml env interpolation) so the
         # number never appears in public run logs.
         run: |
