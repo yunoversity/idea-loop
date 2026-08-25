@@ -1,0 +1,49 @@
+name: Trash pickup SMS reminder
+
+on:
+  schedule:
+    # Thursday 6:00 PM America/Chicago. Two UTC crons cover DST; the script
+    # itself checks Chicago local time and no-ops on the wrong one.
+    - cron: "0 23 * * 4" # 6 PM CDT (summer)
+    - cron: "0 0 * * 5"  # 6 PM CST (winter)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print the message without sending"
+        type: boolean
+        default: false
+      test_phone:
+        description: "Send a one-off test SMS to this E.164 number (uses Textbelt free tier if no key secret is set)"
+        type: string
+        default: ""
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send trash reminder
+        env:
+          TRASH_SMS_TO: ${{ secrets.TRASH_SMS_TO }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM: ${{ secrets.TWILIO_FROM }}
+          TEXTBELT_KEY: ${{ secrets.TEXTBELT_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          TRASH_SMS_EMAIL: ${{ secrets.TRASH_SMS_EMAIL }}
+        # test_phone is read from the event payload (not yaml env interpolation) so the
+        # number never appears in public run logs.
+        run: |
+          TEST_PHONE=$(jq -r '.inputs.test_phone // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || true)
+          if [ -n "$TEST_PHONE" ]; then
+            export TRASH_SMS_TO="$TEST_PHONE"
+            export TEXTBELT_KEY="${TEXTBELT_KEY:-textbelt}"
+            echo "Test mode: sending to number from dispatch input (not logged)."
+          fi
+          python scripts/trash_reminder.py ${{ inputs.dry_run && '--dry-run' || '' }}
