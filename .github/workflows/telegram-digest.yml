@@ -1,9 +1,9 @@
 name: Daily Telegram digest
 
+# Daily schedule removed 2026-08-23 at Anthony's request — the automated
+# morning question digest wasn't adding value. Run manually from the
+# Actions tab if a digest is ever wanted.
 on:
-  schedule:
-    # 13:00 UTC = 8:00 AM Chicago during CDT (winter: 7:00 AM — adjust to 14:00 if preferred)
-    - cron: "0 13 * * *"
   workflow_dispatch:
 
 jobs:
