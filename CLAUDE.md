@@ -72,9 +72,11 @@ Hiring history and review findings: `hiring/ONBOARDING.md`.
 
 ## Coordination surfaces
 
-- `queue.md` — Iris's prioritized open questions; digest and dashboard render it verbatim
+- `queue.md` — Iris's prioritized open questions; the dashboard renders it verbatim
 - `sprint.md` — live build task ledger (from `templates/sprint.md`); Hephaestus captains it
-- `escalations/` — a pushed file here Telegrams Anthony immediately (sprint SLA risk)
+- `escalations/` — sprint SLA risk flags. (No auto-alert since 2026-08-25 — the
+  Telegram notifier was removed with the rest of the bot; Anthony reviews these in
+  sessions and meetings.)
 
 ## Self-improvement
 
@@ -91,33 +93,25 @@ Hiring history and review findings: `hiring/ONBOARDING.md`.
   to the Idea Loop Dashboard artifact on every push to main (GitHub-App webhook) plus
   a daily 7:45 AM safety-net run:
   https://claude.ai/code/artifact/52faa5a2-a3cf-47c5-b5dd-963c1543149a
-- Telegram /interviewme — Iris interviews Anthony one open question at a time
-  (blocking + high-intensity first); answers land in inbox/ for intake like any message.
-- Daily 8:00 AM — Telegram digest of top ≤3 open questions. Runs in **GitHub Actions**
-  (`.github/workflows/telegram-digest.yml`), reading painpoints from the repo's main branch.
-- Live conversation — the **Iris daemon** (`scripts/iris_daemon.py`, launchd service
-  `com.iris.daemon` on Anthony's Mac) long-polls Telegram: /help /status /questions
-  answered by script; other messages are filed to `inbox/` (committed+pushed) AND
-  answered conversationally by read-only headless Claude. Iris cannot write via
-  Telegram — state changes happen only in Claude Code sessions or meetings.
-  When the Mac sleeps, Telegram queues messages (~24h) and the daemon catches up on
-  wake; `.github/workflows/telegram-poll.yml` remains as a manual-dispatch fallback.
 - Daily 6:00 PM — a scheduled cloud Claude agent runs the pre-meeting workflow review
   (low-risk improvements implemented + logged; the rest proposed in pack section 7)
   and builds the meeting pack (sections 1–7 pre-filled, Decisions empty), commits it
-  to `meetings/`; a push-triggered Action sends the Telegram summons. Anthony convenes
-  with `/meeting`. Daily cadence is for the setup phase; revisit once the team settles.
-- The bot is Iris (@Iris_CoSbot); it only talks to Anthony's chat ID.
+  to `meetings/`. Anthony convenes with `/meeting`. Daily cadence is for the setup
+  phase; revisit once the team settles.
+- **Telegram/Iris bot removed entirely 2026-08-25 at Anthony's request** (daily
+  digest, /interviewme, Mac daemon, escalation alerts, meeting summons — all
+  workflows and scripts deleted; recoverable from git history if ever revived).
+  Iris the CoS agent still runs inside Claude Code sessions; she just has no
+  messaging channel to Anthony.
 
 **Sync discipline (required because executors share state via GitHub):**
-- Start every session with `git pull` — inbox messages and meeting packs arrive via Actions.
+- Start every session with `git pull` — meeting packs arrive from the cloud routine.
 - Commit and push at the end of any session that changes pipeline state; the cloud
   can only see what's on main.
 
 ## House rules
 
-- Secrets live in `.env` (gitignored). Never commit tokens. The Telegram bot only
-  talks to Anthony's chat ID (`TELEGRAM_CHAT_ID` in .env).
+- Secrets live in `.env` (gitignored). Never commit tokens.
 - Frontmatter is the source of truth for pipeline state; the dashboard is a
   rendering of it, never an input.
 - Dates in files are absolute (YYYY-MM-DD), never "yesterday".
