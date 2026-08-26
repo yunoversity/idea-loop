@@ -93,11 +93,10 @@ Hiring history and review findings: `hiring/ONBOARDING.md`.
   to the Idea Loop Dashboard artifact on every push to main (GitHub-App webhook) plus
   a daily 7:45 AM safety-net run:
   https://claude.ai/code/artifact/52faa5a2-a3cf-47c5-b5dd-963c1543149a
-- Daily 6:00 PM — a scheduled cloud Claude agent runs the pre-meeting workflow review
-  (low-risk improvements implemented + logged; the rest proposed in pack section 7)
-  and builds the meeting pack (sections 1–7 pre-filled, Decisions empty), commits it
-  to `meetings/`. Anthony convenes with `/meeting`. Daily cadence is for the setup
-  phase; revisit once the team settles.
+- **Staff meetings: no scheduled cadence** (Anthony cancelled all scheduled staff
+  meetings and morning reminders, 2026-08-25). `/meeting` remains available purely
+  on demand — when convened without a pack in `meetings/`, the CoS builds one at
+  the start of the session. Nothing prompts or summons Anthony.
 - **Telegram/Iris bot removed entirely 2026-08-25 at Anthony's request** (daily
   digest, /interviewme, Mac daemon, escalation alerts, meeting summons — all
   workflows and scripts deleted; recoverable from git history if ever revived).
@@ -105,7 +104,8 @@ Hiring history and review findings: `hiring/ONBOARDING.md`.
   messaging channel to Anthony.
 
 **Sync discipline (required because executors share state via GitHub):**
-- Start every session with `git pull` — meeting packs arrive from the cloud routine.
+- Start every session with `git pull` — cloud executors (intake, dashboard) share
+  state via main.
 - Commit and push at the end of any session that changes pipeline state; the cloud
   can only see what's on main.
 
