@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aura-2 Gap Dashboard</title>
+<meta name="description" content="Explore the Deepgram Aura-2 English voice portfolio, score the gaps, and hear candidate voices.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Deepgram Aura-2 · English voice portfolio</p>
+    <h1>More voices? First, let’s agree on the question.</h1>
+    <p class="lede">Customers keep asking for more voices, and for voices like well-known actors. Before we cast anyone, this page shows what the library already covers, lets you score where the real gaps are, and ranks them.</p>
+
+    <div class="scr" aria-label="Summary">
+      <div><b>Situation</b>The voices work. Customers who find one stay.</div>
+      <div><b>Complication</b>“More voices” doesn’t say which voices, for whom, or why.</div>
+      <div><b>Resolution</b>Find out which empty slots someone wants and no existing voice serves.</div>
+    </div>
+
+    <div class="stats" id="stats" aria-live="polite"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1. EXPLORE -->
+  <section id="explore" aria-labelledby="h-explore">
+    <h2 id="h-explore"><span class="num">1</span> Explore the portfolio</h2>
+    <p class="hint">Pick two dimensions. Each cell counts the English voices that match both. Empty cells are <em>candidate</em> gaps, not proven ones: a gap needs someone who wants it and no existing voice that serves it.</p>
+
+    <div class="toolbar">
+      <div class="group">
+        <span class="lbl">Quick views</span>
+        <div class="chips" id="presets" role="group" aria-label="Quick views"></div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <label class="field">X axis <select id="xDim"></select></label>
+      <label class="field">Y axis <select id="yDim"></select></label>
+      <button class="btn ghost" id="swap" title="Swap axes">⇄ Swap</button>
+      <div class="field">Color by
+        <div class="seg" id="colorBy" role="group" aria-label="Color by">
+          <button data-v="count" class="on" aria-pressed="true">Voice count</button>
+          <button data-v="score" aria-pressed="false">Gap priority</button>
+        </div>
+      </div>
+      <label class="field">Count as a gap if
+        <select id="thresh">
+          <option value="0">0 voices (empty)</option>
+          <option value="1">≤ 1 voice (thin)</option>
+          <option value="2">≤ 2 voices</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="heat-scroll"><div id="heat" role="table" aria-label="Voice coverage heatmap"></div></div>
+        <div class="legend" id="legend"></div>
+        <p class="note" id="viewNote"></p>
+      </div>
+      <aside class="card detail" id="detail" aria-live="polite">
+        <h3>Cell details</h3>
+        <p class="muted">Click any cell to see its voices, or to hear the nearest existing voices for an empty one.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2. SCORE -->
+  <section id="score" aria-labelledby="h-score">
+    <h2 id="h-score"><span class="num">2</span> Score each gap dimension</h2>
+    <p class="hint">For every value on every dimension, rate how urgently it should be addressed from 1 (low) to 5 (high) on three criteria. Unscored values count as 3. Scores are saved in this browser.</p>
+
+    <div class="card">
+      <div class="weights" id="weights"></div>
+      <div class="toolbar tight">
+        <div class="tabs" id="dimTabs" role="tablist" aria-label="Dimension"></div>
+        <span class="spacer"></span>
+        <button class="btn ghost" id="illus">Load illustrative scores</button>
+        <button class="btn ghost" id="resetScores">Reset to 3</button>
+      </div>
+      <div id="scoreRows" class="score-rows"></div>
+    </div>
+  </section>
+
+  <!-- 3. RANK -->
+  <section id="rank" aria-labelledby="h-rank">
+    <h2 id="h-rank"><span class="num">3</span> Stack-ranked gaps <small id="rankMeta"></small></h2>
+    <p class="hint">Ranked for the view chosen above. Change the axes or the gap threshold and the ranking follows.</p>
+    <ol class="rank" id="rankList"></ol>
+    <button class="btn ghost" id="moreRank" hidden>Show all</button>
+  </section>
+
+  <!-- 4. SPEECH LAB -->
+  <section id="lab" aria-labelledby="h-lab">
+    <h2 id="h-lab"><span class="num">4</span> Speech lab <small>Deepgram text-to-speech</small></h2>
+    <p class="hint">Hear any English Aura-2 voice say your own script. Pick a voice, write or choose a prompt, and generate. Catalog samples need no key.</p>
+
+    <div class="card lab">
+      <div class="lab-grid">
+        <div>
+          <label class="field block">Voice <select id="labVoice"></select></label>
+          <div class="voice-meta" id="labMeta"></div>
+          <div class="chips" id="promptChips" role="group" aria-label="Prompt presets"></div>
+          <label class="field block">Your prompt <span class="count" id="charCount"></span>
+            <textarea id="labText" rows="5" maxlength="2000" placeholder="Type what you want the voice to say…"></textarea>
+          </label>
+          <div class="actions">
+            <button class="btn primary" id="gen">Generate with Deepgram</button>
+            <button class="btn" id="sample">Play catalog sample</button>
+          </div>
+          <p class="status" id="labStatus" role="status"></p>
+          <audio id="player" controls hidden></audio>
+          <a id="dl" class="btn ghost" hidden download="aura-sample.mp3">Download MP3</a>
+        </div>
+        <div class="api">
+          <h3>API connection</h3>
+          <p class="muted" id="apiMode">Checking…</p>
+          <div id="keyBox">
+            <label class="field block">Deepgram API key
+              <input type="password" id="apiKey" placeholder="Paste key" autocomplete="off" spellcheck="false">
+            </label>
+            <label class="check"><input type="checkbox" id="rememberKey"> Remember for this tab</label>
+            <p class="muted small">The key stays in your browser and goes only to api.deepgram.com. For a shared deployment, run <code>python3 serve.py</code> with <code>DEEPGRAM_API_KEY</code> set and the key never reaches the page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTNOTE -->
+  <footer>
+    <details class="foot" id="footnote">
+      <summary>Footnote: how the composite score and multipliers work</summary>
+      <div class="foot-body">
+        <ol>
+          <li><b>Inputs (1–5).</b> Each value on each dimension gets <b>Market demand (D)</b>, <b>Enterprise fit (E)</b> and <b>Difficulty to source (H)</b>. D and E: 5 = needs attention most. H: 1 = easy, 5 = very hard.</li>
+          <li><b>Flip difficulty.</b> Ease of sourcing <code>S = 6 − H</code>, so an easy gap scores higher.</li>
+          <li><b>Cell inputs.</b> A gap is a cell of two values (X, Y). Each input is the mean of the two values’ scores: <code>D = (D<sub>x</sub> + D<sub>y</sub>) / 2</code>, and likewise E and S.</li>
+          <li><b>Criteria multipliers (weights).</b> <code>Base = (w<sub>D</sub>·D + w<sub>E</sub>·E + w<sub>S</sub>·S) / (w<sub>D</sub> + w<sub>E</sub> + w<sub>S</sub>)</code>, on a 1–5 scale. Weights default to 40 / 35 / 25 and you can change them above.</li>
+          <li><b>Scale to 0–100.</b> <code>Priority = (Base − 1) / 4 × 100</code>.</li>
+          <li><b>Coverage multiplier.</b> A thinly covered cell is a weaker gap than an empty one: <b>0 voices ×1.00</b>, <b>1 voice ×0.60</b>, <b>2 voices ×0.30</b>, <b>3 or more ×0</b> (not a gap).</li>
+          <li><b>Composite</b> <code>= Priority × Coverage multiplier</code>. Gaps are sorted by composite, highest first. Ties go to the cell with fewer voices, then alphabetically.</li>
+        </ol>
+        <div id="worked" class="worked"></div>
+        <p class="muted small">Cost is deliberately outside this analysis; “difficulty to source” is your judgment of casting and recording effort only. Catalog labels (accent, age, tone, use case) are Deepgram’s own and unverified. Values marked “not in catalog” are hypotheses you can score, not existing labels. “Illustrative scores” are placeholders to show how ranking works, not research findings.</p>
+      </div>
+    </details>
+  </footer>
+</main>
+
+<script src="data/voices.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
